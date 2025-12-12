@@ -22,10 +22,9 @@
     "types": ["@testing-library/jest-dom"],
 
     /* Absolute Imports */
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/Assets/*": ["*", "src/Assets/*"],
-      "@/Components/*": ["*", "src/Components/*"]
+      "@ui/*": ["src/shared/ui/*"]
     }
   },
   "include": ["src"],

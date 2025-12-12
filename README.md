@@ -44,6 +44,7 @@ npm run lint
 ```
 
 Для форматирования кода, проверит все файлы в проекте
+
 ```
 npm run format
 ```
@@ -53,10 +54,13 @@ npm run format
 Сообщение коммита должно начинаться со слов feat, fix, chore, docs, refactor, test, style.
 
 Пример плохого коммита
+
 ```
 git commit -m "плохой коммит"
 ```
+
 В таком случае в терминале будет ошибка, коммит не будет выполнен
+
 ```
 husky - DEPRECATED
 
@@ -78,10 +82,13 @@ husky - commit-msg script failed (code 1)
 ```
 
 Пример хорошо коммита
+
 ```
 git commit -m "feat: реализовать иконку для хедера"
 ```
+
 В терминале будет такое сообщение
+
 ```
 husky - DEPRECATED
 

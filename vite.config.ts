@@ -6,9 +6,6 @@ import eslint from 'vite-plugin-eslint';
 export default defineConfig({
   plugins: [react(), eslint()],
   resolve: {
-    alias: [
-      { find: '@/Assets', replacement: '/src/Assets' },
-      { find: '@/Components', replacement: '/src/Components' },
-    ],
+    alias: [{ find: '@ui', replacement: '/src/shared/ui' }],
   },
 });
