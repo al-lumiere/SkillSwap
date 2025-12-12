@@ -27,13 +27,13 @@ module.exports = {
       'error',
       'ignorePackages',
       {
-        "": 'never',
-        'js': 'never',
-        'jsx': 'never',
-        'ts': 'never',
-        'tsx': 'never',
-        'mjs': 'never'
-      }
+        '': 'never',
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        mjs: 'never',
+      },
     ],
     'react/function-component-definition': [
       2,
