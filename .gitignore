@@ -24,3 +24,6 @@ bun.lockb
 *.njsproj
 *.sln
 *.sw?
+
+# Environments
+.env
