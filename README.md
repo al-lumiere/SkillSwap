@@ -18,9 +18,10 @@ npm install
 - ESLinter по гайдлайнам Airbnb
 - Prettier
 - React + TypeScript
+- Husky + commitlint - проверка коммитов на соответсвие Conventional Commits
 - React Router TBD
 - ReduxToolKit TBD
--
+- Jset TBD
 
 ## Доступные скрипты
 
@@ -46,3 +47,53 @@ npm run lint
 ```
 npm run format
 ```
+
+## Про Conventional Commits
+
+Сообщение коммита должно начинаться со слов feat, fix, chore, docs, refactor, test, style.
+
+Пример плохого коммита
+```
+git commit -m "плохой коммит"
+```
+В таком случае в терминале будет ошибка, коммит не будет выполнен
+```
+husky - DEPRECATED
+
+Please remove the following two lines from .husky/commit-msg:
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+They WILL FAIL in v10.0.0
+
+⧗   input: плохой тестовый коммит
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+
+✖   found 2 problems, 0 warnings
+ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+
+husky - commit-msg script failed (code 1)
+```
+
+Пример хорошо коммита
+```
+git commit -m "feat: реализовать иконку для хедера"
+```
+В терминале будет такое сообщение
+```
+husky - DEPRECATED
+
+Please remove the following two lines from .husky/commit-msg:
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+They WILL FAIL in v10.0.0
+
+[chores/setup-project 8ccbfd3] chore: настроить husky и commitlint для conventional commits
+2 files changed, 24 insertions(+), 5 deletions(-)
+```
+
+Сообщение husky - DEPRECATED это сообщение на будущее, когда будет релизнута более новая версия. Всё работает.
