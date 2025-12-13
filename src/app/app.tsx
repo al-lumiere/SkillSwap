@@ -1,4 +1,4 @@
-import { ExampleComponentUI } from '@ui/logo';
+import { ExampleComponentUI } from '@ui/example-component';
 import { SkillsListTest } from '../utils/SkillsListTest';
 
 const App = () => (

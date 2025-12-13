@@ -8,6 +8,7 @@ module.exports = {
     'airbnb',
     'airbnb-typescript',
     'eslint-config-prettier',
+    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['dist', 'vite.config.ts', 'vitest.config.ts', 'tests', '*.cjs'],
   parser: '@typescript-eslint/parser',

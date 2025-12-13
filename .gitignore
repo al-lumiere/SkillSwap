@@ -27,3 +27,6 @@ bun.lockb
 
 # Environments
 .env
+
+*storybook.log
+storybook-static
