@@ -11,6 +11,9 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    alias: [{ find: '@ui', replacement: '/src/shared/ui' }],
+    alias: [
+      { find: '@ui', replacement: '/src/shared/ui' },
+      { find: '@styles', replacement: '/src/shared/assets/styles' },
+    ],
   },
 });

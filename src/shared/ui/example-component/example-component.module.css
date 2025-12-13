@@ -1,8 +1,9 @@
 .container {
   width: 300px;
+  background-color: var(--error-color);
 }
 
 .text {
-  color: fuchsia;
-  background-color: black;
+  color: var(--text-color);
+  font-family: 'Roboto';
 }
