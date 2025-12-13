@@ -1,1 +1,0 @@
-export { ExampleComponentUI } from './logo';

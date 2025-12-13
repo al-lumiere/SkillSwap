@@ -1,0 +1,17 @@
+:root {
+  --text-color: #253017;
+  --caption-color: #69735d;
+  --accent-color: #abd27a;
+  --button-hover-color: #deebc5;
+  --background-color: #f9faf7;
+  --alarm-color: #e0796e;
+  --error-color: #bf3920;
+  --card-input-color: #ffffff;
+  --tag-business-color: #eee7f7;
+  --tag-arts-color: #f7e7f2;
+  --tag-languages-color: #ebe5c5;
+  --tag-education-color: #e7f2f6;
+  --tag-home-color: #f7ebe5;
+  --tag-health-color: #e9f7e7;
+  --tag-no-category-color: #e8ecf7;
+}

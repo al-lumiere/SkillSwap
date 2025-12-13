@@ -24,7 +24,8 @@
     /* Absolute Imports */
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["src/shared/ui/*"]
+      "@ui/*": ["src/shared/ui/*"],
+      "@styles/*": ["src/shared/assets/styles/*"]
     }
   },
   "include": ["src"],
