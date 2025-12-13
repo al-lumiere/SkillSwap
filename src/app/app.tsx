@@ -7,6 +7,6 @@ const App = () => (
     <ExampleComponentUI text="example text" />
     <SkillsListTest />
   </>
-);  
+);
 
 export default App;

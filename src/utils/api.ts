@@ -1,4 +1,4 @@
-import { Category, City, Skill, Subcategory, User } from "./types";
+import { Category, City, Skill, Subcategory, User } from './types';
 
 const FIXTURE_URL = import.meta.env.VITE_FIXTURE_URL as string;
 const MEDIA_URL = import.meta.env.VITE_MEDIA_URL as string;
@@ -12,13 +12,13 @@ async function fetchJson<T>(path: string): Promise<T> {
 }
 
 export const fixturesClient = {
-  getSkills: () => fetchJson<Skill[]>("skills.json"),
-  getUsers: () => fetchJson<User[]>("users.json"),
-  getCities: () => fetchJson<City[]>("cities.json"),
-  getCategories: () => fetchJson<Category[]>("categories.json"),
-  getSubcategories: () => fetchJson<Subcategory[]>("subcategories.json"),
+  getSkills: () => fetchJson<Skill[]>('skills.json'),
+  getUsers: () => fetchJson<User[]>('users.json'),
+  getCities: () => fetchJson<City[]>('cities.json'),
+  getCategories: () => fetchJson<Category[]>('categories.json'),
+  getSubcategories: () => fetchJson<Subcategory[]>('subcategories.json'),
 };
 
 export function mediaUrl(path: string) {
-  return !path ? "" : `${MEDIA_URL}${path}`
+  return !path ? '' : `${MEDIA_URL}${path}`;
 }
