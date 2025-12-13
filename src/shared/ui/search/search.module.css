@@ -1,0 +1,35 @@
+.wrapper{
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 12px;
+border-radius: 12px;
+background-color: var(--card-input-color);
+}
+
+.searchIcon{
+  fill: var(--caption-color);
+  color: var(--caption-color);
+}
+
+
+.input::placeholder{
+  color: var(--caption-color);
+}
+
+.input{
+  caret-color:var(--button-pressed-color);
+  outline: none;
+  flex: 1;
+  border: none;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+.close{
+  color: var(--text-color);  
+}

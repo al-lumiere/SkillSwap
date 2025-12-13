@@ -45,4 +45,13 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      // файлы с иконками
+      files: ['src/shared/assets/icons/**/*.tsx'],
+      rules: {
+        'react/jsx-props-no-spreading': 'off', // разрешаем спред
+      },
+    },
+  ],
 };
