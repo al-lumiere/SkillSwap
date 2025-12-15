@@ -1,1 +1,1 @@
-export { SearchUI } from './icon-button';
+export { IconButtonUI } from './icon-button';
