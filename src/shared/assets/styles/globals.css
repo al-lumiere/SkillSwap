@@ -39,3 +39,19 @@ button {
   padding: 0;
   cursor: pointer;
 }
+
+.icon-clickable:focus-visible {
+  background-color: var(--icon-button-hover-color);
+  border-radius: 6px;
+}
+
+.icon-clickable:hover {
+  cursor: pointer;
+  background-color: var(--icon-button-hover-color);
+  border-radius: 6px;
+}
+
+.icon-clickable:active {
+  background-color: var(--icon-button-active-color);
+  border-radius: 6px;
+}
