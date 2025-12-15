@@ -1,0 +1,77 @@
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--text-color);
+}
+
+.title {
+  font-family: var(--header-font-family), sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioOption {
+  font-family: var(--body-font-family), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.radioOption:hover .radioLabel {
+  text-decoration: underline;
+}
+
+.radioOption:active {
+  background-color: var(--control-active-color);
+  border-radius: 8px;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.radioButton {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: relative;
+  transition: border 0.2s ease;
+}
+.radioInput:checked + .radioButton {
+  border: var(--button-pressed-color) 2px solid;
+}
+
+.radioInput:checked + .radioButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--button-pressed-color);
+  border-radius: 50%;
+}
+
+.radioInput:focus + .radioButton {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
