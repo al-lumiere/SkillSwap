@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper:hover .label {
+  text-decoration: underline;
+}
+
+.wrapper:active {
+  background-color: var(--control-active-color);
+  border-radius: 8px;
+}
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxEmpty {
+  color: var(--text-color);
+}
+.checkboxDone {
+  color: var(--accent-color);
+}
+
+.label {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: var(--body-font-family), sans-serif;
+  color: var(--text-color);
+}
