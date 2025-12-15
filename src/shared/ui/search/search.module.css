@@ -1,24 +1,23 @@
-.wrapper{
-display: flex;
-align-items: center;
-gap: 8px;
-padding: 12px;
-border-radius: 12px;
-background-color: var(--card-input-color);
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: var(--card-input-color);
 }
 
-.searchIcon{
+.searchIcon {
   fill: var(--caption-color);
   color: var(--caption-color);
 }
 
-
-.input::placeholder{
+.input::placeholder {
   color: var(--caption-color);
 }
 
-.input{
-  caret-color:var(--button-pressed-color);
+.input {
+  caret-color: var(--button-pressed-color);
   outline: none;
   flex: 1;
   border: none;
@@ -30,6 +29,6 @@ background-color: var(--card-input-color);
   color: var(--text-color);
 }
 
-.close{
-  color: var(--text-color);  
+.close {
+  color: var(--text-color);
 }
