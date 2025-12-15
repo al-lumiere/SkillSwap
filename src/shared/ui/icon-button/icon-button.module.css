@@ -1,0 +1,20 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+.button:focus-visible {
+  background-color: var(--icon-button-hover-color);
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--icon-button-hover-color);
+}
+
+.button:active {
+  background-color: var(--icon-button-active-color);
+}
