@@ -15,4 +15,8 @@
   --tag-home-color: #f7ebe5;
   --tag-health-color: #e9f7e7;
   --tag-no-category-color: #e8ecf7;
+  --control-active-color: #e3e9ec;
+
+  --body-font-family: 'Roboto';
+  --header-font-family: 'Jost';
 }
