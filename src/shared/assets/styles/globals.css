@@ -54,6 +54,8 @@ button {
 .icon-clickable:active {
   background-color: var(--icon-button-active-color);
   border-radius: 6px;
+} 
+
 .visually-hidden {
   position: absolute;
   width: 1px;
