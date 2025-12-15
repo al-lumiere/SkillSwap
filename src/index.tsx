@@ -1,5 +1,7 @@
 import React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './app/providers/store/store';
 import App from './app/app';
 import '@styles/fonts.css';
 import '@styles/variables.css';
@@ -10,6 +12,8 @@ const root = ReactDOMClient.createRoot(container!);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 );
