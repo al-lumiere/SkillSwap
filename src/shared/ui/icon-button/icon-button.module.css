@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+}
+
+.icon {
+  color: var(--text-color);
+}
+
+.icon:focus-visible {
+  background-color: var(--icon-button-hover-color);
+  border-radius: 6px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  background-color: var(--icon-button-hover-color);
+  border-radius: 6px;
+}
+
+.icon:active {
+  background-color: var(--icon-button-active-color);
+  border-radius: 6px;
+}
+
+.notificationWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--alarm-color);
+  border-radius: 50%;
+  z-index: 1;
+}
