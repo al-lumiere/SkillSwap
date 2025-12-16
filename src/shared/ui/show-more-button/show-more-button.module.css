@@ -15,10 +15,9 @@
   text-decoration: underline;
 }
 
-/* OPTIONAL: add active state
 .button:active {
-  
-} */
+  background-color: var(--control-active-color);
+}
 
 .label {
   font-family: var(--main-font-family);
