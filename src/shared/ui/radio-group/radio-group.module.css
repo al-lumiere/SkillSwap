@@ -15,7 +15,7 @@
 .optionsList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 13px;
 }
 
 .radioOption {
@@ -25,10 +25,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 24px;
+  line-height: 24px;
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
 .radioOption:hover .radioLabel {
@@ -55,7 +56,9 @@
   border-radius: 50%;
   position: relative;
   transition: border 0.2s ease;
+  margin: 2px;
 }
+
 .radioInput:checked + .radioButton {
   border: var(--button-pressed-color) 2px solid;
 }
@@ -75,3 +78,4 @@
 .radioInput:focus + .radioButton {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
+
