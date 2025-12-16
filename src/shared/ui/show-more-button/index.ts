@@ -1,1 +1,1 @@
-export { IconButtonUI } from './show-more-button';
+export { ShowMoreButtonUI } from './show-more-button';
