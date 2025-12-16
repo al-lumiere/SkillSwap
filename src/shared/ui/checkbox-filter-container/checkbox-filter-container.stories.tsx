@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { CheckboxFilterContainerUI } from './checkbox-filter-container';
 import { RadioGroup } from '../radio-group';
 import { CheckboxItemUI } from '../checkbox-item';
+import { CheckboxGroupUI } from '../checkbox-group';
+import { ShowMoreButtonUI } from '../show-more-button';
 import type { RadioGroupProps } from '../radio-group/type';
-
-// OPTIONAL: добавить checkbox-group и add-more-button после их реализации
 
 const meta: Meta<typeof CheckboxFilterContainerUI> = {
   title: 'shared/ui/CheckboxFilterContainer',
@@ -43,191 +43,146 @@ const RadioGroupWrapper = ({ value: initialValue, onChange, title, options, name
 };
 
 export const WithRadioGroup: Story = {
-  render: () => (
-    <CheckboxFilterContainerUI label="Пол автора">
-      <RadioGroupWrapper
-        onChange={() => {}}
-        options={[
-          { value: 'not-specified', label: 'Не имеет значения' },
-          { value: 'male', label: 'Мужской' },
-          { value: 'female', label: 'Женский' },
-        ]}
-        value="not-specified"
-        name="gender-filter"
-      />
-    </CheckboxFilterContainerUI>
-  ),
-};
-
-export const WithCheckboxItems: Story = {
   render: () => {
-    const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
-      'skill-1': false,
-      'skill-2': true,
-      'skill-3': false,
-    });
-
-    const handleToggle = (id: string) => {
-      setCheckedItems((prev) => ({
-        ...prev,
-        [id]: !prev[id],
-      }));
-    };
-
-    return (
-      <CheckboxFilterContainerUI label="Категории">
-        <CheckboxItemUI
-          label="Программирование"
-          checked={checkedItems['skill-1']}
-          onChange={() => handleToggle('skill-1')}
-        />
-        <CheckboxItemUI label="Дизайн" checked={checkedItems['skill-2']} onChange={() => handleToggle('skill-2')} />
-        <CheckboxItemUI label="Маркетинг" checked={checkedItems['skill-3']} onChange={() => handleToggle('skill-3')} />
-      </CheckboxFilterContainerUI>
-    );
-  },
-};
-
-export const WithCheckboxItemsAndShowMore: Story = {
-  render: () => {
-    const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
-      'skill-1': false,
-      'skill-2': true,
-      'skill-3': false,
-      'skill-4': false,
-      'skill-5': true,
-      'skill-6': false,
-      'skill-7': false,
-      'skill-8': false,
-    });
-
-    const [showAll, setShowAll] = useState(false);
-    const visibleCount = 3;
-
-    const handleToggle = (id: string) => {
-      setCheckedItems((prev) => ({
-        ...prev,
-        [id]: !prev[id],
-      }));
-    };
-
-    const allItems = [
-      { id: 'skill-1', label: 'Программирование' },
-      { id: 'skill-2', label: 'Дизайн' },
-      { id: 'skill-3', label: 'Маркетинг' },
-      { id: 'skill-4', label: 'Языки' },
-      { id: 'skill-5', label: 'Музыка' },
-      { id: 'skill-6', label: 'Фотография' },
-      { id: 'skill-7', label: 'Кулинария' },
-      { id: 'skill-8', label: 'Спорт' },
-    ];
-
-    const visibleItems = showAll ? allItems : allItems.slice(0, visibleCount);
-
-    return (
-      <CheckboxFilterContainerUI label="Категории">
-        {visibleItems.map((item) => (
-          <CheckboxItemUI
-            key={item.id}
-            label={item.label}
-            checked={checkedItems[item.id]}
-            onChange={() => handleToggle(item.id)}
-          />
-        ))}
-        {allItems.length > visibleCount && (
-          <button
-            type="button"
-            onClick={() => setShowAll(!showAll)}
-            style={{
-              padding: '8px 16px',
-              border: '1px solid var(--accent-color)',
-              borderRadius: '8px',
-              background: 'transparent',
-              color: 'var(--accent-color)',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
-              alignSelf: 'flex-start',
-            }}
-          >
-            {showAll ? 'Показать меньше' : 'Показать больше'}
-          </button>
-        )}
-      </CheckboxFilterContainerUI>
-    );
-  },
-};
-
-export const MultipleVariants: Story = {
-  render: () => {
-    const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
-      'skill-1': false,
-      'skill-2': true,
-      'skill-3': false,
-    });
-
     const [radioValue, setRadioValue] = useState('not-specified');
-    const [showAll, setShowAll] = useState(false);
 
-    const handleToggle = (id: string) => {
-      setCheckedItems((prev) => ({
+    return (
+      <CheckboxFilterContainerUI label="Пол автора">
+        <RadioGroupWrapper
+          options={[
+            { value: 'not-specified', label: 'Не имеет значения' },
+            { value: 'male', label: 'Мужской' },
+            { value: 'female', label: 'Женский' },
+          ]}
+          value={radioValue}
+          onChange={setRadioValue}
+          name="gender-filter"
+        />
+      </CheckboxFilterContainerUI>
+    );
+  },
+};
+
+export const WithCheckboxGroups: Story = {
+  render: () => {
+    const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({
+      'foreign-languages': true,
+    });
+
+    const [checkedCategories, setCheckedCategories] = useState<Record<string, boolean>>({
+      business: false,
+      creativity: false,
+      'foreign-languages': true,
+      education: false,
+      health: false,
+      home: false,
+    });
+
+    const [checkedLanguages, setCheckedLanguages] = useState<Record<string, boolean>>({
+      english: false,
+      spanish: false,
+      french: false,
+      german: false,
+      chinese: false,
+      japanese: false,
+      exams: false,
+    });
+
+    const [showAllCategories, setShowAllCategories] = useState(false);
+
+    const handleToggleGroup = (groupId: string) => {
+      setExpandedGroups((prev) => ({
         ...prev,
-        [id]: !prev[id],
+        [groupId]: !prev[groupId],
       }));
     };
 
-    const allSkills = [
-      { id: 'skill-1', label: 'JavaScript' },
-      { id: 'skill-2', label: 'TypeScript' },
-      { id: 'skill-3', label: 'Python' },
-      { id: 'skill-4', label: 'Java' },
-      { id: 'skill-5', label: 'C#' },
+    const handleToggleCategory = (categoryId: string) => {
+      setCheckedCategories((prev) => ({
+        ...prev,
+        [categoryId]: !prev[categoryId],
+      }));
+    };
+
+    const handleToggleLanguage = (languageId: string) => {
+      setCheckedLanguages((prev) => ({
+        ...prev,
+        [languageId]: !prev[languageId],
+      }));
+    };
+
+    const allCategories = [
+      { id: 'business', label: 'Бизнес и карьера' },
+      { id: 'creativity', label: 'Творчество и искусство' },
+      {
+        id: 'foreign-languages',
+        label: 'Иностранные языки',
+        children: [
+          { id: 'english', label: 'Английский' },
+          { id: 'spanish', label: 'Испанский' },
+          { id: 'french', label: 'Французский' },
+          { id: 'german', label: 'Немецкий' },
+          { id: 'chinese', label: 'Китайский' },
+          { id: 'japanese', label: 'Японский' },
+          { id: 'exams', label: 'Подготовка к экзаменам (IELTS, TOEFL)' },
+        ],
+      },
+      { id: 'education', label: 'Образование и развитие' },
+      { id: 'health', label: 'Здоровье и лайфстайл' },
+      { id: 'home', label: 'Дом и уют' },
     ];
 
-    const visibleSkills = showAll ? allSkills : allSkills.slice(0, 3);
+    const visibleCount = 4;
+    const visibleCategories = showAllCategories ? allCategories : allCategories.slice(0, visibleCount);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '400px' }}>
-        <CheckboxFilterContainerUI label="Пол автора">
-          <RadioGroupWrapper
-            options={[
-              { value: 'not-specified', label: 'Не имеет значения' },
-              { value: 'male', label: 'Мужской' },
-              { value: 'female', label: 'Женский' },
-            ]}
-            value={radioValue}
-            onChange={setRadioValue}
-            name="gender-filter"
-          />
-        </CheckboxFilterContainerUI>
-
-        <CheckboxFilterContainerUI label="Языки программирования">
-          {visibleSkills.map((skill) => (
-            <CheckboxItemUI
-              key={skill.id}
-              label={skill.label}
-              checked={checkedItems[skill.id] || false}
-              onChange={() => handleToggle(skill.id)}
+      <div
+        style={{
+          display: 'flex',
+          padding: '20px',
+          backgroundColor: '#f9faf7',
+          borderRadius: '8px',
+          width: '400px',
+          flexDirection: 'column',
+          gap: '12px',
+        }}
+      >
+        <CheckboxFilterContainerUI label="Навыки">
+          {visibleCategories.map((category) => {
+            if (category.children) {
+              return (
+                <CheckboxGroupUI
+                  key={category.id}
+                  label={category.label}
+                  expanded={expandedGroups[category.id] || false}
+                  onToggleExpand={() => handleToggleGroup(category.id)}
+                >
+                  {category.children.map((child) => (
+                    <CheckboxItemUI
+                      key={child.id}
+                      label={child.label}
+                      checked={checkedLanguages[child.id] || false}
+                      onChange={() => handleToggleLanguage(child.id)}
+                    />
+                  ))}
+                </CheckboxGroupUI>
+              );
+            }
+            return (
+              <CheckboxItemUI
+                key={category.id}
+                label={category.label}
+                checked={checkedCategories[category.id] || false}
+                onChange={() => handleToggleCategory(category.id)}
+              />
+            );
+          })}
+          {allCategories.length > visibleCount && (
+            <ShowMoreButtonUI
+              label="Все категории"
+              open={showAllCategories}
+              onClick={() => setShowAllCategories(!showAllCategories)}
             />
-          ))}
-          {allSkills.length > 3 && (
-            <button
-              type="button"
-              onClick={() => setShowAll(!showAll)}
-              style={{
-                padding: '8px 16px',
-                border: '1px solid var(--accent-color)',
-                borderRadius: '8px',
-                background: 'transparent',
-                color: 'var(--accent-color)',
-                fontSize: '14px',
-                fontWeight: 500,
-                cursor: 'pointer',
-                alignSelf: 'flex-start',
-              }}
-            >
-              {showAll ? 'Показать меньше' : 'Показать больше'}
-            </button>
           )}
         </CheckboxFilterContainerUI>
       </div>
