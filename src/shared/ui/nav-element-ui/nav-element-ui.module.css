@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #253017;
+  gap: 4px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.container:focus,
+.container:focus-visible {
+  background: #e9edf0;
+  outline: none;
+}
+
+.container:hover {
+  background: #e9edf0;
+  cursor: pointer;
+}
+
+.container:active {
+  background: #dde0e3;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container:active .text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 1px;
+  background: currentColor;
+  border-radius: 2px;
+}
