@@ -1,6 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+}
+
+.wrapper:open {
   gap: 12px;
 }
 
