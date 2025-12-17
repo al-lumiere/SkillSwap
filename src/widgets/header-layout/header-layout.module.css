@@ -15,6 +15,10 @@
   gap: 32px;
 }
 
+.containerAuth {
+  justify-content: space-between;
+}
+
 .left {
   display: flex;
   align-items: center;
@@ -41,7 +45,35 @@
   gap: 32px;
 }
 
-/* ------- Stubs (temporary) ------- */
+.closeButton {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+.closeButton:hover {
+  background: #e9edf0;
+}
+
+.closeButton:active {
+  background: #dde0e3;
+}
+
+.closeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------- Заглушки (временно) ------- */
 
 .logoStub {
   display: inline-flex;
@@ -54,21 +86,6 @@
   font-size: 24px;
   line-height: 32px;
   user-select: none;
-}
-
-.logoStub:focus,
-.logoStub:focus-visible {
-  outline: none;
-  background: #e9edf0;
-}
-
-.logoStub:hover {
-  background: #e9edf0;
-  cursor: pointer;
-}
-
-.logoStub:active {
-  background: #dde0e3;
 }
 
 .logoIcon {
@@ -93,21 +110,6 @@
   color: var(--text-color);
 }
 
-.themeButtonStub:focus,
-.themeButtonStub:focus-visible {
-  outline: none;
-  background: #e9edf0;
-}
-
-.themeButtonStub:hover {
-  background: #e9edf0;
-  cursor: pointer;
-}
-
-.themeButtonStub:active {
-  background: #dde0e3;
-}
-
 .userUnAuthStub {
   display: flex;
   align-items: center;
@@ -119,6 +121,8 @@
   padding: 0 18px;
   border-radius: 12px;
   border: 1px solid var(--accent-color);
+  display: inline-flex;
+  align-items: center;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -131,6 +135,8 @@
   padding: 0 18px;
   border-radius: 12px;
   border: 1px solid var(--accent-color);
+  display: inline-flex;
+  align-items: center;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -141,7 +147,19 @@
 .userAuthStub {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
+}
+
+.userIcons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.userIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .userName {
