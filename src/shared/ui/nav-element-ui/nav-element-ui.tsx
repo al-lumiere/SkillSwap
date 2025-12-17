@@ -1,23 +1,10 @@
 import { FC } from 'react';
-import { TNavElementUIProps } from './type';
 import styles from './nav-element-ui.module.css';
-
-export const Chevron = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M12 15.9354C11.3539 15.9354 10.7078 15.6862 10.2186 15.197L4.20075 9.17912C3.93308 8.91145 3.93308 8.46842 4.20075 8.20075C4.46842 7.93308 4.91145 7.93308 5.17912 8.20075L11.197 14.2186C11.64 14.6617 12.36 14.6617 12.803 14.2186L18.8209 8.20075C19.0885 7.93308 19.5316 7.93308 19.7992 8.20075C20.0669 8.46842 20.0669 8.91145 19.7992 9.17912L13.7814 15.197C13.2922 15.6862 12.6461 15.9354 12 15.9354Z"
-      fill="#253017"
-    />
-  </svg>
-);
+import { TNavElementUIProps } from './type';
 
 export const NavElementUI: FC<TNavElementUIProps> = ({ text, icon, onClick, isActive = false }) => (
   <button type="button" className={`${styles.container} ${isActive ? styles.active : ''}`} onClick={onClick}>
     <span className={styles.text}>{text}</span>
-    {icon ? (
-      <span className={styles.icon}>
-        <Chevron />
-      </span>
-    ) : null}
+    {icon && <span className={styles.icon}>{icon}</span>}
   </button>
 );

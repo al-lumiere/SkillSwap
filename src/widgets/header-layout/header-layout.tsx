@@ -1,6 +1,9 @@
 import { FC } from 'react';
-import { Chevron, NavElementUI } from '@ui/nav-element-ui';
+import { NavElementUI } from '@ui/nav-element-ui';
 import { SearchUI } from '@ui/search';
+
+import ChevronDownIcon from '../../shared/assets/icons/chevron-down';
+
 import styles from './header-layout.module.css';
 import { THeaderLayoutAuthProps, THeaderLayoutFullProps, THeaderLayoutProps } from './type';
 
@@ -132,7 +135,7 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
             <NavElementUI text="О проекте" onClick={onAboutClick} isActive={isAboutActive} />
             <NavElementUI
               text="Все навыки"
-              icon={<Chevron />}
+              icon={<ChevronDownIcon />}
               onClick={onAllSkillsClick}
               isActive={isAllSkillsActive}
             />

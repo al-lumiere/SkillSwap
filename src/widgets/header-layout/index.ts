@@ -1,5 +1,5 @@
 export { HeaderLayout } from './header-layout';
-// Необязательный алиас — в проекте хедер называется AppHeader
-export { HeaderLayout as AppHeader } from './header-layout';
+export { AppHeader } from './app-header';
 
 export type { THeaderLayoutProps, THeaderVariant } from './type';
+export type { TAppHeaderProps } from './app-header';

@@ -41,7 +41,7 @@
   justify-content: center;
 }
 
-.container:active .text::after {
+.active .text::after {
   content: '';
   position: absolute;
   left: 0;
