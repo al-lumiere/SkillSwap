@@ -19,6 +19,8 @@ export type TAppHeaderProps = {
   /** Необязательные слоты (если не переданы — отрисуются заглушки) */
   logo?: ReactNode;
   themeButton?: ReactNode;
+  notificationButton?: ReactNode;
+  favoriteButton?: ReactNode;
   userAuth?: ReactNode;
   userUnAuth?: ReactNode;
 
@@ -41,6 +43,8 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
     isAuthenticated = false,
     logo,
     themeButton,
+    notificationButton,
+    favoriteButton,
     userAuth,
     userUnAuth,
     onAboutClick,
@@ -83,6 +87,8 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
       variant="full"
       logo={logo}
       themeButton={themeButton}
+      notificationButton={notificationButton}
+      favoriteButton={favoriteButton}
       userAuth={userAuth}
       userUnAuth={userUnAuth}
       isAuthenticated={isAuthenticated}
@@ -103,6 +109,8 @@ AppHeader.defaultProps = {
   isAuthenticated: false,
   logo: undefined,
   themeButton: undefined,
+  notificationButton: undefined,
+  favoriteButton: undefined,
   userAuth: undefined,
   userUnAuth: undefined,
   onAboutClick: undefined,

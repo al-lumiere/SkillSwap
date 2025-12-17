@@ -6,6 +6,8 @@ type THeaderSlots = {
   /** Необязательные слоты (если не переданы — отрисуются заглушки) */
   logo?: ReactNode;
   themeButton?: ReactNode;
+  notificationButton?: ReactNode;
+  favoriteButton?: ReactNode;
   userAuth?: ReactNode;
   userUnAuth?: ReactNode;
 };
