@@ -20,13 +20,13 @@ type Story = StoryObj<typeof TextTagUI>;
 export const ArtTag: Story = {
   args: {
     label: 'Игра на барабанах',
-    bgColor: '--tag-arts-color',
+    bgColor: '#f7e7f2',
   },
 };
 
 export const HealthTag: Story = {
   args: {
     label: 'Медитация',
-    bgColor: '--tag-health-color',
+    bgColor: '#e9f7e7',
   },
 };
