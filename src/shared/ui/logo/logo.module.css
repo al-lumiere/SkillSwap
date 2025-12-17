@@ -1,0 +1,35 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.text {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -1.1%;
+  font-family: var(--header-font-family);
+}
+
+.logo:hover {
+  background-color: var(--icon-button-hover-color);
+  cursor: pointer;
+}
+
+.logo:focus-visible {
+  background-color: var(--icon-button-hover-color);
+  outline: none;
+}
+
+.logo:active {
+  background-color: var(--icon-button-active-color);
+}
