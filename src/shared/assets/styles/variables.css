@@ -4,6 +4,10 @@
   --button-pressed-color: #508826;
   --accent-color: #abd27a;
   --button-hover-color: #deebc5;
+  --button-disabled-color: #e4e8df;
+  --button-disabled-text-color: #9ca197;
+  --button-tertiary-active-color: #dfe0e4;
+  --tertiary-disabled-text-color: #e2e2e4;
   --background-color: #f9faf7;
   --alarm-color: #e0796e;
   --error-color: #bf3920;

@@ -1,0 +1,103 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--body-font-family);
+  border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+
+  cursor: pointer;
+  border: none;
+  padding: 12px 24px;
+  height: 48px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.primary {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  width: 284px;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--button-hover-color);
+}
+
+.primary:active:not(:disabled) {
+  background-color: var(--button-pressed-color);
+  color: var(--card-input-color);
+}
+
+.secondary {
+  background-color: var(--card-input-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+  width: 200px;
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--card-input-color);
+  border: 1px solid var(--button-hover-color);
+  color: var(--caption-color);
+}
+
+.secondary:active:not(:disabled) {
+  border: 1px solid var(--button-pressed-color);
+  color: var(--text-color);
+}
+
+.tertiary {
+  background-color: var(--card-input-color);
+  color: var(--text-color);
+  width: 200px;
+}
+
+.tertiary:hover:not(:disabled) {
+  background-color: var(--icon-button-hover-color);
+}
+
+.tertiary:active:not(:disabled) {
+  background-color: var(--button-tertiary-active-color);
+}
+
+.tertiary:disabled {
+  background-color: var(--card-input-color);
+  color: var(--tertiary-disabled-text-color);
+}
+
+.button:focus-visible:not(:disabled) {
+  outline: none;
+  background-color: var(--icon-button-hover-color);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.primary:disabled {
+  background-color: var(--button-disabled-color);
+  color: var(--caption-color);
+}
+
+.secondary:disabled {
+  border: 1px solid var(--button-disabled-color);
+  color: var(--button-disabled-text-color);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.icon img {
+  width: 24px;
+  height: 24px;
+}
