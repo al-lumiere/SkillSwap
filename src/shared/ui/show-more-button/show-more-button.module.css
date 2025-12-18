@@ -1,0 +1,33 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: transparent;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.button:focus-visible {
+  background-color: var(--icon-button-hover-color);
+}
+
+.button:hover .label {
+  text-decoration: underline;
+}
+
+.button:active {
+  background-color: var(--control-active-color);
+}
+
+.label {
+  font-family: var(--main-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--button-pressed-color);
+}
+
+.icon {
+  color: var(--text-color);
+}
