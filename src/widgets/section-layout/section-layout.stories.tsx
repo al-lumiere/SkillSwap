@@ -55,12 +55,10 @@ export const PopularWithButton: Story = {
         <SectionLayoutUI
           title="Популярное"
           actionButton={
-            <Button
-              text="Смотреть все"
-              icon={<ChevronRightIcon />}
-              variant="tertiary"
-              onClick={() => console.log('Смотреть все')}
-            />
+            <Button variant="tertiary" onClick={() => console.log('')}>
+              Смотреть все
+              <ChevronRightIcon />
+            </Button>
           }
         >
           {cards.map((card) => (
@@ -133,7 +131,10 @@ export const SimilarWithFilterButton: Story = {
         <SectionLayoutUI
           title="Похожие предложения"
           actionButton={
-            <Button text="Сначала новые" icon={<SortIcon />} variant="tertiary" onClick={() => console.log('')} />
+            <Button variant="tertiary" onClick={() => console.log('')}>
+              <SortIcon />
+              Сначала новые
+            </Button>
           }
         >
           {cards.map((card) => (

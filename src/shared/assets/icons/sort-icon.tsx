@@ -28,4 +28,3 @@ const SortIcon = ({ color = 'currentColor', size = 24, className = '', ...rest }
 );
 
 export default SortIcon;
-

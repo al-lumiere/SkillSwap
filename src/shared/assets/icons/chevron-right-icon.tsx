@@ -16,4 +16,3 @@ const ChevronRightIcon = ({ color = 'currentColor', size = 24, className = '', .
 );
 
 export default ChevronRightIcon;
-
