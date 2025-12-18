@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SectionLayoutUI } from './section-layout';
 import { CatalogCardLayoutUI } from '../catalog-card-layout';
+import { Button } from '../../shared/ui/button';
+import ChevronRightIcon from '../../shared/assets/icons/chevron-right-icon';
+import SortIcon from '../../shared/assets/icons/sort-icon';
 
 const meta: Meta<typeof SectionLayoutUI> = {
   title: 'widgets/SectionLayout',
@@ -39,28 +42,6 @@ const mockCardData = {
   ],
 };
 
-// eslint-disable-next-line react/require-default-props
-const SimpleButton = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      padding: '12px 24px',
-      background: '#FFFFFF',
-      borderRadius: '12px',
-      cursor: 'pointer',
-      fontSize: '16px',
-      fontFamily: 'inherit',
-      color: 'var(--text-color)',
-    }}
-  >
-    {children}
-  </button>
-);
-
 export const PopularWithButton: Story = {
   render: () => {
     const cards = [
@@ -73,7 +54,14 @@ export const PopularWithButton: Story = {
       <div style={{ width: '1020px' }}>
         <SectionLayoutUI
           title="Популярное"
-          actionButton={<SimpleButton onClick={() => console.log('Смотреть все')}>Смотреть все</SimpleButton>}
+          actionButton={
+            <Button
+              text="Смотреть все"
+              icon={<ChevronRightIcon />}
+              variant="tertiary"
+              onClick={() => console.log('Смотреть все')}
+            />
+          }
         >
           {cards.map((card) => (
             <CatalogCardLayoutUI
@@ -144,7 +132,9 @@ export const SimilarWithFilterButton: Story = {
       <div style={{ width: '1368px' }}>
         <SectionLayoutUI
           title="Похожие предложения"
-          actionButton={<SimpleButton onClick={() => console.log('')}>Сначала новые</SimpleButton>}
+          actionButton={
+            <Button text="Сначала новые" icon={<SortIcon />} variant="tertiary" onClick={() => console.log('')} />
+          }
         >
           {cards.map((card) => (
             <CatalogCardLayoutUI
