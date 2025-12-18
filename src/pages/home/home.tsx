@@ -5,7 +5,6 @@ import { SkillsListTest } from '../../utils/SkillsListTest';
 
 export const HomePage: FC = () => (
   <>
-    <h1>SkillSwap</h1>
     <ExampleComponentUI text="example text" />
     <SkillsListTest />
   </>
