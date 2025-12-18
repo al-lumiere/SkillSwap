@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './button';
+import CrossIcon from '../../assets/icons/cross-icon';
 
 const meta: Meta<typeof Button> = {
-  title: 'shared/ui/Button',
+  title: 'ui/Button',
   component: Button,
   args: {
     text: 'Button',
@@ -30,7 +31,7 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     text: 'Primary',
-    disabled: true,
+    disabled: false,
   },
 };
 
@@ -45,6 +46,14 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     variant: 'tertiary',
+    text: 'Пример tertiary',
+  },
+};
+
+export const TertiaryIcon: Story = {
+  args: {
+    variant: 'tertiary',
     text: 'Tertiary',
+    icon: <CrossIcon />,
   },
 };

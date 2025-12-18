@@ -1,5 +1,5 @@
 .button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -30,11 +30,10 @@
   background-color: var(--button-hover-color);
 }
 
-.primary:active:not(:disabled)  {
+.primary:active:not(:disabled) {
   background-color: var(--button-pressed-color);
   color: var(--card-input-color);
 }
-
 
 .secondary {
   background-color: var(--card-input-color);
@@ -49,16 +48,28 @@
   color: var(--caption-color);
 }
 
-.secondary:active:not(:disabled)  {
+.secondary:active:not(:disabled) {
   border: 1px solid var(--button-pressed-color);
   color: var(--text-color);
 }
-
 
 .tertiary {
   background-color: var(--card-input-color);
   color: var(--text-color);
   width: 200px;
+}
+
+.tertiary:hover:not(:disabled) {
+  background-color: var(--icon-button-hover-color);
+}
+
+.tertiary:active:not(:disabled) {
+  background-color: var(--button-tertiary-active-color);
+}
+
+.tertiary:disabled {
+  background-color: var(--card-input-color);
+  color: var(--tertiary-disabled-text-color);
 }
 
 .button:focus-visible:not(:disabled) {
@@ -74,8 +85,7 @@
 .primary:disabled {
   background-color: var(--button-disabled-color);
   color: var(--caption-color);
-} 
-
+}
 
 .secondary:disabled {
   border: 1px solid var(--button-disabled-color);
@@ -88,6 +98,6 @@
 }
 
 .icon img {
-  width: 24px;     
+  width: 24px;
   height: 24px;
 }
