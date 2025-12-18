@@ -20,27 +20,9 @@ const CloseIcon = () => (
   </svg>
 );
 
-// const SparkIcon = () => (
-//   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-//     <path
-//       d="M11 1.5C12.1 6.2 15.8 9.9 20.5 11C15.8 12.1 12.1 15.8 11 20.5C9.9 15.8 6.2 12.1 1.5 11C6.2 9.9 9.9 6.2 11 1.5Z"
-//       fill="currentColor"
-//     />
-//   </svg>
-// );
-
 const noop = () => undefined;
 
 // Временные заглушки для отсутствующих UI-компонентов (UserAuthUI / UserUnAuthUI)
-// const LogoStub: FC = () => (
-//   <div className={styles.logoStub} aria-label="SkillSwap">
-//     <span className={styles.logoIcon} aria-hidden="true">
-//       <SparkIcon />
-//     </span>
-//     SkillSwap
-//   </div>
-// );
-
 const ThemeButtonStub: FC = () => (
   <IconButtonUI onClick={noop}>
     <MoonIcon />

@@ -79,64 +79,12 @@
 
 /* ------- Заглушки (временно) ------- */
 
-/* .logoStub {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 8px;
-  color: var(--text-color);
-  font-family: 'Jost', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  user-select: none;
-}
-
-.logoIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: var(--accent-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-} */
-
 .userUnAuthStub {
   display: flex;
   align-items: center;
   gap: 8px;
   padding-left: 20px;
 }
-
-/* .btnOutline {
-  height: 44px;
-  padding: 0 18px;
-  border-radius: 12px;
-  border: 1px solid var(--accent-color);
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-color);
-  background: transparent;
-}
-
-.btnFilled {
-  height: 44px;
-  padding: 0 18px;
-  border-radius: 12px;
-  border: 1px solid var(--accent-color);
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-color);
-  background: var(--accent-color);
-} */
 
 .userAuthStub {
   display: flex;

@@ -12,7 +12,6 @@
 
   cursor: pointer;
   border: none;
-  /* padding: 12px 24px; */
   height: 48px;
   transition:
     background-color 0.2s ease,
