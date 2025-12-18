@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { IconButtonUI } from '@ui/icon-button';
 import { NavElementUI } from '@ui/nav-element-ui';
 import { SearchUI } from '@ui/search';
+import { Button } from '@ui/button';
+import { Logo } from '@ui/logo';
 
 import ChevronDownIcon from '../../shared/assets/icons/chevron-down';
 import LikeIcon from '../../shared/assets/icons/like-icon';
@@ -18,26 +20,26 @@ const CloseIcon = () => (
   </svg>
 );
 
-const SparkIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-    <path
-      d="M11 1.5C12.1 6.2 15.8 9.9 20.5 11C15.8 12.1 12.1 15.8 11 20.5C9.9 15.8 6.2 12.1 1.5 11C6.2 9.9 9.9 6.2 11 1.5Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// const SparkIcon = () => (
+//   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+//     <path
+//       d="M11 1.5C12.1 6.2 15.8 9.9 20.5 11C15.8 12.1 12.1 15.8 11 20.5C9.9 15.8 6.2 12.1 1.5 11C6.2 9.9 9.9 6.2 11 1.5Z"
+//       fill="currentColor"
+//     />
+//   </svg>
+// );
 
 const noop = () => undefined;
 
-// Временные заглушки для отсутствующих UI-компонентов (LogoUI / UserAuthUI / UserUnAuthUI)
-const LogoStub: FC = () => (
-  <div className={styles.logoStub} aria-label="SkillSwap">
-    <span className={styles.logoIcon} aria-hidden="true">
-      <SparkIcon />
-    </span>
-    SkillSwap
-  </div>
-);
+// Временные заглушки для отсутствующих UI-компонентов (UserAuthUI / UserUnAuthUI)
+// const LogoStub: FC = () => (
+//   <div className={styles.logoStub} aria-label="SkillSwap">
+//     <span className={styles.logoIcon} aria-hidden="true">
+//       <SparkIcon />
+//     </span>
+//     SkillSwap
+//   </div>
+// );
 
 const ThemeButtonStub: FC = () => (
   <IconButtonUI onClick={noop}>
@@ -61,10 +63,13 @@ const FavoriteButtonStub: FC<TIconStubProps> = ({ onClick }) => (
   </IconButtonUI>
 );
 
-const UserUnAuthStub: FC = () => (
-  <div className={styles.userUnAuthStub}>
-    <div className={styles.btnOutline}>Войти</div>
-    <div className={styles.btnFilled}>Зарегистрироваться</div>
+const UserUnAuthStub: FC<{ onLoginClick: () => void; onRegisterClick: () => void }> = ({
+  onLoginClick,
+  onRegisterClick,
+}) => (
+  <div className={styles.authButtons}>
+    <Button text="Войти" variant="secondary" onClick={onLoginClick} />
+    <Button text="Зарегистрироваться" variant="primary" onClick={onRegisterClick} />
   </div>
 );
 
@@ -85,17 +90,10 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
     return (
       <header className={styles.header}>
         <div className={`${styles.container} ${styles.containerAuth}`}>
-          <div className={styles.left}>{logo ?? <LogoStub />}</div>
+          <div className={styles.left}>{logo ?? <Logo />}</div>
 
           <div className={styles.right}>
-            {onClose ? (
-              <button type="button" className={styles.closeButton} onClick={onClose}>
-                <span>Закрыть</span>
-                <span className={styles.closeIcon}>
-                  <CloseIcon />
-                </span>
-              </button>
-            ) : null}
+            {onClose ? <Button text="Закрыть" variant="tertiary" icon={<CloseIcon />} onClick={onClose} /> : null}
           </div>
         </div>
       </header>
@@ -107,6 +105,8 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
     onAllSkillsClick,
     onNotificationClick,
     onFavoriteClick,
+    onLoginClick,
+    onRegisterClick,
     isAuthenticated,
     searchValue,
     onSearchChange,
@@ -125,7 +125,7 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.left}>
-          {logo ?? <LogoStub />}
+          {logo ?? <Logo />}
 
           <nav className={styles.navBlock} aria-label="Навигация">
             <NavElementUI text="О проекте" onClick={onAboutClick} isActive={isAboutActive} />
@@ -151,7 +151,9 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
               {userAuth ?? <UserAuthStub />}
             </>
           ) : (
-            (userUnAuth ?? <UserUnAuthStub />)
+            (userUnAuth ?? (
+              <UserUnAuthStub onLoginClick={onLoginClick ?? noop} onRegisterClick={onRegisterClick ?? noop} />
+            ))
           )}
         </div>
       </div>

@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 20px;
+  gap: 8px;
 }
 
 .navBlock {
@@ -41,6 +41,12 @@
   align-items: center;
   justify-content: flex-end;
   flex: 0 0 auto;
+}
+
+.authButtons {
+  display: flex;
+  gap: 8px;
+  padding-left: 10px;
 }
 
 .closeButton {
@@ -73,7 +79,7 @@
 
 /* ------- Заглушки (временно) ------- */
 
-.logoStub {
+/* .logoStub {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -95,7 +101,7 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-}
+} */
 
 .userUnAuthStub {
   display: flex;
@@ -104,7 +110,7 @@
   padding-left: 20px;
 }
 
-.btnOutline {
+/* .btnOutline {
   height: 44px;
   padding: 0 18px;
   border-radius: 12px;
@@ -130,7 +136,7 @@
   line-height: 24px;
   color: var(--text-color);
   background: var(--accent-color);
-}
+} */
 
 .userAuthStub {
   display: flex;
@@ -142,13 +148,8 @@
 .userIcons {
   display: flex;
   align-items: center;
-  gap: 24px;
-}
-
-.userIcon {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
+  gap: 24px;
 }
 
 .userName {

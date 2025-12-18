@@ -24,6 +24,10 @@ export type THeaderLayoutFullProps = THeaderSlots & {
   onNotificationClick?: () => void;
   onFavoriteClick?: () => void;
 
+  /** Обработчики для кнопок в неавторизованном состоянии */
+  onLoginClick?: () => void;
+  onRegisterClick?: () => void;
+
   /** Состояние авторизации (только выбирает, какой блок пользователя отрисовать) */
   isAuthenticated: boolean;
 

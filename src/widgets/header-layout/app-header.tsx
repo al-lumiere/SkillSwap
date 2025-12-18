@@ -1,4 +1,7 @@
+/* eslint-disable react/require-default-props */
 import type { FC, ReactNode } from 'react';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from '../../app/providers/store/store';
 import { headerActions } from '../../entities/slices/headerSlice';
@@ -29,6 +32,13 @@ export type TAppHeaderProps = {
   onAllSkillsClick?: () => void;
   onNotificationClick?: () => void;
   onFavoriteClick?: () => void;
+
+  /** Обработчики для кнопок "Войти" / "Зарегистрироваться".
+   * Если не переданы — контейнер по умолчанию навигирует на /login и /register.
+   */
+  onLoginClick?: () => void;
+  onRegisterClick?: () => void;
+
   onSearchChange?: (value: string) => void;
   onSearchClear?: () => void;
 };
@@ -38,53 +48,72 @@ export type TAppHeaderProps = {
  * - хранит UI-состояние (поиск/активность/открытие меню) в Redux
  * - прячет useSelector/useDispatch от MainLayout
  */
-export const AppHeader: FC<TAppHeaderProps> = (props) => {
-  const {
-    variant = 'full',
-    onClose,
-    isAuthenticated = false,
-    logo,
-    themeButton,
-    notificationButton,
-    favoriteButton,
-    userAuth,
-    userUnAuth,
-    onAboutClick,
-    onAllSkillsClick,
-    onNotificationClick,
-    onFavoriteClick,
-    onSearchChange,
-    onSearchClear,
-  } = props;
-
+export const AppHeader: FC<TAppHeaderProps> = ({
+  variant = 'full',
+  onClose,
+  isAuthenticated = false,
+  logo,
+  themeButton,
+  notificationButton,
+  favoriteButton,
+  userAuth,
+  userUnAuth,
+  onAboutClick,
+  onAllSkillsClick,
+  onNotificationClick,
+  onFavoriteClick,
+  onLoginClick,
+  onRegisterClick,
+  onSearchChange,
+  onSearchClear,
+}) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const searchValue = useSelector((state) => state.header.searchValue);
-  const isAboutActive = useSelector((state) => state.header.isAboutActive);
-  const isAllSkillsOpen = useSelector((state) => state.header.isAllSkillsOpen);
 
-  if (variant === 'auth') {
-    return <HeaderLayout variant="auth" logo={logo} onClose={onClose} />;
-  }
+  const { searchValue, isAboutActive, isAllSkillsOpen } = useSelector((state) => state.header);
 
-  const handleAboutClick = () => {
+  const handleAboutClick = useCallback(() => {
     dispatch(headerActions.aboutClicked());
     onAboutClick?.();
-  };
+  }, [dispatch, onAboutClick]);
 
-  const handleAllSkillsClick = () => {
+  const handleAllSkillsClick = useCallback(() => {
     dispatch(headerActions.allSkillsToggled());
     onAllSkillsClick?.();
-  };
+  }, [dispatch, onAllSkillsClick]);
 
-  const handleSearchChange = (value: string) => {
-    dispatch(headerActions.setSearchValue(value));
-    onSearchChange?.(value);
-  };
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      dispatch(headerActions.setSearchValue(value));
+      onSearchChange?.(value);
+    },
+    [dispatch, onSearchChange],
+  );
 
-  const handleSearchClear = () => {
+  const handleSearchClear = useCallback(() => {
     dispatch(headerActions.clearSearch());
     onSearchClear?.();
-  };
+  }, [dispatch, onSearchClear]);
+
+  const handleLoginClick = useCallback(() => {
+    if (onLoginClick) {
+      onLoginClick();
+      return;
+    }
+    navigate('/login');
+  }, [navigate, onLoginClick]);
+
+  const handleRegisterClick = useCallback(() => {
+    if (onRegisterClick) {
+      onRegisterClick();
+      return;
+    }
+    navigate('/register');
+  }, [navigate, onRegisterClick]);
+
+  if (variant === 'auth') {
+    return <HeaderLayout variant="auth" onClose={onClose} logo={logo} />;
+  }
 
   return (
     <HeaderLayout
@@ -100,6 +129,8 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
       onAllSkillsClick={handleAllSkillsClick}
       onNotificationClick={onNotificationClick}
       onFavoriteClick={onFavoriteClick}
+      onLoginClick={handleLoginClick}
+      onRegisterClick={handleRegisterClick}
       searchValue={searchValue}
       onSearchChange={handleSearchChange}
       onSearchClear={handleSearchClear}
@@ -107,22 +138,4 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
       isAllSkillsActive={isAllSkillsOpen}
     />
   );
-};
-
-AppHeader.defaultProps = {
-  variant: 'full',
-  onClose: undefined,
-  isAuthenticated: false,
-  logo: undefined,
-  themeButton: undefined,
-  notificationButton: undefined,
-  favoriteButton: undefined,
-  userAuth: undefined,
-  userUnAuth: undefined,
-  onAboutClick: undefined,
-  onAllSkillsClick: undefined,
-  onNotificationClick: undefined,
-  onFavoriteClick: undefined,
-  onSearchChange: undefined,
-  onSearchClear: undefined,
 };
