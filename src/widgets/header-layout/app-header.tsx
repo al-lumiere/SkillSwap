@@ -27,6 +27,8 @@ export type TAppHeaderProps = {
   /** Необязательные внешние обработчики (например, для навигации). Вызываются ПОСЛЕ dispatch */
   onAboutClick?: () => void;
   onAllSkillsClick?: () => void;
+  onNotificationClick?: () => void;
+  onFavoriteClick?: () => void;
   onSearchChange?: (value: string) => void;
   onSearchClear?: () => void;
 };
@@ -49,6 +51,8 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
     userUnAuth,
     onAboutClick,
     onAllSkillsClick,
+    onNotificationClick,
+    onFavoriteClick,
     onSearchChange,
     onSearchClear,
   } = props;
@@ -94,6 +98,8 @@ export const AppHeader: FC<TAppHeaderProps> = (props) => {
       isAuthenticated={isAuthenticated}
       onAboutClick={handleAboutClick}
       onAllSkillsClick={handleAllSkillsClick}
+      onNotificationClick={onNotificationClick}
+      onFavoriteClick={onFavoriteClick}
       searchValue={searchValue}
       onSearchChange={handleSearchChange}
       onSearchClear={handleSearchClear}
@@ -115,6 +121,8 @@ AppHeader.defaultProps = {
   userUnAuth: undefined,
   onAboutClick: undefined,
   onAllSkillsClick: undefined,
+  onNotificationClick: undefined,
+  onFavoriteClick: undefined,
   onSearchChange: undefined,
   onSearchClear: undefined,
 };

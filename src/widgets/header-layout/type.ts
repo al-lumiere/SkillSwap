@@ -20,6 +20,10 @@ export type THeaderLayoutFullProps = THeaderSlots & {
   /** Обработчик клика по «Все навыки» */
   onAllSkillsClick: () => void;
 
+  /** Необязательные обработчики иконок (используются для дефолтных кнопок-заглушек) */
+  onNotificationClick?: () => void;
+  onFavoriteClick?: () => void;
+
   /** Состояние авторизации (только выбирает, какой блок пользователя отрисовать) */
   isAuthenticated: boolean;
 

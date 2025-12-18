@@ -1,15 +1,16 @@
 .button {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .button:focus-visible {
   background-color: var(--icon-button-hover-color);
+  outline: transparent;
 }
 
 .button:hover {

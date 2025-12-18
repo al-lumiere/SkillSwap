@@ -29,7 +29,7 @@ const SparkIcon = () => (
 
 const noop = () => undefined;
 
-// Временные заглушки для отсутствующих UI-компонентов (LogoUI / IconButtonUI / UserAuthUI / UserUnAuthUI)
+// Временные заглушки для отсутствующих UI-компонентов (LogoUI / UserAuthUI / UserUnAuthUI)
 const LogoStub: FC = () => (
   <div className={styles.logoStub} aria-label="SkillSwap">
     <span className={styles.logoIcon} aria-hidden="true">
@@ -45,14 +45,18 @@ const ThemeButtonStub: FC = () => (
   </IconButtonUI>
 );
 
-const NotificationButtonStub: FC = () => (
-  <IconButtonUI onClick={noop}>
+type TIconStubProps = {
+  onClick: () => void;
+};
+
+const NotificationButtonStub: FC<TIconStubProps> = ({ onClick }) => (
+  <IconButtonUI onClick={onClick}>
     <NotificationIcon color="#253017" />
   </IconButtonUI>
 );
 
-const FavoriteButtonStub: FC = () => (
-  <IconButtonUI onClick={noop}>
+const FavoriteButtonStub: FC<TIconStubProps> = ({ onClick }) => (
+  <IconButtonUI onClick={onClick}>
     <LikeIcon color="#253017" />
   </IconButtonUI>
 );
@@ -101,6 +105,8 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
   const {
     onAboutClick,
     onAllSkillsClick,
+    onNotificationClick,
+    onFavoriteClick,
     isAuthenticated,
     searchValue,
     onSearchChange,
@@ -140,8 +146,8 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
           {themeButton ?? <ThemeButtonStub />}
           {isAuthenticated ? (
             <>
-              {notificationButton ?? <NotificationButtonStub />}
-              {favoriteButton ?? <FavoriteButtonStub />}
+              {notificationButton ?? <NotificationButtonStub onClick={onNotificationClick ?? noop} />}
+              {favoriteButton ?? <FavoriteButtonStub onClick={onFavoriteClick ?? noop} />}
               {userAuth ?? <UserAuthStub />}
             </>
           ) : (
