@@ -6,6 +6,9 @@ import { AppHeader } from '../../widgets/header-layout';
 export const MainLayout = () => (
   <>
     <AppHeader isAuthenticated={false} />
+    {/* Для теста авторизованного пользователя и кнопки "закрыть" раскомитить нижние строчки */}
+    {/* <AppHeader isAuthenticated /> */}
+    {/* <AppHeader variant="auth" onClose={() => window.history.back()} /> */}
 
     <main>
       <Suspense fallback="Загружаем...">

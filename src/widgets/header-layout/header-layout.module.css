@@ -29,7 +29,6 @@
 .navBlock {
   display: flex;
   align-items: center;
-  /*gap: 24px;*/
 }
 
 .search {
@@ -42,7 +41,6 @@
   align-items: center;
   justify-content: flex-end;
   flex: 0 0 auto;
-  gap: 20px;
 }
 
 .closeButton {
@@ -93,27 +91,17 @@
   height: 44px;
   border-radius: 999px;
   background: var(--accent-color);
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
 }
 
-/* .themeButtonStub {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-color);
-} */
-
 .userUnAuthStub {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
+  padding-left: 20px;
 }
 
 .btnOutline {
@@ -147,7 +135,8 @@
 .userAuthStub {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
+  padding-left: 20px;
 }
 
 .userIcons {

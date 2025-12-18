@@ -41,7 +41,7 @@ const LogoStub: FC = () => (
 
 const ThemeButtonStub: FC = () => (
   <IconButtonUI onClick={noop}>
-    <MoonIcon color="#253017" />
+    <MoonIcon />
   </IconButtonUI>
 );
 
@@ -51,13 +51,13 @@ type TIconStubProps = {
 
 const NotificationButtonStub: FC<TIconStubProps> = ({ onClick }) => (
   <IconButtonUI onClick={onClick}>
-    <NotificationIcon color="#253017" />
+    <NotificationIcon />
   </IconButtonUI>
 );
 
 const FavoriteButtonStub: FC<TIconStubProps> = ({ onClick }) => (
   <IconButtonUI onClick={onClick}>
-    <LikeIcon color="#253017" />
+    <LikeIcon />
   </IconButtonUI>
 );
 
