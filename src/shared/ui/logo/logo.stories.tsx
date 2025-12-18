@@ -12,12 +12,6 @@ const meta: Meta<typeof Logo> = {
       </MemoryRouter>
     ),
   ],
-  args: {
-    to: '/',
-  },
-  argTypes: {
-    to: { control: 'text' },
-  },
   parameters: {
     layout: 'centered',
   },
