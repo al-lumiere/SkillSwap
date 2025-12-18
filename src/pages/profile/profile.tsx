@@ -10,4 +10,4 @@ export const ProfilePage: FC = () => (
   </main>
 );
 
-export default ProfilePage
+export default ProfilePage;
