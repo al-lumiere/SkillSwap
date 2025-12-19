@@ -5,7 +5,7 @@ import NotificationIcon from '../../assets/icons/notification-icon';
 import LikeIcon from '../../assets/icons/like-icon';
 
 const meta: Meta<typeof UserAuthedPanelUI> = {
-  title: 'UI/UserAuthedPanelUI',
+  title: 'ui/UserAuthedPanelUI',
   component: UserAuthedPanelUI,
   parameters: {
     layout: 'centered',

@@ -11,14 +11,14 @@ export const IllustrationBlockUI = ({ illustration, title, description, actions 
         <p className={styles.description}>{description}</p>
       </div>
       {actions && (
-      <div className={styles.buttons}>
-        {actions.map((action) => (
-          <ButtonUI variant={action.primary ? 'primary' : 'secondary'} onClick={action.onClick}>
-            {action.text}
-          </ButtonUI>
-        ))}
-      </div>
-    )}
+        <div className={styles.buttons}>
+          {actions.map((action) => (
+            <ButtonUI variant={action.primary ? 'primary' : 'secondary'} onClick={action.onClick}>
+              {action.text}
+            </ButtonUI>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 );

@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './radio-group.module.css';
-import { RadioGroupProps } from './type';
+import { RadioGroupUIProps } from './type';
 
-const RadioGroup: React.FC<RadioGroupProps> = ({ title, options, value, onChange, name }) => (
+const RadioGroupUI: React.FC<RadioGroupUIProps> = ({ title, options, value, onChange, name }) => (
   <div className={styles.radioGroup}>
     {title && <h2 className={styles.title}>{title}</h2>}
     <div className={styles.optionsList}>
@@ -25,4 +25,4 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ title, options, value, onChange
   </div>
 );
 
-export default RadioGroup;
+export default RadioGroupUI;

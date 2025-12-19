@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { CatalogCardLayoutUI } from './catalog-card-layout';
+import { CatalogCardUI } from './catalog-card';
 
-const meta: Meta<typeof CatalogCardLayoutUI> = {
-  title: 'widgets/CatalogCardLayout',
-  component: CatalogCardLayoutUI,
+const meta: Meta<typeof CatalogCardUI> = {
+  title: 'ui/CatalogCardUI',
+  component: CatalogCardUI,
   parameters: {
     layout: 'centered',
   },
@@ -12,7 +12,7 @@ const meta: Meta<typeof CatalogCardLayoutUI> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CatalogCardLayoutUI>;
+type Story = StoryObj<typeof CatalogCardUI>;
 
 export const Default: Story = {
   args: {
@@ -44,7 +44,7 @@ export const Default: Story = {
     };
 
     return (
-      <CatalogCardLayoutUI
+      <CatalogCardUI
         avatar={avatar}
         name={name}
         ageText={ageText}

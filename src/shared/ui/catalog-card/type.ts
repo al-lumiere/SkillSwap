@@ -1,4 +1,4 @@
-export type TCatalogCardLayoutProps = {
+export type TCatalogCardUIProps = {
   avatar: string;
   name: string;
   ageText: string;

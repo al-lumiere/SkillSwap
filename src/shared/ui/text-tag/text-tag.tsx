@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import styles from './text-tag.module.css';
-import { TTextTagProps } from './type';
+import { TTextTagUIProps } from './type';
 
-export const TextTagUI: FC<TTextTagProps> = ({ label, bgColor }) => (
+export const TextTagUI: FC<TTextTagUIProps> = ({ label, bgColor }) => (
   <span className={styles.tag} style={{ backgroundColor: bgColor }}>
     {label}
   </span>

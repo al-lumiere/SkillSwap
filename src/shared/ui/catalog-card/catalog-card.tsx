@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { IconButtonUI } from '@ui/icon-button';
 import { TextTagUI } from '@ui/text-tag';
 import { ButtonUI } from '@ui/button';
-import { TCatalogCardLayoutProps } from './type';
+import { TCatalogCardUIProps } from './type';
 
 import styles from './catalog-card-layout.module.css';
 
-import LikeIcon from '../../shared/assets/icons/like-icon';
-import LikeFullIcon from '../../shared/assets/icons/like-full-icon';
+import LikeIcon from '../../assets/icons/like-icon';
+import LikeFullIcon from '../../assets/icons/like-full-icon';
 
-export const CatalogCardLayoutUI: FC<TCatalogCardLayoutProps> = ({
+export const CatalogCardUI: FC<TCatalogCardUIProps> = ({
   avatar,
   name,
   ageText,

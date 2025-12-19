@@ -1,1 +1,1 @@
-export { CheckboxGroupUI } from './checkbox-group';
+export { CheckboxListUI } from './checkbox-group';

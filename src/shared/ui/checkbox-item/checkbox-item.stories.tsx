@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { CheckboxItemUI } from './checkbox-item';
 
 const meta: Meta<typeof CheckboxItemUI> = {
-  title: 'shared/ui/CheckboxItem',
+  title: 'ui/CheckboxItemUI',
   component: CheckboxItemUI,
   parameters: {
     layout: 'centered',

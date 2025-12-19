@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { RadioGroup } from './index';
-import type { RadioGroupProps } from './type';
+import { RadioGroupUI } from './index';
+import type { RadioGroupUIProps } from './type';
 
-const meta: Meta<typeof RadioGroup> = {
-  title: 'UI/RadioGroup',
-  component: RadioGroup,
+const meta: Meta<typeof RadioGroupUI> = {
+  title: 'ui/RadioGroupUI',
+  component: RadioGroupUI,
   parameters: {
     layout: 'centered',
   },
@@ -34,10 +34,10 @@ const meta: Meta<typeof RadioGroup> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof RadioGroup>;
+type Story = StoryObj<typeof RadioGroupUI>;
 
 // Wrapper component with state management
-const RadioGroupWithState = ({ value: initialValue, onChange, title, options, name }: RadioGroupProps) => {
+const RadioGroupWithState = ({ value: initialValue, onChange, title, options, name }: RadioGroupUIProps) => {
   const [value, setValue] = useState(initialValue);
 
   const handleChange = (newValue: string) => {
@@ -47,7 +47,7 @@ const RadioGroupWithState = ({ value: initialValue, onChange, title, options, na
     }
   };
 
-  return <RadioGroup value={value} onChange={handleChange} title={title} options={options} name={name} />;
+  return <RadioGroupUI value={value} onChange={handleChange} title={title} options={options} name={name} />;
 };
 
 export const WithTitle: Story = {

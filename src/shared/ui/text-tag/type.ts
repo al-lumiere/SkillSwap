@@ -1,4 +1,4 @@
-export type TTextTagProps = {
+export type TTextTagUIProps = {
   label: string;
   bgColor: string;
 };

@@ -13,7 +13,12 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@ui', replacement: '/src/shared/ui' },
-      { find: '@styles', replacement: '/src/shared/assets/styles' },
+      { find: '@icons', replacement: '/src/shared/assets/icons' },
+      { find: '@slices', replacement: '/src/store/slices' },
+      { find: '@pages', replacement: '/src/pages' },
+      { find: '@components', replacement: '/src/components' },
+      { find: '@store', replacement: '/src/store' },
+      { find: '@api', replacement: '/src/api' },
     ],
   },
 });

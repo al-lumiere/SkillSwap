@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { TCheckboxGroupProps } from './type';
+import { TCheckboxListUIProps } from './type';
 import styles from './checkbox-group.module.css';
 import ChevronDownIcon from '../../assets/icons/chevron-down';
 import ChevronUpIcon from '../../assets/icons/chevron-up';
 import CheckboxEmptyIcon from '../../assets/icons/checkbox-empty';
 import CheckboxRemoveIcon from '../../assets/icons/checkbox-remove';
 
-export const CheckboxGroupUI: FC<TCheckboxGroupProps> = ({ label, expanded = false, onToggleExpand, children }) => (
+export const CheckboxListUI: FC<TCheckboxListUIProps> = ({ label, expanded = false, onToggleExpand, children }) => (
   <details className={styles.wrapper} open={expanded}>
     <summary
       className={styles.summary}

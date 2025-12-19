@@ -1,1 +1,0 @@
-export { CatalogCardLayoutUI } from './catalog-card-layout';
