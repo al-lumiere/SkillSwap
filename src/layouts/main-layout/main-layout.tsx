@@ -7,7 +7,7 @@ export const MainLayout = () => (
   <>
     <AppHeader isAuthenticated={false} />
     {/* Для теста авторизованного пользователя и кнопки "закрыть" раскомитить нижние строчки */}
-    <AppHeader isAuthenticated />
+    {/* <AppHeader isAuthenticated /> */}
     {/* <AppHeader variant="auth" onClose={() => window.history.back()} /> */}
 
     <main>
