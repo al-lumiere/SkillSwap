@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { Button } from '@ui/button';
+import { ButtonUI } from '@ui/button';
 import style from './user-guest.module.css';
-import { TGuestUserPanelProps } from './type';
+import { TGuestUserPanelUIProps } from './type';
 
-export const GuestUserPanel: FC<TGuestUserPanelProps> = ({ onLogin, onSignup }) => (
+export const GuestUserPanelUI: FC<TGuestUserPanelUIProps> = ({ onLogin, onSignup }) => (
   <div className={style.buttons_container}>
-    <Button variant="secondary" text="Войти" onClick={onLogin} />
-    <Button variant="primary" text="Зарегестрироваться" onClick={onSignup} />
+    <ButtonUI variant="secondary" text="Войти" onClick={onLogin} />
+    <ButtonUI variant="primary" text="Зарегестрироваться" onClick={onSignup} />
   </div>
 );

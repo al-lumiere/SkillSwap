@@ -1,4 +1,4 @@
-export type TGuestUserPanelProps = {
+export type TGuestUserPanelUIProps = {
   onLogin: () => void;
   onSignup: () => void;
 };

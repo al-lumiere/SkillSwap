@@ -1,7 +1,7 @@
-import { ButtonProps } from './types';
+import { ButtonUIProps } from './types';
 import styles from './button.module.css';
 
-export const Button = ({ text, icon, variant = 'primary', disabled = false, onClick }: ButtonProps) => {
+export const ButtonUI = ({ text, icon, variant = 'primary', disabled = false, onClick }: ButtonUIProps) => {
   const className = [styles.button, styles[variant], disabled ? styles.isDisabled : ''].filter(Boolean).join(' ');
 
   return (

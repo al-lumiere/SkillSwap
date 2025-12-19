@@ -1,141 +1,136 @@
-/* eslint-disable react/require-default-props */
-import type { FC, ReactNode } from 'react';
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { useDispatch, useSelector } from '../../app/providers/store/store';
-import { headerActions } from '../../entities/slices/headerSlice';
+import type { FC } from 'react';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { HeaderLayout } from './header-layout';
-import type { THeaderVariant } from './type';
-
-export type TAppHeaderProps = {
-  /** Вариант хедера (по умолчанию full) */
-  variant?: THeaderVariant;
-
-  /** Кнопка "Закрыть" (используется только в варианте auth) */
-  onClose?: () => void;
-
-  /** Состояние авторизации (только для выбора userAuth / userUnAuth) */
-  isAuthenticated?: boolean;
-
-  /** Необязательные слоты (если не переданы — отрисуются заглушки) */
-  logo?: ReactNode;
-  themeButton?: ReactNode;
-  notificationButton?: ReactNode;
-  favoriteButton?: ReactNode;
-  userAuth?: ReactNode;
-  userUnAuth?: ReactNode;
-
-  /** Необязательные внешние обработчики (например, для навигации). Вызываются ПОСЛЕ dispatch */
-  onAboutClick?: () => void;
-  onAllSkillsClick?: () => void;
-  onNotificationClick?: () => void;
-  onFavoriteClick?: () => void;
-
-  /** Обработчики для кнопок "Войти" / "Зарегистрироваться".
-   * Если не переданы — контейнер по умолчанию навигирует на /login и /register.
-   */
-  onLoginClick?: () => void;
-  onRegisterClick?: () => void;
-
-  onSearchChange?: (value: string) => void;
-  onSearchClear?: () => void;
-};
+import type { TAppHeaderProps } from './type';
 
 /**
  * Контейнер для HeaderLayout:
- * - хранит UI-состояние (поиск/активность/открытие меню) в Redux
- * - прячет useSelector/useDispatch от MainLayout
+ * - не хранит UI-состояние в Redux
+ * - держит только минимальные локальные значения (поиск/открытие меню), если их не контролируют извне
+ * - даёт дефолтную навигацию на /login и /register
+ *
+ * Важно: активность пунктов навигации НЕ должна сохраняться между переходами.
+ * Поэтому «О проекте» считаем активным только когда текущий URL = /about.
  */
 export const AppHeader: FC<TAppHeaderProps> = ({
   variant = 'full',
   onClose,
   isAuthenticated = false,
-  logo,
-  themeButton,
-  notificationButton,
-  favoriteButton,
-  userAuth,
-  userUnAuth,
+  userPanelProps,
+  guestPanelProps,
   onAboutClick,
   onAllSkillsClick,
+  isAllSkillsOpen: isAllSkillsOpenProp,
+  onThemeClick,
   onNotificationClick,
   onFavoriteClick,
-  onLoginClick,
-  onRegisterClick,
+  searchValue: searchValueProp,
   onSearchChange,
   onSearchClear,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const { searchValue, isAboutActive, isAllSkillsOpen } = useSelector((state) => state.header);
+  const [searchValueState, setSearchValueState] = useState('');
+  const [isAllSkillsOpenState, setIsAllSkillsOpenState] = useState(false);
 
-  const handleAboutClick = useCallback(() => {
-    dispatch(headerActions.aboutClicked());
+  const searchValue = searchValueProp ?? searchValueState;
+  const isAllSkillsOpen = isAllSkillsOpenProp ?? isAllSkillsOpenState;
+
+  // «О проекте» ведёт на /about (которого нет в роутере → откроется NotFoundPage по "*").
+  // Активность зависит только от текущего пути и НЕ конфликтует с «Все навыки».
+  const isAboutActive = location.pathname === '/about';
+
+  if (variant === 'auth') {
+    return <HeaderLayout variant="auth" onClose={onClose} />;
+  }
+
+  const handleAboutClick = () => {
     onAboutClick?.();
-  }, [dispatch, onAboutClick]);
 
-  const handleAllSkillsClick = useCallback(() => {
-    dispatch(headerActions.allSkillsToggled());
+    // Открываем not-found (через отсутствие роута /about).
+    navigate('/about');
+  };
+
+  const handleAllSkillsClick = () => {
+    if (isAllSkillsOpenProp === undefined) {
+      setIsAllSkillsOpenState((prev) => !prev);
+    }
     onAllSkillsClick?.();
-  }, [dispatch, onAllSkillsClick]);
+  };
 
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      dispatch(headerActions.setSearchValue(value));
-      onSearchChange?.(value);
-    },
-    [dispatch, onSearchChange],
-  );
+  const handleSearchChange = (value: string) => {
+    if (searchValueProp === undefined) {
+      setSearchValueState(value);
+    }
+    onSearchChange?.(value);
+  };
 
-  const handleSearchClear = useCallback(() => {
-    dispatch(headerActions.clearSearch());
+  const handleSearchClear = () => {
+    if (searchValueProp === undefined) {
+      setSearchValueState('');
+    }
     onSearchClear?.();
-  }, [dispatch, onSearchClear]);
+  };
 
-  const handleLoginClick = useCallback(() => {
-    if (onLoginClick) {
-      onLoginClick();
+  const handleLogin = () => {
+    if (guestPanelProps?.onLogin) {
+      guestPanelProps.onLogin();
       return;
     }
     navigate('/login');
-  }, [navigate, onLoginClick]);
+  };
 
-  const handleRegisterClick = useCallback(() => {
-    if (onRegisterClick) {
-      onRegisterClick();
+  const handleSignup = () => {
+    if (guestPanelProps?.onSignup) {
+      guestPanelProps.onSignup();
       return;
     }
     navigate('/register');
-  }, [navigate, onRegisterClick]);
+  };
 
-  if (variant === 'auth') {
-    return <HeaderLayout variant="auth" onClose={onClose} logo={logo} />;
+  if (isAuthenticated) {
+    return (
+      <HeaderLayout
+        variant="full"
+        isAuthenticated
+        userPanelProps={
+          userPanelProps ?? {
+            userName: 'Пользователь',
+          }
+        }
+        onAboutClick={handleAboutClick}
+        onAllSkillsClick={handleAllSkillsClick}
+        isAboutActive={isAboutActive}
+        isAllSkillsOpen={isAllSkillsOpen}
+        searchValue={searchValue}
+        onSearchChange={handleSearchChange}
+        onSearchClear={handleSearchClear}
+        onThemeClick={onThemeClick}
+        onNotificationClick={onNotificationClick}
+        onFavoriteClick={onFavoriteClick}
+      />
+    );
   }
 
   return (
     <HeaderLayout
       variant="full"
-      logo={logo}
-      themeButton={themeButton}
-      notificationButton={notificationButton}
-      favoriteButton={favoriteButton}
-      userAuth={userAuth}
-      userUnAuth={userUnAuth}
-      isAuthenticated={isAuthenticated}
+      isAuthenticated={false}
+      guestPanelProps={{
+        onLogin: handleLogin,
+        onSignup: handleSignup,
+      }}
       onAboutClick={handleAboutClick}
       onAllSkillsClick={handleAllSkillsClick}
-      onNotificationClick={onNotificationClick}
-      onFavoriteClick={onFavoriteClick}
-      onLoginClick={handleLoginClick}
-      onRegisterClick={handleRegisterClick}
+      isAboutActive={isAboutActive}
+      isAllSkillsOpen={isAllSkillsOpen}
       searchValue={searchValue}
       onSearchChange={handleSearchChange}
       onSearchClear={handleSearchClear}
-      isAboutActive={isAboutActive}
-      isAllSkillsActive={isAllSkillsOpen}
+      onThemeClick={onThemeClick}
     />
   );
 };

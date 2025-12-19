@@ -1,52 +1,92 @@
-import type { ReactNode } from 'react';
+import type { TGuestUserPanelUIProps } from '@ui/user-guest/type';
+import type { TUserPanelUIProps } from '@ui/user-authed-panel/type';
 
 export type THeaderVariant = 'full' | 'auth';
 
-type THeaderSlots = {
-  /** Необязательные слоты (если не переданы — отрисуются заглушки) */
-  logo?: ReactNode;
-  themeButton?: ReactNode;
-  notificationButton?: ReactNode;
-  favoriteButton?: ReactNode;
-  userAuth?: ReactNode;
-  userUnAuth?: ReactNode;
-};
-
-export type THeaderLayoutFullProps = THeaderSlots & {
+type THeaderLayoutFullBaseProps = {
   variant?: 'full';
 
-  /** Обработчик клика по «О проекте» */
-  onAboutClick: () => void;
-  /** Обработчик клика по «Все навыки» */
-  onAllSkillsClick: () => void;
+  /** Навигация */
+  onAboutClick?: () => void;
+  onAllSkillsClick?: () => void;
 
-  /** Необязательные обработчики иконок (используются для дефолтных кнопок-заглушек) */
+  /** Подсветка «О проекте» (обычно вычисляется по роуту в контейнере) */
+  isAboutActive?: boolean;
+
+  /** UI-флаг раскрытого меню «Все навыки» (подсветка/поворот шеврона) */
+  isAllSkillsOpen?: boolean;
+
+  /** Поиск */
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  onSearchClear?: () => void;
+
+  /** Иконки/действия */
+  onThemeClick?: () => void;
   onNotificationClick?: () => void;
   onFavoriteClick?: () => void;
-
-  /** Обработчики для кнопок в неавторизованном состоянии */
-  onLoginClick?: () => void;
-  onRegisterClick?: () => void;
-
-  /** Состояние авторизации (только выбирает, какой блок пользователя отрисовать) */
-  isAuthenticated: boolean;
-
-  /** Значение поиска */
-  searchValue: string;
-  /** Обработчик изменения поиска */
-  onSearchChange: (value: string) => void;
-  /** Обработчик очистки поиска */
-  onSearchClear: () => void;
-
-  /** Необязательные флаги активного состояния пунктов навигации (подчёркивание) */
-  isAboutActive?: boolean;
-  isAllSkillsActive?: boolean;
 };
 
-export type THeaderLayoutAuthProps = Pick<THeaderSlots, 'logo'> & {
+type TAuthedUserProps = {
+  isAuthenticated: true;
+  /** Пропсы панели авторизованного пользователя (кроме actions — их собирает HeaderLayout) */
+  userPanelProps: Omit<TUserPanelUIProps, 'actions'>;
+  guestPanelProps?: never;
+};
+
+type TGuestUserProps = {
+  isAuthenticated: false;
+  /** Пропсы гостевой панели (кнопки «Войти/Зарегистрироваться») */
+  guestPanelProps: TGuestUserPanelUIProps;
+  userPanelProps?: never;
+};
+
+export type THeaderLayoutFullProps = THeaderLayoutFullBaseProps & (TAuthedUserProps | TGuestUserProps);
+
+export type THeaderLayoutAuthProps = {
   variant: 'auth';
   /** Необязательный обработчик закрытия (кнопка появится, если передан) */
   onClose?: () => void;
 };
 
 export type THeaderLayoutProps = THeaderLayoutFullProps | THeaderLayoutAuthProps;
+
+/**
+ * Пропсы контейнера AppHeader:
+ * - даёт дефолтную навигацию на /login и /register
+ * - может держать локальные UI-значения (например поиск)
+ */
+export type TAppHeaderProps = {
+  variant?: THeaderVariant;
+  onClose?: () => void;
+
+  /**
+   * Для демо/разработки можно пробрасывать явно.
+   * В реальном проекте часто будет вычисляться из store.
+   */
+  isAuthenticated?: boolean;
+
+  /** Панель авторизованного пользователя (обязательна, если isAuthenticated=true) */
+  userPanelProps?: Omit<TUserPanelUIProps, 'actions'>;
+
+  /**
+   * Панель гостя. Можно передать частично или полностью.
+   * Если не передать, контейнер создаст дефолтные handlers (/login, /register).
+   */
+  guestPanelProps?: Partial<TGuestUserPanelUIProps>;
+
+  onAboutClick?: () => void;
+  onAllSkillsClick?: () => void;
+
+  /** Можно передать извне, если меню контролируется снаружи */
+  isAllSkillsOpen?: boolean;
+
+  onThemeClick?: () => void;
+  onNotificationClick?: () => void;
+  onFavoriteClick?: () => void;
+
+  /** Можно контролировать поиск извне, иначе контейнер будет держать локально */
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  onSearchClear?: () => void;
+};

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
-import { Logo } from './logo';
+import { LogoUI } from './logo';
 
-const meta: Meta<typeof Logo> = {
+const meta: Meta<typeof LogoUI> = {
   title: 'shared/ui/Logo',
-  component: Logo,
+  component: LogoUI,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -19,6 +19,6 @@ const meta: Meta<typeof Logo> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Logo>;
+type Story = StoryObj<typeof LogoUI>;
 
 export const Primary: Story = {};

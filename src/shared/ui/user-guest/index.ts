@@ -1,1 +1,1 @@
-export { GuestUserPanel } from './user-guest';
+export { GuestUserPanelUI } from './user-guest';

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { GuestUserPanel } from './user-guest';
+import { GuestUserPanelUI } from './user-guest';
 
-const meta: Meta<typeof GuestUserPanel> = {
-  title: 'UI/GuestUserPanel',
-  component: GuestUserPanel,
+const meta: Meta<typeof GuestUserPanelUI> = {
+  title: 'ui/GuestUserPanel',
+  component: GuestUserPanelUI,
   parameters: {
     layout: 'centered',
   },

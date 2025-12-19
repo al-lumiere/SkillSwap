@@ -1,9 +1,9 @@
 import { ReactNode, ButtonHTMLAttributes } from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonUIVariant = 'primary' | 'secondary' | 'tertiary';
 
-export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   text: string;
   icon?: ReactNode;
-  variant: ButtonVariant;
+  variant: ButtonUIVariant;
 }
