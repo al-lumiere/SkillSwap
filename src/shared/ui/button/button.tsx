@@ -6,8 +6,7 @@ export const ButtonUI = ({ text, icon, variant = 'primary', disabled = false, on
 
   return (
     <button type="button" disabled={disabled} onClick={onClick} className={className}>
-      {text && <span>{text}</span>}
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {children}
     </button>
   );
 };

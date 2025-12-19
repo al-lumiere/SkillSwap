@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { IconButtonUI } from '@ui/icon-button';
 import { TextTagUI } from '@ui/text-tag';
+import { Button } from '@ui/button';
 import { TCatalogCardLayoutProps } from './type';
 
 import styles from './catalog-card-layout.module.css';
@@ -74,9 +75,9 @@ export const CatalogCardLayoutUI: FC<TCatalogCardLayoutProps> = ({
         </section>
       </div>
 
-      <button type="button" className={styles.fakeButton} onClick={handleDetailsClick}>
+      <Button variant="primary" onClick={handleDetailsClick}>
         Подробнее
-      </button>
+      </Button>
     </article>
   );
 };
