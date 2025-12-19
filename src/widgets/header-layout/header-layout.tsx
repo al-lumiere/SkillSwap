@@ -9,16 +9,10 @@ import ChevronDownIcon from '../../shared/assets/icons/chevron-down';
 import LikeIcon from '../../shared/assets/icons/like-icon';
 import MoonIcon from '../../shared/assets/icons/moon-icon';
 import NotificationIcon from '../../shared/assets/icons/notification-icon';
+import CrossIcon from '../../shared/assets/icons/cross-icon';
 
 import styles from './header-layout.module.css';
 import { THeaderLayoutAuthProps, THeaderLayoutFullProps, THeaderLayoutProps } from './type';
-
-const CloseIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M18 6L6 18" stroke="#253017" strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M6 6L18 18" stroke="#253017" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-);
 
 const noop = () => undefined;
 
@@ -75,7 +69,7 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
           <div className={styles.left}>{logo ?? <Logo />}</div>
 
           <div className={styles.right}>
-            {onClose ? <Button text="Закрыть" variant="tertiary" icon={<CloseIcon />} onClick={onClose} /> : null}
+            {onClose ? <Button text="Закрыть" variant="tertiary" icon={<CrossIcon />} onClick={onClose} /> : null}
           </div>
         </div>
       </header>
@@ -89,16 +83,16 @@ export const HeaderLayout: FC<THeaderLayoutProps> = (props) => {
     onFavoriteClick,
     onLoginClick,
     onRegisterClick,
-    isAuthenticated,
-    searchValue,
     onSearchChange,
     onSearchClear,
+    isAuthenticated,
     isAboutActive = false,
     isAllSkillsActive = false,
     logo,
     themeButton,
     notificationButton,
     favoriteButton,
+    searchValue,
     userAuth,
     userUnAuth,
   } = props as THeaderLayoutFullProps;
