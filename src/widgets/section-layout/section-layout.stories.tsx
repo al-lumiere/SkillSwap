@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { SectionLayoutUI } from './section-layout';
 import { CatalogCardLayoutUI } from '../catalog-card-layout';
 import { Button } from '../../shared/ui/button';
 import ChevronRightIcon from '../../shared/assets/icons/chevron-right-icon';
-import SortIcon from '../../shared/assets/icons/sort-icon';
 
 const meta: Meta<typeof SectionLayoutUI> = {
   title: 'widgets/SectionLayout',
@@ -44,11 +44,25 @@ const mockCardData = {
 
 export const PopularWithButton: Story = {
   render: () => {
-    const cards = [
+    const [cards, setCards] = useState([
       { id: 0, name: 'Иван', city: 'Санкт-Петербург', age: '34 года', likes: 5, favorited: false },
       { id: 1, name: 'Виктория', city: 'Кемерово', age: '30 лет', likes: 15, favorited: false },
       { id: 2, name: 'Елена', city: 'Красноярск', age: '28 лет', likes: 25, favorited: true },
-    ];
+    ]);
+
+    const handleFavoriteToggle = (cardId: number, nextValue: boolean) => {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card.id === cardId
+            ? {
+                ...card,
+                favorited: nextValue,
+                likes: nextValue ? card.likes + 1 : card.likes - 1,
+              }
+            : card,
+        ),
+      );
+    };
 
     return (
       <div style={{ width: '1020px' }}>
@@ -73,7 +87,7 @@ export const PopularWithButton: Story = {
               likesCount={card.likes}
               isFavorited={card.favorited}
               onDetailsClick={() => console.log(`Details clicked for ${card.name}`)}
-              onFavoriteToggle={(value) => console.log(`Favorite toggled for ${card.name}:`, value)}
+              onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
         </SectionLayoutUI>
@@ -84,14 +98,28 @@ export const PopularWithButton: Story = {
 
 export const RecommendedWithoutButton: Story = {
   render: () => {
-    const cards = [
+    const [cards, setCards] = useState([
       { id: 0, name: 'Иван', city: 'Санкт-Петербург', age: '34 года', likes: 5, favorited: false },
       { id: 1, name: 'Виктория', city: 'Кемерово', age: '30 лет', likes: 15, favorited: false },
       { id: 2, name: 'Елена', city: 'Красноярск', age: '28 лет', likes: 25, favorited: true },
       { id: 3, name: 'Константин', city: 'Иркутск', age: '36 лет', likes: 35, favorited: false },
       { id: 4, name: 'София', city: 'Абакан', age: '24 года', likes: 45, favorited: false },
       { id: 5, name: 'Екатерина', city: 'Пермь', age: '33 года', likes: 55, favorited: true },
-    ];
+    ]);
+
+    const handleFavoriteToggle = (cardId: number, nextValue: boolean) => {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card.id === cardId
+            ? {
+                ...card,
+                favorited: nextValue,
+                likes: nextValue ? card.likes + 1 : card.likes - 1,
+              }
+            : card,
+        ),
+      );
+    };
 
     return (
       <div style={{ width: '1020px' }}>
@@ -108,7 +136,7 @@ export const RecommendedWithoutButton: Story = {
               likesCount={card.likes}
               isFavorited={card.favorited}
               onDetailsClick={() => console.log(`Details clicked for ${card.name}`)}
-              onFavoriteToggle={(value) => console.log(`Favorite toggled for ${card.name}:`, value)}
+              onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
         </SectionLayoutUI>
@@ -119,24 +147,30 @@ export const RecommendedWithoutButton: Story = {
 
 export const SimilarWithFilterButton: Story = {
   render: () => {
-    const cards = [
+    const [cards, setCards] = useState([
       { id: 0, name: 'Иван', city: 'Санкт-Петербург', age: '34 года', likes: 5, favorited: false },
       { id: 1, name: 'Виктория', city: 'Кемерово', age: '30 лет', likes: 15, favorited: false },
       { id: 2, name: 'Елена', city: 'Красноярск', age: '28 лет', likes: 25, favorited: true },
       { id: 3, name: 'Константин', city: 'Иркутск', age: '36 лет', likes: 35, favorited: false },
-    ];
+    ]);
+
+    const handleFavoriteToggle = (cardId: number, nextValue: boolean) => {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card.id === cardId
+            ? {
+                ...card,
+                favorited: nextValue,
+                likes: nextValue ? card.likes + 1 : card.likes - 1,
+              }
+            : card,
+        ),
+      );
+    };
 
     return (
       <div style={{ width: '1368px' }}>
-        <SectionLayoutUI
-          title="Похожие предложения"
-          actionButton={
-            <Button variant="tertiary" onClick={() => console.log('')}>
-              <SortIcon />
-              Сначала новые
-            </Button>
-          }
-        >
+        <SectionLayoutUI title={`Похожие предложения: ${cards.length}`}>
           {cards.map((card) => (
             <CatalogCardLayoutUI
               key={card.id}
@@ -149,7 +183,7 @@ export const SimilarWithFilterButton: Story = {
               likesCount={card.likes}
               isFavorited={card.favorited}
               onDetailsClick={() => console.log(`Details clicked for ${card.name}`)}
-              onFavoriteToggle={(value) => console.log(`Favorite toggled for ${card.name}:`, value)}
+              onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
         </SectionLayoutUI>
