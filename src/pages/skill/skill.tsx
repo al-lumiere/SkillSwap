@@ -3,4 +3,4 @@ import styles from './skill.module.css';
 
 export const SkillPage: FC = () => <h1>Skill Page</h1>;
 
-export default SkillPage
+export default SkillPage;
