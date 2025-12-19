@@ -6,12 +6,12 @@ const meta: Meta<typeof Button> = {
   title: 'ui/Button',
   component: Button,
   args: {
-    text: 'Button',
+    children: 'Button',
     variant: 'primary',
     disabled: false,
   },
   argTypes: {
-    text: { control: 'text' },
+    children: { control: 'text' },
     variant: {
       control: 'radio',
       options: ['primary', 'secondary', 'tertiary'],
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    text: 'Primary',
+    children: 'Primary',
     disabled: false,
   },
 };
@@ -38,7 +38,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    text: 'Secondary',
+    children: 'Secondary',
     disabled: true,
   },
 };
@@ -46,14 +46,30 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     variant: 'tertiary',
-    text: 'Пример tertiary',
+    children: 'Пример tertiary',
   },
 };
 
-export const TertiaryIcon: Story = {
+export const TertiaryIconLeft: Story = {
   args: {
     variant: 'tertiary',
-    text: 'Tertiary',
-    icon: <CrossIcon />,
+    children: (
+      <>
+        <CrossIcon />
+        Tertiary
+      </>
+    ),
+  },
+};
+
+export const TertiaryIconRight: Story = {
+  args: {
+    variant: 'tertiary',
+    children: (
+      <>
+        Tertiary
+        <CrossIcon />
+      </>
+    ),
   },
 };
