@@ -1,0 +1,5 @@
+.buttons_container {
+  display: flex;
+  gap: 8px;
+  /* width: 308px; */
+}

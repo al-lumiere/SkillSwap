@@ -9,8 +9,8 @@ type ProtectedRouteProps = {
 
 export const ProtectedRoute = ({
   // onlyUnAuth,
-  children
-}: ProtectedRouteProps) => children
+  children,
+}: ProtectedRouteProps) => children;
 
 // todo: оживить блокировщик когда будет готова авторизация
 // }: ProtectedRouteProps) => {
@@ -27,7 +27,6 @@ export const ProtectedRoute = ({
 //     //  если маршрут для авторизованного пользователя, но пользователь неавторизован, то делаем редирект
 //     return <Navigate replace to='/login' state={{ from: location }} />; // в поле from объекта location.state записываем информацию о URL
 //   }
-
 
 //   if (onlyUnAuth && user) {
 //     //  если маршрут для неавторизованного пользователя, но пользователь авторизован
