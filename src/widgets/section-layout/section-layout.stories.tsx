@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { SectionLayoutUI } from './section-layout';
 import { CatalogCardLayoutUI } from '../catalog-card-layout';
-import { Button } from '../../shared/ui/button';
+import { ButtonUI } from '../../shared/ui/button';
 import ChevronRightIcon from '../../shared/assets/icons/chevron-right-icon';
 
 const meta: Meta<typeof SectionLayoutUI> = {
@@ -69,10 +69,10 @@ export const PopularWithButton: Story = {
         <SectionLayoutUI
           title="Популярное"
           actionButton={
-            <Button variant="tertiary" onClick={() => console.log('')}>
+            <ButtonUI variant="tertiary" onClick={() => console.log('')}>
               Смотреть все
               <ChevronRightIcon />
-            </Button>
+            </ButtonUI>
           }
         >
           {cards.map((card) => (
