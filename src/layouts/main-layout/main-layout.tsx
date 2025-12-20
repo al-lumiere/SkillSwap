@@ -4,8 +4,8 @@ import { HeaderUI } from '../../widgets/header';
 
 export const MainLayout = () => (
   <>
-    <HeaderUI variant="full" isUserAuth={false} />
-    {/* <HeaderUI variant="full" isUserAuth userName="Some user" /> */}
+    {/* <HeaderUI variant="full" isUserAuth={false} /> */}
+    <HeaderUI variant="full" isUserAuth userName="Мария" />
 
     <main>
       <Suspense fallback="Загружаем...">

@@ -6,14 +6,13 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  background-color: var(--background-color);
   justify-content: space-between;
 }
 
 .navBlock {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
 }
 
 .search {

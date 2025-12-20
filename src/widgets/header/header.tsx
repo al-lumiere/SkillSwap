@@ -38,8 +38,12 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
               userName={userName ?? ''}
               actions={
                 <>
-                  <NotificationIcon />
-                  <LikeIcon />
+                  <IconButtonUI onClick={() => {}}>
+                    <NotificationIcon />
+                  </IconButtonUI>
+                  <IconButtonUI onClick={() => {}}>
+                    <LikeIcon />
+                  </IconButtonUI>
                 </>
               }
             />
