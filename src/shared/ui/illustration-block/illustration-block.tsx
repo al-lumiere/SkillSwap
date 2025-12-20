@@ -10,8 +10,7 @@ export const IllustrationBlockUI = ({ illustration, title, description, actions 
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.description}>{description}</p>
       </div>
-    </div>
-    {actions && (
+      {actions && (
       <div className={styles.buttons}>
         {actions.map((action) => (
           <ButtonUI variant={action.primary ? 'primary' : 'secondary'} onClick={action.onClick}>
@@ -20,5 +19,6 @@ export const IllustrationBlockUI = ({ illustration, title, description, actions 
         ))}
       </div>
     )}
+    </div>
   </div>
 );
