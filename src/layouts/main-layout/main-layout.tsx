@@ -1,19 +1,40 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HeaderUI } from '../../widgets/header';
 
-export const MainLayout = () => (
-  <>
-    {/* <HeaderUI variant="full" isUserAuth={false} /> */}
-    <HeaderUI variant="full" isUserAuth userName="Мария" />
+export const MainLayout = () => {
+  /* я добавила состояние, чтобы корректно работал поиск, но потом нужно будет перенести это в умный компонент для шапки */
+  const [searchValue, setSearchValue] = useState('');
 
-    <main>
-      <Suspense fallback="Загружаем...">
-        <Outlet />
-      </Suspense>
-    </main>
+  return (
+    <>
+      <HeaderUI
+        variant="full"
+        isUserAuth={false}
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+        onSearchClear={() => setSearchValue('')}
+      />
 
-    {/* TODO: когда появится футер, импортировать его и использовать здесь <AppFooter /> */}
-    <h1>Футер</h1>
-  </>
-);
+      {/*
+      <HeaderUI
+        variant="full"
+        isUserAuth
+        userName="Мария"
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+        onSearchClear={() => setSearchValue('')}
+      />
+      */}
+
+      <main>
+        <Suspense fallback="Загружаем...">
+          <Outlet />
+        </Suspense>
+      </main>
+
+      {/* TODO: когда появится футер, импортировать его и использовать здесь <AppFooter /> */}
+      <h1>Футер</h1>
+    </>
+  );
+};

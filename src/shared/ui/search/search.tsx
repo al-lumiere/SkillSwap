@@ -11,6 +11,7 @@ export const SearchUI: FC<TSearchInputProps> = ({ placeholder, value, onChange, 
       className={styles.input}
       type="text"
       name="search"
+      autoComplete="off"
       placeholder={placeholder || 'Искать навык'}
       value={value}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
