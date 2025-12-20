@@ -1,13 +1,14 @@
 .user_panel {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   align-items: center;
 }
 
 .actions {
   display: flex;
-  /*gap: 20px;*/
+  gap: 20px;
   align-items: center;
+  margin-left: 10px;
 }
 
 .profile_button {

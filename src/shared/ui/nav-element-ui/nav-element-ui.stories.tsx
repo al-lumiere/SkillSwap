@@ -6,12 +6,10 @@ const meta: Meta<typeof NavElementUI> = {
   component: NavElementUI,
   args: {
     text: 'О проекте',
-    isActive: false,
     onClick: () => undefined,
   },
   argTypes: {
     text: { control: 'text' },
-    isActive: { control: 'boolean' },
   },
   parameters: {
     layout: 'centered',
@@ -39,15 +37,8 @@ export const WithIcon: Story = {
   },
 };
 
-export const Active: Story = {
-  args: {
-    isActive: true,
-  },
-};
-
 export const ActiveWithIcon: Story = {
   args: {
-    isActive: true,
     icon: (
       <span aria-hidden>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

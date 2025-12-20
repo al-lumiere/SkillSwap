@@ -3,7 +3,6 @@ import { ReactNode, ButtonHTMLAttributes } from 'react';
 export type ButtonUIVariant = 'primary' | 'secondary' | 'tertiary';
 
 export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
-  text: string;
-  icon?: ReactNode;
+  children: ReactNode;
   variant: ButtonUIVariant;
 }

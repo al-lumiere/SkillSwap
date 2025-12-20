@@ -5,7 +5,11 @@ import { TGuestUserPanelUIProps } from './type';
 
 export const GuestUserPanelUI: FC<TGuestUserPanelUIProps> = ({ onLogin, onSignup }) => (
   <div className={style.buttons_container}>
-    <ButtonUI variant="secondary" text="Войти" onClick={onLogin} />
-    <ButtonUI variant="primary" text="Зарегестрироваться" onClick={onSignup} />
+    <ButtonUI variant="secondary" onClick={onLogin}>
+      Войти
+    </ButtonUI>
+    <ButtonUI variant="primary" onClick={onSignup}>
+      Зарегестрироваться
+    </ButtonUI>
   </div>
 );

@@ -6,14 +6,10 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 48px;
-  padding: 0 12px;
   letter-spacing: 0.02em;
   color: var(--text-color);
   gap: 4px;
-  border: none;
   border-radius: 12px;
-  background: transparent;
 }
 
 .container:focus-visible {
@@ -28,6 +24,7 @@
 
 .container:active {
   background-color: var(--icon-button-active-color);
+  text-decoration: underline;
 }
 
 .text {
@@ -39,14 +36,4 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.active .text::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 10px;
-  height: 1px;
-  background: currentColor;
 }

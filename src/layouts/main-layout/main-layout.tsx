@@ -1,14 +1,11 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-
-import { AppHeader } from '../../widgets/header-layout';
+import { HeaderUI } from '../../widgets/header';
 
 export const MainLayout = () => (
   <>
-    <AppHeader isAuthenticated={false} />
-    {/* Для теста авторизованного пользователя и кнопки "закрыть" раскомитить нижние строчки */}
-    {/* <AppHeader isAuthenticated /> */}
-    {/* <AppHeader variant="auth" onClose={() => window.history.back()} /> */}
+    <HeaderUI variant="full" isUserAuth={false} />
+    {/* <HeaderUI variant="full" isUserAuth userName="Some user" /> */}
 
     <main>
       <Suspense fallback="Загружаем...">
