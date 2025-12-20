@@ -5,7 +5,7 @@ import LikeIcon from '../../assets/icons/like-icon';
 import { IconButtonUI } from './icon-button';
 
 const meta: Meta<typeof IconButtonUI> = {
-  title: 'shared/ui/IconButton',
+  title: 'ui/IconButtonUI',
   component: IconButtonUI,
   parameters: {
     layout: 'centered',

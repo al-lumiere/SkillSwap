@@ -1,0 +1,25 @@
+.header {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 36px 20px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background-color: var(--background-color);
+  justify-content: space-between;
+}
+
+.navBlock {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.search {
+  flex: 1;
+}
+
+.right {
+  display: flex;
+}

@@ -3,7 +3,7 @@ import styles from './logo.module.css';
 
 import LogoIcon from '../../assets/icons/logo-icon';
 
-export const Logo = () => (
+export const LogoUI = () => (
   <Link to="/" className={styles.logo}>
     <LogoIcon className={styles.icon} />
     <span className={styles.text}>SkillSwap</span>

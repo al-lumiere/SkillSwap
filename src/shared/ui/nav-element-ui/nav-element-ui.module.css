@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+  gap: 4px;
+  border-radius: 12px;
+}
+
+.container:focus-visible {
+  background-color: var(--icon-button-hover-color);
+  outline: none;
+}
+
+.container:hover {
+  background-color: var(--icon-button-hover-color);
+  cursor: pointer;
+}
+
+.container:active {
+  background-color: var(--icon-button-active-color);
+  text-decoration: underline;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

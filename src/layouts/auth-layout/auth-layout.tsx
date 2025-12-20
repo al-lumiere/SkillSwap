@@ -1,11 +1,10 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { HeaderUI } from '../../widgets/header';
 
 export const AuthLayout = () => (
-  // todo: когда появиться хедер, импортировать его и поюзать
   <>
-    {/* <AppHeader variant="auth" /> */}
-    <h1>Хедер урезанный</h1>
+    <HeaderUI variant="compact" onCloseClick={() => window.history.back()} />
     <main>
       <Suspense fallback="Загружаем...">
         <Outlet />

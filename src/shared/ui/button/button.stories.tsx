@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button } from './button';
+import { ButtonUI } from './button';
 import CrossIcon from '../../assets/icons/cross-icon';
 
-const meta: Meta<typeof Button> = {
-  title: 'ui/Button',
-  component: Button,
+const meta: Meta<typeof ButtonUI> = {
+  title: 'ui/ButtonUI',
+  component: ButtonUI,
   args: {
     children: 'Button',
     variant: 'primary',
@@ -25,7 +25,7 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof ButtonUI>;
 
 export const Primary: Story = {
   args: {
