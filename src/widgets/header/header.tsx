@@ -18,7 +18,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
   const { variant } = props;
 
   if (variant === 'full') {
-    const { isUserAuth, userName } = props;
+    const { isUserAuth, userName, avatarUrl, searchValue, onSearchChange, onSearchClear } = props;
     return (
       <header className={style.header}>
         <LogoUI />
@@ -27,7 +27,12 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
           <NavElementUI text="Все навыки" onClick={() => {}} icon={<ChevronDownIcon />} />
         </div>
         <div className={style.search}>
-          <SearchUI />
+          <SearchUI
+            placeholder="Искать навык"
+            value={searchValue ?? ''}
+            onChange={onSearchChange}
+            onClear={onSearchClear}
+          />
         </div>
         <div className={style.right}>
           <IconButtonUI onClick={() => {}}>
@@ -36,15 +41,20 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
           {isUserAuth ? (
             <UserAuthedPanelUI
               userName={userName ?? ''}
+              avatarUrl={avatarUrl ?? ''}
               actions={
                 <>
-                  <NotificationIcon />
-                  <LikeIcon />
+                  <IconButtonUI onClick={() => {}}>
+                    <NotificationIcon />
+                  </IconButtonUI>
+                  <IconButtonUI onClick={() => {}}>
+                    <LikeIcon />
+                  </IconButtonUI>
                 </>
               }
             />
           ) : (
-            <GuestUserPanelUI onLogin={() => {}} onSignup={() => {}} />
+            <GuestUserPanelUI />
           )}
         </div>
       </header>

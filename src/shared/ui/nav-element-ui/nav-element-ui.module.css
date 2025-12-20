@@ -6,10 +6,12 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
+  line-height: 24px;
   letter-spacing: 0.02em;
   color: var(--text-color);
   gap: 4px;
   border-radius: 12px;
+  padding: 12px 12px;
 }
 
 .container:focus-visible {
@@ -24,7 +26,6 @@
 
 .container:active {
   background-color: var(--icon-button-active-color);
-  text-decoration: underline;
 }
 
 .text {
