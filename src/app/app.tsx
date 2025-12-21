@@ -2,17 +2,17 @@ import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { HomePage } from '@pages/home';
-import { MainLayout } from '../layouts/main-layout';
-import { AuthLayout } from '../layouts/auth-layout';
-import { ProtectedRoute } from '../features/protected-route';
+import { MainLayout } from '@layouts/main-layout';
+import { AuthLayout } from '@layouts/auth-layout';
+import { ProtectedRoute } from '@features/protected-route';
 import style from './app.module.css';
 
-const SkillPage = lazy(() => import('../pages/skill/skill'));
-const ProfilePage = lazy(() => import('../pages/profile/profile'));
-const NotFoundPage = lazy(() => import('../pages/not-found/not-found'));
-const ServerErrorPage = lazy(() => import('../pages/server-error/server-error'));
-const LoginPage = lazy(() => import('../pages/login/login'));
-const RegisterPage = lazy(() => import('../pages/register/register'));
+const SkillPage = lazy(() => import('@pages/skill/skill'));
+const ProfilePage = lazy(() => import('@pages/profile/profile'));
+const NotFoundPage = lazy(() => import('@pages/not-found/not-found'));
+const ServerErrorPage = lazy(() => import('@pages/server-error/server-error'));
+const LoginPage = lazy(() => import('@pages/login/login'));
+const RegisterPage = lazy(() => import('@pages/register/register'));
 
 const App = () => (
   <div className={style.app}>

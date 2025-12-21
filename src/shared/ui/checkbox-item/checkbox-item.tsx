@@ -1,8 +1,8 @@
 import { FC, useId } from 'react';
+import CheckboxEmptyIcon from '@icons/checkbox-empty';
+import CheckboxDoneIcon from '@icons/checkbox-done';
 import { TCheckboxItemUIProps } from './type';
 import styles from './checkbox-item.module.css';
-import CheckboxDoneIcon from '../../assets/icons/checkbox-done';
-import CheckboxEmptyIcon from '../../assets/icons/checkbox-empty';
 
 export const CheckboxItemUI: FC<TCheckboxItemUIProps> = ({ label, checked = false, onChange }) => {
   const inputId = useId();

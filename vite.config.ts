@@ -19,6 +19,9 @@ export default defineConfig({
       { find: '@components', replacement: '/src/components' },
       { find: '@store', replacement: '/src/store' },
       { find: '@api', replacement: '/src/api' },
+      { find: '@layouts', replacement: '/src/layouts' },
+      { find: '@features', replacement: '/src/features' },
+      { find: '@images', replacement: '/src/shared/assets/images' },
     ],
   },
 });

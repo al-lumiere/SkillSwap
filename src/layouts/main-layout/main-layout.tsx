@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { HeaderUI } from '../../widgets/header';
+import { HeaderUI } from '@components/header';
 
 export const MainLayout = () => {
   /* я добавила состояние, чтобы корректно работал поиск, но потом нужно будет перенести это в умный компонент для шапки */

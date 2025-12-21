@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { HeaderUI } from '../../widgets/header';
+import { HeaderUI } from '@components/header';
 
 export const AuthLayout = () => (
   <>

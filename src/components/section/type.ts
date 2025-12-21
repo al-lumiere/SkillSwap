@@ -1,4 +1,4 @@
-export type TSectionLayoutProps = {
+export type TSectionUIProps = {
   title: string;
   children: React.ReactNode;
   actionButton?: React.ReactNode;

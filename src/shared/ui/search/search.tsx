@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import CrossIcon from '../../assets/icons/cross-icon';
-import SearchIcon from '../../assets/icons/search-icon';
+import CrossIcon from '@icons/cross-icon';
+import SearchIcon from '@icons/search-icon';
 import { TSearchInputProps } from './type';
 import styles from './search.module.css';
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import CrossIcon from '@icons/cross-icon';
 import { ButtonUI } from './button';
-import CrossIcon from '../../assets/icons/cross-icon';
 
 const meta: Meta<typeof ButtonUI> = {
   title: 'ui/ButtonUI',

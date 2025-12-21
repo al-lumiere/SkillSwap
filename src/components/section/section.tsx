@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import styles from './section-layout.module.css';
-import { TSectionLayoutProps } from './type';
+import { TSectionUIProps } from './type';
 
-export const SectionLayoutUI: FC<TSectionLayoutProps> = ({ title, children, actionButton }) => (
+export const SectionUI: FC<TSectionUIProps> = ({ title, children, actionButton }) => (
   <section className={styles.section}>
     <div className={styles.header}>
       <h2 className={styles.title}>{title}</h2>

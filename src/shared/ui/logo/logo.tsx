@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
+import LogoIcon from '@icons/logo-icon';
 import styles from './logo.module.css';
-
-import LogoIcon from '../../assets/icons/logo-icon';
 
 export const LogoUI = () => (
   <Link to="/" className={styles.logo}>

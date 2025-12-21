@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import ChevronDownIcon from '@icons/chevron-down';
+import ChevronUpIcon from '@icons/chevron-up';
 import styles from './show-more-button.module.css';
 import { TShowMoreButtonUIProps } from './type';
-import ChevronUpIcon from '../../assets/icons/chevron-up';
-import ChevronDownIcon from '../../assets/icons/chevron-down';
 
 export const ShowMoreButtonUI: FC<TShowMoreButtonUIProps> = ({ label, onClick, open }) => (
   <button type="button" className={styles.button} onClick={onClick}>

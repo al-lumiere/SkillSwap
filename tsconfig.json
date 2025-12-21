@@ -30,7 +30,10 @@
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@store/*": ["store/*"],
-      "@api/*": ["api/*"]
+      "@api/*": ["api/*"],
+      "@layouts/*": ["layouts/*"],
+      "@features/*": ["features/*"],
+      "@images/*": ["shared/assets/images/*"]
     }
   },
   "include": ["src"],

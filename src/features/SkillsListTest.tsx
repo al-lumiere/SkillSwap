@@ -4,8 +4,8 @@
 // !!! тестовая крокозябра для проверки данных, не часть приложения !!!
 
 import { useState, useEffect, FC } from 'react';
-import { fixturesClient, mediaUrl } from '../api/api';
-import { Skill } from '../api/types';
+import { fixturesClient, mediaUrl } from '@api/api';
+import { Skill } from '@api/types';
 
 function useSkills() {
   const [skills, setSkills] = useState<Skill[]>([]);
