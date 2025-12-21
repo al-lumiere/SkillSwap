@@ -4,7 +4,7 @@ import { SearchUI } from './search';
 import { TSearchInputProps } from './type';
 
 const meta: Meta<typeof SearchUI> = {
-  title: 'UI/SearchUI',
+  title: 'ui/SearchUI',
   component: SearchUI,
 };
 

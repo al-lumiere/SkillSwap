@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import UserInfoIllustration from '@images/user-info';
+import Error404Illustration from '@images/error-404';
+import Error500Illustration from '@images/error-500';
+import LightBulbIllustration from '@images/light-bulb';
+import SchoolBoardIllustration from '@images/school-board';
 import { IllustrationBlockUI } from './illustration-block';
-import UserInfoIllustration from '../../assets/images/user-info';
-import Error404Illustration from '../../assets/images/error-404';
-import Error500Illustration from '../../assets/images/error-500';
-import LightBulbIllustration from '../../assets/images/light-bulb';
-import SchoolBoardIllustration from '../../assets/images/school-board';
 
 const meta: Meta<typeof IllustrationBlockUI> = {
   title: 'ui/IllustrationBlock',

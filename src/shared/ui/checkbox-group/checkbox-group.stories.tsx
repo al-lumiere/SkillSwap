@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useEffect } from 'react';
-import { CheckboxGroupUI } from './checkbox-group';
+import { CheckboxListUI } from './checkbox-group';
 import { CheckboxItemUI } from '../checkbox-item';
 
-const meta: Meta<typeof CheckboxGroupUI> = {
-  title: 'shared/ui/CheckboxGroup',
-  component: CheckboxGroupUI,
+const meta: Meta<typeof CheckboxListUI> = {
+  title: 'ui/CheckboxListUI',
+  component: CheckboxListUI,
   parameters: {
     layout: 'centered',
   },
@@ -18,9 +18,9 @@ const meta: Meta<typeof CheckboxGroupUI> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CheckboxGroupUI>;
+type Story = StoryObj<typeof CheckboxListUI>;
 
-const InteractiveTemplate = ({ label, expanded: initialExpanded }: Parameters<typeof CheckboxGroupUI>[0]) => {
+const InteractiveTemplate = ({ label, expanded: initialExpanded }: Parameters<typeof CheckboxListUI>[0]) => {
   const [expanded, setExpanded] = useState(initialExpanded || false);
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
     'item-1': false,
@@ -45,7 +45,7 @@ const InteractiveTemplate = ({ label, expanded: initialExpanded }: Parameters<ty
   };
 
   return (
-    <CheckboxGroupUI label={label} expanded={expanded} onToggleExpand={handleToggle}>
+    <CheckboxListUI label={label} expanded={expanded} onToggleExpand={handleToggle}>
       <CheckboxItemUI
         label="Первый пункт"
         checked={checkedItems['item-1']}
@@ -61,7 +61,7 @@ const InteractiveTemplate = ({ label, expanded: initialExpanded }: Parameters<ty
         checked={checkedItems['item-3']}
         onChange={() => handleItemToggle('item-3')}
       />
-    </CheckboxGroupUI>
+    </CheckboxListUI>
   );
 };
 
@@ -130,7 +130,7 @@ export const WithContainer: Story = {
           backgroundColor: 'var(--background-color,rgb(237, 237, 237))',
         }}
       >
-        <CheckboxGroupUI label={label} expanded={expanded} onToggleExpand={handleToggle}>
+        <CheckboxListUI label={label} expanded={expanded} onToggleExpand={handleToggle}>
           <CheckboxItemUI
             label="JavaScript"
             checked={checkedItems['item-1']}
@@ -143,7 +143,7 @@ export const WithContainer: Story = {
           />
           <CheckboxItemUI label="Python" checked={checkedItems['item-3']} onChange={() => handleItemToggle('item-3')} />
           <CheckboxItemUI label="Java" checked={checkedItems['item-4']} onChange={() => handleItemToggle('item-4')} />
-        </CheckboxGroupUI>
+        </CheckboxListUI>
       </div>
     );
   },

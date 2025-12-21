@@ -1,4 +1,4 @@
-export type TCheckboxFilterContainerProps = {
+export type TCheckboxFilterContainerUIProps = {
   children: React.ReactNode;
   label: string;
 };

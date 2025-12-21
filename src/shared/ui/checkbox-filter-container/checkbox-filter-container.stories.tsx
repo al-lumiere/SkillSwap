@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { CheckboxFilterContainerUI } from './checkbox-filter-container';
-import { RadioGroup } from '../radio-group';
+import { RadioGroupUI } from '../radio-group';
 import { CheckboxItemUI } from '../checkbox-item';
-import { CheckboxGroupUI } from '../checkbox-group';
+import { CheckboxListUI } from '../checkbox-group';
 import { ShowMoreButtonUI } from '../show-more-button';
-import type { RadioGroupProps } from '../radio-group/type';
+import type { RadioGroupUIProps } from '../radio-group/type';
 
 const meta: Meta<typeof CheckboxFilterContainerUI> = {
-  title: 'shared/ui/CheckboxFilterContainer',
+  title: 'ui/CheckboxFilterContainerUI',
   component: CheckboxFilterContainerUI,
   parameters: {
     layout: 'centered',
@@ -29,7 +29,7 @@ export default meta;
 
 type Story = StoryObj<typeof CheckboxFilterContainerUI>;
 
-const RadioGroupWrapper = ({ value: initialValue, onChange, title, options, name }: RadioGroupProps) => {
+const RadioGroupWrapper = ({ value: initialValue, onChange, title, options, name }: RadioGroupUIProps) => {
   const [value, setValue] = useState(initialValue);
 
   const handleChange = (newValue: string) => {
@@ -39,7 +39,7 @@ const RadioGroupWrapper = ({ value: initialValue, onChange, title, options, name
     }
   };
 
-  return <RadioGroup value={value} onChange={handleChange} title={title} options={options} name={name} />;
+  return <RadioGroupUI value={value} onChange={handleChange} title={title} options={options} name={name} />;
 };
 
 export const WithRadioGroup: Story = {
@@ -151,7 +151,7 @@ export const WithCheckboxGroups: Story = {
           {visibleCategories.map((category) => {
             if (category.children) {
               return (
-                <CheckboxGroupUI
+                <CheckboxListUI
                   key={category.id}
                   label={category.label}
                   expanded={expandedGroups[category.id] || false}
@@ -165,7 +165,7 @@ export const WithCheckboxGroups: Story = {
                       onChange={() => handleToggleLanguage(child.id)}
                     />
                   ))}
-                </CheckboxGroupUI>
+                </CheckboxListUI>
               );
             }
             return (

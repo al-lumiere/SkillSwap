@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { SectionLayoutUI } from './section-layout';
-import { CatalogCardLayoutUI } from '../catalog-card-layout';
-import { ButtonUI } from '../../shared/ui/button';
-import ChevronRightIcon from '../../shared/assets/icons/chevron-right-icon';
+import { ButtonUI } from '@ui/button';
+import ChevronRightIcon from '@icons/chevron-right-icon';
+import { SectionUI } from './section';
+import { CatalogCardUI } from '../catalog-card';
 
-const meta: Meta<typeof SectionLayoutUI> = {
-  title: 'widgets/SectionLayout',
-  component: SectionLayoutUI,
+const meta: Meta<typeof SectionUI> = {
+  title: 'ui/SectionLayout',
+  component: SectionUI,
   parameters: {
     layout: 'centered',
     docs: {
@@ -26,7 +26,7 @@ const meta: Meta<typeof SectionLayoutUI> = {
 
 export default meta;
 
-type Story = StoryObj<typeof SectionLayoutUI>;
+type Story = StoryObj<typeof SectionUI>;
 
 // Моковые данные для карточек
 const mockCardData = {
@@ -66,7 +66,7 @@ export const PopularWithButton: Story = {
 
     return (
       <div style={{ width: '1020px' }}>
-        <SectionLayoutUI
+        <SectionUI
           title="Популярное"
           actionButton={
             <ButtonUI variant="tertiary" onClick={() => console.log('')}>
@@ -76,7 +76,7 @@ export const PopularWithButton: Story = {
           }
         >
           {cards.map((card) => (
-            <CatalogCardLayoutUI
+            <CatalogCardUI
               key={card.id}
               avatar={`https://i.pravatar.cc/150?img=${card.id + 1}`}
               name={card.name}
@@ -90,7 +90,7 @@ export const PopularWithButton: Story = {
               onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
-        </SectionLayoutUI>
+        </SectionUI>
       </div>
     );
   },
@@ -123,9 +123,9 @@ export const RecommendedWithoutButton: Story = {
 
     return (
       <div style={{ width: '1020px' }}>
-        <SectionLayoutUI title="Рекомендуем">
+        <SectionUI title="Рекомендуем">
           {cards.map((card) => (
-            <CatalogCardLayoutUI
+            <CatalogCardUI
               key={card.id}
               avatar={`https://i.pravatar.cc/150?img=${card.id + 1}`}
               name={card.name}
@@ -139,7 +139,7 @@ export const RecommendedWithoutButton: Story = {
               onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
-        </SectionLayoutUI>
+        </SectionUI>
       </div>
     );
   },
@@ -170,9 +170,9 @@ export const SimilarWithFilterButton: Story = {
 
     return (
       <div style={{ width: '1368px' }}>
-        <SectionLayoutUI title={`Похожие предложения: ${cards.length}`}>
+        <SectionUI title={`Похожие предложения: ${cards.length}`}>
           {cards.map((card) => (
-            <CatalogCardLayoutUI
+            <CatalogCardUI
               key={card.id}
               avatar={`https://i.pravatar.cc/150?img=${card.id + 1}`}
               name={card.name}
@@ -186,7 +186,7 @@ export const SimilarWithFilterButton: Story = {
               onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
             />
           ))}
-        </SectionLayoutUI>
+        </SectionUI>
       </div>
     );
   },

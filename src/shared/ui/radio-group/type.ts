@@ -3,7 +3,7 @@ export interface RadioOption {
   label: string;
 }
 
-export interface RadioGroupProps {
+export interface RadioGroupUIProps {
   title?: string;
   options: RadioOption[];
   value: string;

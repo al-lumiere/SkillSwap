@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { IconButtonUI } from '@ui/icon-button';
+import NotificationIcon from '@icons/notification-icon';
+import LikeIcon from '@icons/like-icon';
 import { UserAuthedPanelUI } from './user-authed-panel';
-import NotificationIcon from '../../assets/icons/notification-icon';
-import LikeIcon from '../../assets/icons/like-icon';
 
 const meta: Meta<typeof UserAuthedPanelUI> = {
-  title: 'UI/UserAuthedPanelUI',
+  title: 'ui/UserAuthedPanelUI',
   component: UserAuthedPanelUI,
   parameters: {
     layout: 'centered',
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof UserAuthedPanelUI>;
 export const AuthedUser: Story = {
   args: {
     userName: 'Рик Санчез',
-    avatarUrl: '../../assets/icons/user-circle-icon',
+    avatarUrl: '@icons/user-circle-icon',
     actions: (
       <>
         <IconButtonUI onClick={() => {}}>

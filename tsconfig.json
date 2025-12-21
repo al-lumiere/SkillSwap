@@ -22,10 +22,18 @@
     "types": ["@testing-library/jest-dom"],
 
     /* Absolute Imports */
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@ui/*": ["src/shared/ui/*"],
-      "@styles/*": ["src/shared/assets/styles/*"]
+      "@ui/*": ["shared/ui/*"],
+      "@icons/*": ["shared/assets/icons/*"],
+      "@slices/*": ["store/slices/*"],
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@store/*": ["store/*"],
+      "@api/*": ["api/*"],
+      "@layouts/*": ["layouts/*"],
+      "@features/*": ["features/*"],
+      "@images/*": ["shared/assets/images/*"]
     }
   },
   "include": ["src"],

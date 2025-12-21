@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextTagUI } from './text-tag';
 
 const meta: Meta<typeof TextTagUI> = {
-  title: 'UI/TextTagUI',
+  title: 'ui/TextTagUI',
   component: TextTagUI,
   parameters: {
     layout: 'centered',

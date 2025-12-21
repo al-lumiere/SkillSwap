@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { LogoUI } from './logo';
 
 const meta: Meta<typeof LogoUI> = {
-  title: 'shared/ui/Logo',
+  title: 'ui/Logo',
   component: LogoUI,
   decorators: [
     (Story) => (

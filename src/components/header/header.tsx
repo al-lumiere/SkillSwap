@@ -6,11 +6,11 @@ import { IconButtonUI } from '@ui/icon-button';
 import { GuestUserPanelUI } from '@ui/user-guest';
 import { UserAuthedPanelUI } from '@ui/user-authed-panel';
 import { ButtonUI } from '@ui/button';
-import ChevronDownIcon from '../../shared/assets/icons/chevron-down';
-import MoonIcon from '../../shared/assets/icons/moon-icon';
-import NotificationIcon from '../../shared/assets/icons/notification-icon';
-import LikeIcon from '../../shared/assets/icons/like-icon';
-import CrossIcon from '../../shared/assets/icons/cross-icon';
+import ChevronDownIcon from '@icons/chevron-down';
+import MoonIcon from '@icons/moon-icon';
+import NotificationIcon from '@icons/notification-icon';
+import LikeIcon from '@icons/like-icon';
+import CrossIcon from '@icons/cross-icon';
 import style from './header.module.css';
 import { HeaderUIProps } from './type';
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ShowMoreButtonUI } from './show-more-button';
 
 const meta: Meta<typeof ShowMoreButtonUI> = {
-  title: 'shared/ui/ShowMoreButton',
+  title: 'ui/ShowMoreButtonUI',
   component: ShowMoreButtonUI,
   parameters: {
     layout: 'centered',

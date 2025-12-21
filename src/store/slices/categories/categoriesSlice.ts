@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fixturesClient } from '../../utils/api';
-import { Category } from '../../utils/types';
+import { fixturesClient } from '@api/api';
+import { Category } from '@api/types';
 
 type CategoriesState = {
   data: Category[];

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import MoonIcon from '../../assets/icons/moon-icon';
-import NotificationIcon from '../../assets/icons/notification-icon';
-import LikeIcon from '../../assets/icons/like-icon';
+import MoonIcon from '@icons/moon-icon';
+import NotificationIcon from '@icons/notification-icon';
+import LikeIcon from '@icons/like-icon';
 import { IconButtonUI } from './icon-button';
 
 const meta: Meta<typeof IconButtonUI> = {
