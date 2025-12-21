@@ -6,8 +6,8 @@ import { TCatalogCardUIProps } from './type';
 
 import styles from './catalog-card-layout.module.css';
 
-import LikeIcon from '../../assets/icons/like-icon';
-import LikeFullIcon from '../../assets/icons/like-full-icon';
+import LikeIcon from '../../shared/assets/icons/like-icon';
+import LikeFullIcon from '../../shared/assets/icons/like-full-icon';
 
 export const CatalogCardUI: FC<TCatalogCardUIProps> = ({
   avatar,

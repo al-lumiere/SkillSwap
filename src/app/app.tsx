@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { HomePage } from '@pages/home';
 import { MainLayout } from '../layouts/main-layout';
 import { AuthLayout } from '../layouts/auth-layout';
-import { ProtectedRoute } from '../components/protected-route';
+import { ProtectedRoute } from '../features/protected-route';
 import style from './app.module.css';
 
 const SkillPage = lazy(() => import('../pages/skill/skill'));
