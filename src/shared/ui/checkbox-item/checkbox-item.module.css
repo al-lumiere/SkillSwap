@@ -10,6 +10,11 @@
   text-decoration: underline;
 }
 
+.wrapper:focus-visible {
+  background-color: var(--control-focus-color);
+  border-radius: 8px;
+}
+
 .wrapper:active {
   background-color: var(--control-active-color);
   border-radius: 8px;
