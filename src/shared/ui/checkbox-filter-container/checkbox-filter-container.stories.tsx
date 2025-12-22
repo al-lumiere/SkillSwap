@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { CheckboxFilterContainerUI } from './checkbox-filter-container';
 import { CheckboxItemUI } from '../checkbox-item';
-import { CheckboxListUI } from '../checkbox-group';
+import { CheckboxListUI } from '../checkbox-list';
 import { ShowMoreButtonUI } from '../show-more-button';
 
 const meta: Meta<typeof CheckboxFilterContainerUI> = {
