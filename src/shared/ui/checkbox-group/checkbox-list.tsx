@@ -3,7 +3,7 @@ import ChevronDownIcon from '@icons/chevron-down';
 import ChevronUpIcon from '@icons/chevron-up';
 import CheckboxEmptyIcon from '@icons/checkbox-empty';
 import CheckboxRemoveIcon from '@icons/checkbox-remove';
-import styles from './checkbox-group.module.css';
+import styles from './checkbox-list.module.css';
 import { TCheckboxListProps } from './type';
 
 export const CheckboxListUI: FC<TCheckboxListProps> = memo(({ label, expanded = false, onToggleExpand, children }) => (
@@ -29,7 +29,7 @@ export const CheckboxListUI: FC<TCheckboxListProps> = memo(({ label, expanded = 
       <div className={styles.chevron}>{expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
     </summary>
 
-    <div className={`${styles.content} ${expanded ? styles.contentExpanded : ''}`}>
+    <div className={styles.content}>
       <div>{children}</div>
     </div>
   </details>

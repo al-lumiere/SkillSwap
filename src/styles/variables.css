@@ -21,7 +21,8 @@
   --tag-no-category-color: #e8ecf7;
   --icon-button-hover-color: #e9edf0;
   --icon-button-active-color: #dde0e3;
-  --control-active-color: #e9edf0;
+  --control-active-color: #dde0e3;
+  --control-focus-color: #e9edf0;
   --body-font-family: 'Roboto';
   --header-font-family: 'Jost';
 }

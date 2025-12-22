@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from './section-layout.module.css';
+import styles from './section.module.css';
 import { TSectionUIProps } from './type';
 
 export const SectionUI: FC<TSectionUIProps> = ({ title, children, actionButton }) => (

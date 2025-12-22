@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { CheckboxFilterContainerUI } from './checkbox-filter-container';
-import { RadioGroupUI } from '../radio-group';
 import { CheckboxItemUI } from '../checkbox-item';
 import { CheckboxListUI } from '../checkbox-group';
 import { ShowMoreButtonUI } from '../show-more-button';
-import type { RadioGroupUIProps } from '../radio-group/type';
 
 const meta: Meta<typeof CheckboxFilterContainerUI> = {
   title: 'ui/CheckboxFilterContainerUI',
@@ -28,40 +26,6 @@ const meta: Meta<typeof CheckboxFilterContainerUI> = {
 export default meta;
 
 type Story = StoryObj<typeof CheckboxFilterContainerUI>;
-
-const RadioGroupWrapper = ({ value: initialValue, onChange, title, options, name }: RadioGroupUIProps) => {
-  const [value, setValue] = useState(initialValue);
-
-  const handleChange = (newValue: string) => {
-    setValue(newValue);
-    if (onChange) {
-      onChange(newValue);
-    }
-  };
-
-  return <RadioGroupUI value={value} onChange={handleChange} title={title} options={options} name={name} />;
-};
-
-export const WithRadioGroup: Story = {
-  render: () => {
-    const [radioValue, setRadioValue] = useState('not-specified');
-
-    return (
-      <CheckboxFilterContainerUI label="Пол автора">
-        <RadioGroupWrapper
-          options={[
-            { value: 'not-specified', label: 'Не имеет значения' },
-            { value: 'male', label: 'Мужской' },
-            { value: 'female', label: 'Женский' },
-          ]}
-          value={radioValue}
-          onChange={setRadioValue}
-          name="gender-filter"
-        />
-      </CheckboxFilterContainerUI>
-    );
-  },
-};
 
 export const WithCheckboxGroups: Story = {
   render: () => {

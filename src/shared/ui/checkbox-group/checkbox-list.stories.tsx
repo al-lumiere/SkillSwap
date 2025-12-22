@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useEffect } from 'react';
-import { CheckboxListUI } from './checkbox-group';
+import { CheckboxListUI } from './checkbox-list';
 import { CheckboxItemUI } from '../checkbox-item';
 
 const meta: Meta<typeof CheckboxListUI> = {
