@@ -26,7 +26,7 @@ export const FooterLayout = () => (
         </div>
       </nav>
 
-      <p className={styles.copyright}>SkillSwap — 2025</p>
+      <p className={styles.copyright}>SkillSwap - 2025</p>
     </div>
   </footer>
 );
