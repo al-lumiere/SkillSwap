@@ -74,7 +74,7 @@ export const CatalogCardUI: FC<TCatalogCardUIProps> = ({
         </section>
       </div>
 
-      <ButtonUI variant="primary" onClick={handleDetailsClick}>
+      <ButtonUI variant="primary" onClick={handleDetailsClick} padding="12px 99px">
         Подробнее
       </ButtonUI>
     </article>

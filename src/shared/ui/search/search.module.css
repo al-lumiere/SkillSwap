@@ -32,3 +32,13 @@
 .close {
   color: var(--text-color);
 }
+
+.wrapper:hover {
+  outline: 1px solid black;
+  cursor: text;
+}
+
+.wrapper:active {
+  outline: 1px solid green;
+  cursor: text;
+}

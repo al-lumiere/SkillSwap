@@ -1,8 +1,10 @@
-import { ReactNode, ButtonHTMLAttributes } from 'react';
+import { ReactNode, ButtonHTMLAttributes, CSSProperties } from 'react';
 
 export type ButtonUIVariant = 'primary' | 'secondary' | 'tertiary';
 
-export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+export interface ButtonUIProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   children: ReactNode;
-  variant: ButtonUIVariant;
+  variant?: ButtonUIVariant;
+  padding?: CSSProperties['padding'];
 }

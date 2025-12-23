@@ -65,7 +65,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
   return (
     <header className={style.header}>
       <LogoUI />
-      <ButtonUI variant="tertiary" onClick={onCloseClick}>
+      <ButtonUI variant="tertiary" onClick={onCloseClick} padding="12px 24px">
         Закрыть
         <CrossIcon />
       </ButtonUI>
