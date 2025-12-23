@@ -1,32 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { MemoryRouter } from 'react-router-dom';
 import { GuestUserPanelUI } from './user-guest';
 
 const meta: Meta<typeof GuestUserPanelUI> = {
   title: 'ui/GuestUserPanel',
   component: GuestUserPanelUI,
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    onLogin: { action: 'login clicked' },
-    onSignup: { action: 'signup clicked' },
-  },
+  parameters: { layout: 'centered' },
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
 
-// кнопки реализованы флексбоксом, и он тянется на всю доступную ширину. если вставить эту группу кнопок в хедер, то они сожмуться. для примера в module.css можно раскомментировать свойтсво width и посмотреть
+type Story = StoryObj<typeof GuestUserPanelUI>;
 
-export const LoginButton: StoryObj = {
-  args: {
-    variant: 'secondary',
-    text: 'Войти',
-  },
-};
-
-export const SignupButton: StoryObj = {
-  args: {
-    variant: 'primary',
-    text: 'Зарегестрироваться',
-  },
-};
+export const Default: Story = {};

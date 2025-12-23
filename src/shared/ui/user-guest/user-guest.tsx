@@ -7,10 +7,10 @@ import style from './user-guest.module.css';
 export const GuestUserPanelUI: FC = () => (
   <div className={style.buttons_container}>
     <Link to="/login">
-      <ButtonUI variant="secondary">Войти</ButtonUI>
+      <ButtonUI variant="secondary" padding="12px 21px">Войти</ButtonUI>
     </Link>
     <Link to="/register">
-      <ButtonUI variant="primary">Зарегистрироваться</ButtonUI>
+      <ButtonUI variant="primary" padding="12px 24px">Зарегистрироваться</ButtonUI>
     </Link>
   </div>
 );

@@ -3,4 +3,5 @@ export type TCheckboxListProps = {
   label: string;
   expanded: boolean;
   onToggleExpand: () => void;
+  hasSelected?: boolean;
 };
