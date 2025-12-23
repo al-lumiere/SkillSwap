@@ -18,6 +18,8 @@ export type CityOption = {
   slug?: string;
 };
 
+export type SkillsCategoryUI = Category & { hasSelected: boolean };
+
 export type FiltersBlockUIProps = {
   appliedCount?: number;
   onReset: () => void;
@@ -32,7 +34,7 @@ export type FiltersBlockUIProps = {
 
   skills: {
     title: string;
-    categories: Category[];
+    categories: SkillsCategoryUI[];
     expandedCategoryIds: number[];
     onToggleExpandCategory: (categoryId: number) => void;
     selectedSubcategoryIds: number[];

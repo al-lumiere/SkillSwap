@@ -33,6 +33,17 @@ export const useCatalogFilters = () => {
 
   const visibleCities = useMemo(() => (showAllCities ? CITIES : CITIES.slice(0, 5)), [showAllCities]);
 
+  const selectedSubSet = useMemo(() => new Set(selectedSubcategoryIds), [selectedSubcategoryIds]);
+
+  const visibleCategoriesVM = useMemo(
+    () =>
+      visibleCategories.map((category) => ({
+        ...category,
+        hasSelected: category.subcategories.some((sub) => selectedSubSet.has(sub.id)),
+      })),
+    [visibleCategories, selectedSubSet],
+  );
+
   const onToggleExpandCategory = useCallback((categoryId: number) => {
     setExpandedCategoryIds((prev) =>
       prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId],
@@ -92,7 +103,7 @@ export const useCatalogFilters = () => {
 
       skills: {
         title: 'Навыки',
-        categories: visibleCategories,
+        categories: visibleCategoriesVM,
         expandedCategoryIds,
         onToggleExpandCategory,
         selectedSubcategoryIds,
@@ -129,7 +140,7 @@ export const useCatalogFilters = () => {
       onReset,
 
       intentValue,
-      visibleCategories,
+      visibleCategoriesVM,
       expandedCategoryIds,
       onToggleExpandCategory,
       selectedSubcategoryIds,

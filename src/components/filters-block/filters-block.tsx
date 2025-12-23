@@ -54,6 +54,7 @@ export const FiltersBlockUI: FC<FiltersBlockUIProps> = ({
                 label={category.name}
                 expanded={expanded}
                 onToggleExpand={() => skills.onToggleExpandCategory(category.id)}
+                hasSelected={category.hasSelected}
               >
                 {category.subcategories.map((subcategory) => (
                   <CheckboxItemUI
