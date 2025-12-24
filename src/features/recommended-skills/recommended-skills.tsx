@@ -1,33 +1,21 @@
 import { FC } from 'react';
 import { SectionUI } from '@components/section';
-import { ButtonUI } from '@ui/button';
 import { useSelector } from 'react-redux';
 import { selectSkillsByList } from '@slices/skills/skillsSlice';
 import { CatalogCardUI } from '@components/catalog-card';
 import { useNavigate } from 'react-router-dom';
-import ChevronRightIcon from '@icons/chevron-right-icon';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
 import formatAge from '../../shared/helpers/format-age';
 
-export const PopularSkills: FC = () => {
-  const popularSkills: Skill[] = useSelector(selectSkillsByList('home:popular'));
-
-  const firstThree: Skill[] = popularSkills.slice(0, 3);
+export const RecommendedSkills: FC = () => {
+  const recommendedSkills: Skill[] = useSelector(selectSkillsByList('home:recommended'));
 
   const navigate = useNavigate();
 
   return (
-    <SectionUI
-      title="Популярное"
-      actionButton={
-        <ButtonUI variant="tertiary" padding="12px 24px" onClick={() => {}}>
-          Смотреть все
-          <ChevronRightIcon />
-        </ButtonUI>
-      }
-    >
-      {firstThree.map((skill) => {
+    <SectionUI title="Рекомендуем">
+      {recommendedSkills.map((skill) => {
         const learnTags = skill.author.learnSubcategories.map((subcat) => ({
           id: subcat.id,
           label: subcat.name,

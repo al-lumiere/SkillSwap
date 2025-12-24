@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { FiltersBlockUI } from '@components/filters-block';
-import { useCatalogFilters } from './use-filters-block';
-import { MOCK_CARD_DATA } from './filters.mocks';
+import { useCatalogFilters } from './use-catalog-fllters';
 
 export const Filters: FC = () => {
   const { filtersProps } = useCatalogFilters();

@@ -20,7 +20,7 @@ export const CatalogCardUI: FC<TCatalogCardUIProps> = ({
   onDetailsClick,
   onFavoriteToggle,
 }) => {
-  const visibleTags = learnTags.slice(0, 2);
+  const visibleTags = learnTags.slice(0, 1);
   const hiddenTagsCount = learnTags.length > visibleTags.length ? learnTags.length - visibleTags.length : 0;
 
   const handleFavorite = () => {

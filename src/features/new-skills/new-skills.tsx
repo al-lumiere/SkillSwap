@@ -10,16 +10,16 @@ import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
 import formatAge from '../../shared/helpers/format-age';
 
-export const PopularSkills: FC = () => {
-  const popularSkills: Skill[] = useSelector(selectSkillsByList('home:popular'));
+export const NewSkills: FC = () => {
+  const newSkills: Skill[] = useSelector(selectSkillsByList('home:new'));
 
-  const firstThree: Skill[] = popularSkills.slice(0, 3);
+  const firstThree: Skill[] = newSkills.slice(0, 3);
 
   const navigate = useNavigate();
 
   return (
     <SectionUI
-      title="Популярное"
+      title="Новое"
       actionButton={
         <ButtonUI variant="tertiary" padding="12px 24px" onClick={() => {}}>
           Смотреть все

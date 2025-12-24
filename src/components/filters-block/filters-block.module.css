@@ -1,12 +1,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 44px;
-  padding: 20px;
+  gap: 42px;
+  padding: 17px 20px 20px;
   background-color: var(--card-input-color);
   color: var(--text-color);
-  width: 324px;
+  min-width: 324px;
   border-radius: 12px;
+  align-self: flex-start;
 }
 
 .header {

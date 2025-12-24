@@ -77,7 +77,7 @@ export type SkillsQueryParams = {
   mode?: 'all' | 'teach' | 'learn'; // "Всё / Могу научить / Хочу научиться"
   subcategoryId?: number[]; // repeated query param: ?subcategoryId=9&subcategoryId=10
   // gender?: 'any' | 'male' | 'female';
-  gender?: 'любой' | 'мужской' | 'женский'; // переделать на инглиш тут и в фикстурах
+  gender?: 'any' | 'male' | 'female'; // переделать на инглиш тут и в фикстурах
   cityId?: number;
   // список favorites запилить пожже, пока просто зарезервируем поля
   favorites_only?: boolean; // страница избранного

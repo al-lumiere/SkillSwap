@@ -4,14 +4,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type FiltersState = {
   mode: 'all' | 'teach' | 'learn';
   subcategoryId: number[];
-  gender: 'любой' | 'мужской' | 'женский';
-  cityId?: number;
+  gender: 'any' | 'male' | 'female';
+  cityIds: number[];
 };
 
 const initialState: FiltersState = {
   mode: 'all',
   subcategoryId: [],
-  gender: 'любой',
+  gender: 'any',
+  cityIds: [],
 };
 
 const filtersSlice = createSlice({
@@ -27,8 +28,8 @@ const filtersSlice = createSlice({
     setGender(state, action: PayloadAction<FiltersState['gender']>) {
       state.gender = action.payload;
     },
-    setCity(state, action: PayloadAction<number | undefined>) {
-      state.cityId = action.payload;
+    setCities(state, action: PayloadAction<number[]>) {
+      state.cityIds = action.payload;
     },
     resetFilters() {
       return initialState;
@@ -36,6 +37,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setMode, setSubcategories, setGender, setCity, resetFilters } = filtersSlice.actions;
+export const { setMode, setSubcategories, setGender, setCities, resetFilters } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
