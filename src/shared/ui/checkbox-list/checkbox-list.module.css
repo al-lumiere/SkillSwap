@@ -75,7 +75,7 @@
 .content > * {
   overflow: hidden;
   padding-left: 32px;
-  padding-bottom: 4px; 
+  padding-bottom: 4px;
 }
 
 .content > * > * + * {
