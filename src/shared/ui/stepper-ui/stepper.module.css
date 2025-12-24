@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 212px;
+}
+
+.title {
+  font-family: 'Jost';
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.stepsWrapper {
+  display: flex;
+  width: 100%;
+  gap: 16px; /* Расстояние между полосками */
+}
+
+.stepButton {
+  flex: 1; /* Чтобы все шаги занимали равную ширину */
+  height: 4px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  background-color: var(--button-disabled-color); /* Цвет предстоящего шага (серый) */
+}
+
+.stepButton:hover {
+  filter: brightness(0.95);
+  background-color: var(--button-hover-color);
+}
+
+.stepButton:focus-visible {
+  outline: 2px solid #deebc5;
+  outline-offset: 2px;
+}
+
+/* Стили для текущего и пройденных шагов */
+.active {
+  background-color: var(--accent-color); /* Цвет активного/пройденного шага (зеленый) */
+}
