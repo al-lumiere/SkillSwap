@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NavElementUI } from './nav-element-ui';
 
 const meta: Meta<typeof NavElementUI> = {
-  title: 'shared/ui/NavElementUI',
+  title: 'UI/NavElementUI',
   component: NavElementUI,
   args: {
     text: 'О проекте',
