@@ -1,4 +1,4 @@
-import { Category } from "@api/types";
+import { Category } from '@api/types';
 
 export type ShowMoreControlUI = {
   label: string;

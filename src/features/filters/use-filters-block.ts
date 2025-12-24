@@ -3,14 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { FiltersBlockUIProps } from '@components/filters-block/type';
 
-import {
-  CATEGORIES,
-  CITIES,
-  DEFAULT_GENDER,
-  DEFAULT_INTENT,
-  GENDER_OPTIONS,
-  INTENT_OPTIONS,
-} from './main-layout.mocks';
+import { CATEGORIES, CITIES, DEFAULT_GENDER, DEFAULT_INTENT, GENDER_OPTIONS, INTENT_OPTIONS } from './filters.mocks';
 
 export const useCatalogFilters = () => {
   // radio
