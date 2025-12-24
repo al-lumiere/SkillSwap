@@ -28,6 +28,9 @@ const createEmptyList = (pageSize = 18): SkillsListState => ({
   loading: false,
 });
 
+const EMPTY_SKILLS: Skill[] = [];
+const EMPTY_LIST: SkillsListState = createEmptyList();
+
 const initialState: SkillsState = {
   entities: {}, // склад карточек по id ( 41: { id: 41, title: "...", ... } )
   lists: {}, // "ленты" по listKey ("home:popular", "home:new", "home:recommended" )
@@ -99,13 +102,13 @@ const skillsSlice = createSlice({
 });
 
 // метаданные конкретного списка
-export const selectSkillsList = (listKey: string) => (state: RootState) => state.skills.lists[listKey];
+export const selectSkillsList = (listKey: string) => (state: RootState) => state.skills.lists[listKey] ?? EMPTY_LIST;
 
 // массив skills для конкретного списка
 export const selectSkillsByList = (listKey: string) => (state: RootState) => {
   const list = state.skills.lists[listKey];
-  if (!list) return [];
-  return list.ids.map((id) => state.skills.entities[id]);
+  if (!list) return EMPTY_SKILLS;
+  return list.ids.map((id) => state.skills.entities[id]).filter(Boolean);
 };
 
 export const { resetList } = skillsSlice.actions;

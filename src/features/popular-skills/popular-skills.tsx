@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC} from 'react';
 import { SectionUI } from '@components/section';
 import { ButtonUI } from '@ui/button';
 import { useSelector } from 'react-redux';

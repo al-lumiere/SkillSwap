@@ -1,10 +1,13 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { SectionUI } from '@components/section';
 import { ButtonUI } from '@ui/button';
 import { CatalogCardUI } from '@components/catalog-card';
+
 import { useDispatch, useSelector } from '@store/store';
 import { fetchSkills, resetList, selectSkillsByList, selectSkillsList } from '@slices/skills/skillsSlice';
+
 import SortIcon from '@icons/sort-icon';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
@@ -17,78 +20,98 @@ export const FilteredSkills: FC = () => {
   const filters = useSelector((s) => s.filters);
   const search = useSelector((s) => s.search.debouncedQuery);
 
-  const filteredSkills: Skill[] = useSelector(selectSkillsByList('filters'));
-  const filteredMeta = useSelector(selectSkillsList('filters'));
+  const selectFilteredSkills = useMemo(() => selectSkillsByList('filters'), []);
+  const selectFilteredMeta = useMemo(() => selectSkillsList('filters'), []);
+
+  const filteredSkills: Skill[] = useSelector(selectFilteredSkills);
+  const filteredMeta = useSelector(selectFilteredMeta);
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const hasSearch = Boolean(search?.trim());
-    const hasGender = filters.gender !== 'any';
-    const hasSubcats = filters.subcategoryId.length > 0;
-    const hasCities = filters.cityIds.length > 0;
-    const hasMode = filters.mode !== 'all';
+  // это нужно будет убрать, когда на сервере будет использовать англ + в types тоже нужно будет поправить
+  const genderApi = useMemo(() => {
+    if (filters.gender === 'male') return 'мужской';
+    if (filters.gender === 'female') return 'женский';
+    return undefined;
+  }, [filters.gender]);
 
-    const shouldRequest = hasSearch || hasGender || hasSubcats || hasCities || hasMode;
+  const hasSearch = Boolean(search?.trim());
+  const hasGender = filters.gender !== 'any';
+  const hasSubcats = filters.subcategoryId.length > 0;
+  const hasCities = filters.cityIds.length > 0;
+  const hasMode = filters.mode !== 'all';
+
+  const shouldRequest = hasSearch || hasGender || hasSubcats || hasCities || hasMode;
+
+  type FetchSkillsArgs = Parameters<typeof fetchSkills>[0];
+  type SkillsParams = FetchSkillsArgs['params'];
+
+  const baseParams = useMemo(
+    () => ({
+      ordering: '-createdAt' as const,
+      ...(hasSearch ? { search: search!.trim() } : {}),
+      ...(hasMode ? { mode: filters.mode as 'teach' | 'learn' } : {}),
+      ...(hasGender && genderApi ? { gender: genderApi } : {}),
+      ...(hasSubcats ? { subcategoryId: filters.subcategoryId } : {}),
+      ...(hasCities ? { cityIds: filters.cityIds } : {}),
+    }),
+    [
+      hasSearch,
+      search,
+      hasMode,
+      filters.mode,
+      hasGender,
+      genderApi,
+      hasSubcats,
+      filters.subcategoryId,
+      hasCities,
+      filters.cityIds,
+    ],
+  );
+
+  useEffect(() => {
     if (!shouldRequest) return;
 
     dispatch(resetList('filters'));
 
-    dispatch(
-      fetchSkills({
-        listKey: 'filters',
-        params: {
-          page: 1,
-          page_size: 18,
-          ordering: '-createdAt',
-          ...(hasSearch ? { search } : {}),
-          ...(filters.mode !== 'all' ? { mode: filters.mode } : {}),
-          ...(filters.gender !== 'any' ? { gender: filters.gender } : {}),
-          ...(filters.subcategoryId.length ? { subcategoryId: filters.subcategoryId } : {}),
-          ...(filters.cityIds.length ? { cityIds: filters.cityIds } : {}),
-        },
-      }),
-    );
-  }, [dispatch, filters, search]);
+    const params = {
+      page: 1,
+      page_size: 18,
+      ...baseParams,
+    } as unknown as SkillsParams;
+
+    dispatch(fetchSkills({ listKey: 'filters', params }));
+  }, [dispatch, shouldRequest, baseParams]);
 
   useEffect(() => {
     const el = sentinelRef.current;
-    if (!el) return undefined;
-    if (!filteredMeta?.hasMore) return undefined;
-    const hasSearch = Boolean(search?.trim());
+    if (!el || !filteredMeta.hasMore) {
+      return () => {};
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         if (filteredMeta.loading) return;
 
-        dispatch(
-          fetchSkills({
-            listKey: 'filters',
-            append: true,
-            params: {
-              page: filteredMeta.page + 1,
-              page_size: filteredMeta.pageSize,
-              ordering: '-createdAt',
-              ...(hasSearch ? { search } : {}),
-              ...(filters.mode !== 'all' ? { mode: filters.mode } : {}),
-              ...(filters.gender !== 'any' ? { gender: filters.gender } : {}),
-              ...(filters.subcategoryId.length ? { subcategoryId: filters.subcategoryId } : {}),
-              ...(filters.cityIds.length ? { cityIds: filters.cityIds } : {}),
-            },
-          }),
-        );
+        const params = {
+          page: filteredMeta.page,
+          page_size: filteredMeta.pageSize,
+          ...baseParams,
+        } as unknown as SkillsParams;
+
+        dispatch(fetchSkills({ listKey: 'filters', append: true, params }));
       },
       { rootMargin: '200px' },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [dispatch, filteredMeta, filters, search]);
+  }, [dispatch, filteredMeta, baseParams]);
 
   return (
     <SectionUI
-      title={`Подходящие предложения (${filteredSkills.length})`}
+      title={`Подходящие предложения (${filteredMeta.total || filteredSkills.length})}`}
       actionButton={
         <ButtonUI variant="tertiary" padding="12px 24px" onClick={() => {}}>
           <SortIcon />
@@ -120,8 +143,8 @@ export const FilteredSkills: FC = () => {
             learnTags={learnTags}
             likesCount={skill.favoritesCount}
             isFavorited={skill.isFavorited}
-            onDetailsClick={() => navigate(`/skills/:${skill.id}`)}
-            onFavoriteToggle={(_nextValue: boolean) => {}}
+            onDetailsClick={() => navigate(`/skills/${skill.id}`)}
+            onFavoriteToggle={() => {}}
           />
         );
       })}
