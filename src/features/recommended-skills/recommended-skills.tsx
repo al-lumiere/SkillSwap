@@ -1,17 +1,48 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { SectionUI } from '@components/section';
 import { useSelector } from 'react-redux';
-import { selectSkillsByList } from '@slices/skills/skillsSlice';
+import { fetchSkills, selectSkillsByList, selectSkillsList } from '@slices/skills/skillsSlice';
 import { CatalogCardUI } from '@components/catalog-card';
 import { useNavigate } from 'react-router-dom';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
+import { useDispatch } from '@store/store';
 import formatAge from '../../shared/helpers/format-age';
 
 export const RecommendedSkills: FC = () => {
   const recommendedSkills: Skill[] = useSelector(selectSkillsByList('home:recommended'));
-
+  const recomendedMeta = useSelector(selectSkillsList('home:recommended'));
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!recomendedMeta?.hasMore) return undefined;
+    if (!sentinelRef.current) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        if (recomendedMeta.loading) return;
+
+        dispatch(
+          fetchSkills({
+            listKey: 'home:recommended',
+            append: true,
+            params: {
+              page: recomendedMeta.page,
+              page_size: recomendedMeta.pageSize,
+            },
+          }),
+        );
+      },
+      { rootMargin: '200px' },
+    );
+
+    observer.observe(sentinelRef.current);
+
+    return () => observer.disconnect();
+  }, [recomendedMeta, dispatch]);
 
   return (
     <SectionUI title="Рекомендуем">
@@ -43,6 +74,9 @@ export const RecommendedSkills: FC = () => {
           />
         );
       })}
+
+      {recomendedMeta?.hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+      {recomendedMeta?.loading && <p>Загрузка…</p>}
     </SectionUI>
   );
 };
