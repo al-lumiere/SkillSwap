@@ -44,12 +44,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'import/no-unresolved': [
-      'error',
-      {
-        ignore: ['swiper/css'],
-      },
-    ],
   },
   overrides: [
     {
