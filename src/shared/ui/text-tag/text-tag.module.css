@@ -1,15 +1,23 @@
 .tag {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: transparent;
   border-radius: 20px;
   padding: 8px 12px;
+  max-width: 100%;
+  min-width: 0;
   font-family: var(--body-font-family);
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.02em;
   color: var(--text-color);
-  gap: 4px;
+}
+
+.text {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

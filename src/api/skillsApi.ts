@@ -39,7 +39,7 @@ async function fetchJson<T>(path: string): Promise<T> {
 }
 
 function applyFilters(skills: Skill[], params: SkillsQueryParams): Skill[] {
-  let out = skills;
+  let out = skills.slice();
 
   // mode
   const ids = params.subcategoryId ?? [];
@@ -63,9 +63,14 @@ function applyFilters(skills: Skill[], params: SkillsQueryParams): Skill[] {
     out = out.filter((s) => s.author.gender === params.gender);
   }
 
-  // cityId
-  if (typeof params.cityId === 'number') {
-    out = out.filter((s) => s.author.city?.id === params.cityId);
+  // cityIds
+  const cityIds = params.cityIds ?? []; // params.cityIds: number[] | undefined
+  if (cityIds.length > 0) {
+    const set = new Set(cityIds);
+    out = out.filter((s) => {
+      const authorCityId = s.author.city?.id;
+      return typeof authorCityId === 'number' && set.has(authorCityId);
+    });
   }
 
   // search
@@ -144,7 +149,7 @@ function paginateDRF<T>(items: T[], params: SkillsQueryParams): DRFPaginated<T> 
 
   if (params.mode) common.mode = params.mode;
   if (params.gender) common.gender = params.gender;
-  if (typeof params.cityId === 'number') common.cityId = String(params.cityId);
+  if (params.cityIds?.length) common.cityIds = params.cityIds.map(String);
   if (params.subcategoryId?.length) common.subcategoryId = params.subcategoryId.map(String);
 
   const hasPrev = page > 1;
