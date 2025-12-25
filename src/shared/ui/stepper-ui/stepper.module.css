@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 212px;
+}
+
+.title {
+  font-family: var(--header-font-family);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.011em;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.stepsWrapper {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+
+.stepButton {
+  flex: 1;
+  height: 4px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  background-color: var(--button-disabled-color);
+}
+
+.stepButton:hover {
+  filter: brightness(0.95);
+  background-color: var(--button-hover-color);
+}
+
+.stepButton:focus-visible {
+  outline: 2px solid #deebc5;
+  outline-offset: 2px;
+}
+
+.active {
+  background-color: var(--accent-color); 
+}
