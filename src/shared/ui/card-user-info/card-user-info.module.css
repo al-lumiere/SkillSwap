@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 22px;
-  padding: 20px;
+  gap: 21px;
+  padding: 32px;
   width: 324px;
   height: 444px;
   background: var(--card-input-color);
@@ -31,12 +31,11 @@
 }
 
 .avatar {
-  justify-content: center;
-  align-items: center;
+  object-fit: cover;
+  object-position: center;
   width: 100px;
   height: 100px;
   border-radius: 100px;
-  z-index: 0;
 }
 
 .name {
