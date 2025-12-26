@@ -1,5 +1,5 @@
-import type { ChangeEvent, FC } from 'react';
-import { useId, useMemo, useState } from 'react';
+import type { FC } from 'react';
+import { useId, useState } from 'react';
 import EyeIcon from '@icons/eye-icon';
 import EyeOffIcon from '@icons/eye-off-icon';
 import { TInputUIProps } from './type';
@@ -14,6 +14,7 @@ export const InputUI: FC<TInputUIProps> = ({
   icon,
   value = '',
   onChange,
+  autoComplete,
   placeholder,
   required,
   helperText,
@@ -24,7 +25,7 @@ export const InputUI: FC<TInputUIProps> = ({
   showPasswordToggle = true,
 }) => {
   const reactId = useId();
-  const inputId = useMemo(() => id || `input-ui-${reactId}`, [id, reactId]);
+  const inputId = id || reactId;
 
   const isPassword = type === 'password';
   const shouldShowPasswordToggle = isPassword && !icon && showPasswordToggle;
@@ -35,10 +36,6 @@ export const InputUI: FC<TInputUIProps> = ({
     inputType = isPasswordVisible ? 'text' : 'password';
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-  };
-
   return (
     <div className={cn(styles.container, className)}>
       {!!label && (
@@ -48,40 +45,35 @@ export const InputUI: FC<TInputUIProps> = ({
         </label>
       )}
 
-      <div
-        className={cn(
-          styles.field,
-          !!errorText && styles.fieldError,
-          !!disabled && styles.fieldDisabled,
-          (!!icon || shouldShowPasswordToggle) && styles.fieldWithIcon,
-        )}
-      >
-        <input
-          id={inputId}
-          name={name}
-          type={inputType}
-          className={styles.input}
-          placeholder={placeholder}
-          value={value}
-          onChange={handleChange}
-          autoComplete="off"
-          aria-invalid={!!errorText}
-          disabled={disabled}
-        />
-
-        {!!icon && !shouldShowPasswordToggle && <span className={styles.iconButton}>{icon}</span>}
-
-        {shouldShowPasswordToggle && (
-          <button
-            type="button"
-            className={styles.iconButton}
-            aria-label={isPasswordVisible ? 'Скрыть пароль' : 'Показать пароль'}
-            onClick={() => setIsPasswordVisible((prev) => !prev)}
+      <div className={cn(styles.field, !!errorText && styles.fieldError, !!disabled && styles.fieldDisabled)}>
+        <div className={styles.formGroup}>
+          <input
+            id={inputId}
+            name={name}
+            type={inputType}
+            className={styles.input}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            autoComplete={autoComplete}
+            aria-invalid={!!errorText}
             disabled={disabled}
-          >
-            {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-          </button>
-        )}
+          />
+
+          {!!icon && !shouldShowPasswordToggle && <span className={styles.iconButton}>{icon}</span>}
+
+          {shouldShowPasswordToggle && (
+            <button
+              type="button"
+              className={styles.iconButton}
+              aria-label={isPasswordVisible ? 'Скрыть пароль' : 'Показать пароль'}
+              onClick={() => setIsPasswordVisible((prev) => !prev)}
+              disabled={disabled}
+            >
+              {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
+            </button>
+          )}
+        </div>
       </div>
 
       {errorText ? (
