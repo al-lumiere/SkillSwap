@@ -9,9 +9,10 @@ const meta: Meta<typeof CardActionsUI> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    onLikeClick: { action: 'liked' },
+    onFavoriteToggle: { action: 'toggle favorite' },
     onShareClick: { action: 'shared' },
     onMoreClick: { action: 'more options' },
+    isFavorite: { control: 'boolean' },
   },
 };
 
@@ -20,12 +21,12 @@ type Story = StoryObj<typeof CardActionsUI>;
 
 export const Default: Story = {
   args: {
-    isLiked: false,
+    isFavorite: false,
   },
 };
 
-export const Liked: Story = {
+export const Favorited: Story = {
   args: {
-    isLiked: true, // Демонстрация активного состояния (сердечко будет нажато)
+    isFavorite: true, // Демонстрация активного состояния (сердечко будет нажато)
   },
 };

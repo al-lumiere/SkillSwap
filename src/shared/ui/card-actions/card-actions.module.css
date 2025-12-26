@@ -1,7 +1,6 @@
 .container {
   display: inline-flex;
   align-items: center;
-  gap: 16px; /* Расстояние между кнопками */
   color: var(--text-color);
 }
 
