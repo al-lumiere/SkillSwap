@@ -1,0 +1,54 @@
+.navigation {
+  position: absolute;
+  top: 0;
+  left: -16px;
+  right: -16px;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  padding: 8px;
+  border: none;
+  background-color: var(--button-disabled-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button.hidden {
+  display: none;
+}
+
+.buttonLeft {
+  left: 0;
+}
+
+.buttonRight {
+  right: 0;
+}
+
+.iconLeft {
+  transform: rotate(-180deg);
+}
+
+.iconRight {
+  transform: rotate(0deg);
+}
+
