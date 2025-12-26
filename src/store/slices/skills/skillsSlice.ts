@@ -55,6 +55,19 @@ const skillsSlice = createSlice({
     resetList(state, action: PayloadAction<string>) {
       state.lists[action.payload] = createEmptyList();
     },
+    toggleFavorite(state, action: PayloadAction<{ skillId: number; nextValue: boolean }>) {
+      const { skillId, nextValue } = action.payload;
+      const skill = state.entities[skillId];
+      if (!skill) return;
+
+      skill.isFavorited = nextValue;
+
+      const delta = nextValue ? 1 : -1;
+      const nextCount = (skill.favoritesCount ?? 0) + delta;
+
+      // защита от ухода в минус
+      skill.favoritesCount = Math.max(0, nextCount);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -111,5 +124,5 @@ export const selectSkillsByList = (listKey: string) => (state: RootState) => {
   return list.ids.map((id) => state.skills.entities[id]).filter(Boolean);
 };
 
-export const { resetList } = skillsSlice.actions;
+export const { resetList, toggleFavorite } = skillsSlice.actions;
 export default skillsSlice.reducer;

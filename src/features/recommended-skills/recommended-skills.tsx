@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef } from 'react';
 import { SectionUI } from '@components/section';
 import { useSelector } from 'react-redux';
-import { fetchSkills, selectSkillsByList, selectSkillsList } from '@slices/skills/skillsSlice';
+import { fetchSkills, selectSkillsByList, selectSkillsList, toggleFavorite } from '@slices/skills/skillsSlice';
 import { CatalogCardUI } from '@components/catalog-card';
 import { useNavigate } from 'react-router-dom';
 import { Skill } from '@api/types';
@@ -70,7 +70,7 @@ export const RecommendedSkills: FC = () => {
             onDetailsClick={() => {
               navigate(`/skills/:${skill.id}`);
             }}
-            onFavoriteToggle={(_nextValue: boolean) => {}}
+            onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
           />
         );
       })}
