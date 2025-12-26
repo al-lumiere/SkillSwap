@@ -9,6 +9,8 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
   category,
   description,
   images,
+  isFavorite,
+  onFavoriteToggle,
   onOfferExchange,
 }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -23,9 +25,8 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
       <CardActionsUI
         onShareClick={() => console.log('Share clicked')}
         onMoreClick={() => console.log('More clicked')}
-        // Если нужно состояние лайка:
-        isFavorite={false}
-        onFavoriteToggle={(val) => console.log('Favorite:', val)}
+        isFavorite={isFavorite}
+        onFavoriteToggle={onFavoriteToggle}
       />
 
       <div className={styles.content}>
