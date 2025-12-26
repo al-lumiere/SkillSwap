@@ -1,6 +1,6 @@
 export type CardActionsUIProps = {
   isFavorite?: boolean;
-  onFavoriteToggle?: (isFavorite: boolean) => void;
+  onFavoriteToggle?: (nextValue: boolean) => void;
   onShareClick: () => void;
   onMoreClick: () => void;
   className?: string;

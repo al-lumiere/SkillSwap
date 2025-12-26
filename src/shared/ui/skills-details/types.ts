@@ -5,4 +5,6 @@ export interface SkillDetailsCardProps {
   images: string[];
   onOfferExchange?: () => void;
   className?: string;
+  isFavorite: boolean;
+  onFavoriteToggle?: (nextValue: boolean) => void;
 }
