@@ -16,15 +16,7 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
   const MAX_THUMBNAILS = 3;
   const mainImage = images[activeImageIndex];
   const thumbnails = images.slice(1, 1 + MAX_THUMBNAILS);
-  const remainingCount = images.length - (MAX_THUMBNAILS + 1);
-
-  // Обработчик для клавиатуры (Enter / Space)
-  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      setActiveImageIndex(index);
-    }
-  };
+  const remainingCount = Math.max(0, images.length - (MAX_THUMBNAILS + 1));
 
   return (
     <div className={styles.container}>
@@ -46,12 +38,9 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
           </div>
 
           <div className={styles.description}>{description}</div>
-
-          <div className={styles.buttonPadding}>
-            <ButtonUI onClick={onOfferExchange} type="button" variant="primary" padding="12px 123px">
-              Предложить обмен
-            </ButtonUI>
-          </div>
+          <ButtonUI onClick={onOfferExchange} type="button" variant="primary" padding="12px 123px">
+            Предложить обмен
+          </ButtonUI>
         </div>
 
         <div className={styles.gallerySide}>
@@ -90,7 +79,6 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
                   type="button"
                   className={styles.thumbItem}
                   onClick={() => setActiveImageIndex(realIndex)}
-                  onKeyDown={(e) => handleKeyDown(e, realIndex)} // Исправлено: поддержка клавиатуры
                   aria-label={`Показать фото ${realIndex + 1}`}
                 >
                   <img src={src} alt="" aria-hidden="true" />
