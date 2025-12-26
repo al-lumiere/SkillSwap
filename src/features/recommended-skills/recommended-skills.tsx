@@ -68,7 +68,7 @@ export const RecommendedSkills: FC = () => {
             likesCount={skill.favoritesCount}
             isFavorited={skill.isFavorited}
             onDetailsClick={() => {
-              navigate(`/skills/:${skill.id}`);
+              navigate(`/skills/${skill.id}`);
             }}
             onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
           />
