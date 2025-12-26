@@ -73,6 +73,7 @@
   border: none;
 }
 
+
 .input::placeholder {
   color: var(--caption-color);
 }

@@ -7,7 +7,6 @@ export type TInputUIProps = {
   icon?: ReactNode;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  autoComplete?: string;
   placeholder?: string;
   required?: boolean;
   helperText?: string;

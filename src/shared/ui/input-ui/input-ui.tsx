@@ -5,8 +5,6 @@ import EyeOffIcon from '@icons/eye-off-icon';
 import { TInputUIProps } from './type';
 import styles from './input-ui.module.css';
 
-const cn = (...classes: Array<string | undefined | false>) => classes.filter(Boolean).join(' ');
-
 export const InputUI: FC<TInputUIProps> = ({
   label,
   name,
@@ -14,7 +12,6 @@ export const InputUI: FC<TInputUIProps> = ({
   icon,
   value = '',
   onChange,
-  autoComplete,
   placeholder,
   required,
   helperText,
@@ -25,27 +22,30 @@ export const InputUI: FC<TInputUIProps> = ({
   showPasswordToggle = true,
 }) => {
   const reactId = useId();
-  const inputId = id || reactId;
+  const inputId = id ?? `input-ui-${reactId}`;
 
-  const isPassword = type === 'password';
-  const shouldShowPasswordToggle = isPassword && !icon && showPasswordToggle;
+  const shouldShowPasswordToggle = type === 'password' && !icon && showPasswordToggle;
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   let inputType = type;
+
   if (shouldShowPasswordToggle) {
     inputType = isPasswordVisible ? 'text' : 'password';
   }
 
   return (
-    <div className={cn(styles.container, className)}>
-      {!!label && (
+    <div className={[styles.container, className].filter(Boolean).join(' ')}>
+      {label && (
         <label className={styles.label} htmlFor={inputId}>
           {label}
-          {!!required && <span className={styles.required}>*</span>}
+          {required && <span className={styles.required}>*</span>}
         </label>
       )}
 
-      <div className={cn(styles.field, !!errorText && styles.fieldError, !!disabled && styles.fieldDisabled)}>
+      <div
+        className={[styles.field, errorText && styles.fieldError, disabled && styles.fieldDisabled]
+          .filter(Boolean)
+          .join(' ')}
+      >
         <div className={styles.formGroup}>
           <input
             id={inputId}
@@ -54,13 +54,13 @@ export const InputUI: FC<TInputUIProps> = ({
             className={styles.input}
             placeholder={placeholder}
             value={value}
+            required={required}
             onChange={onChange}
-            autoComplete={autoComplete}
             aria-invalid={!!errorText}
             disabled={disabled}
           />
 
-          {!!icon && !shouldShowPasswordToggle && <span className={styles.iconButton}>{icon}</span>}
+          {icon && !shouldShowPasswordToggle && <span className={styles.iconButton}>{icon}</span>}
 
           {shouldShowPasswordToggle && (
             <button
@@ -77,9 +77,9 @@ export const InputUI: FC<TInputUIProps> = ({
       </div>
 
       {errorText ? (
-        <p className={cn(styles.helperText, styles.errorText)}>{errorText}</p>
+        <p className={[styles.helperText, styles.errorText].join(' ')}>{errorText}</p>
       ) : (
-        !!helperText && <p className={styles.helperText}>{helperText}</p>
+        helperText && <p className={styles.helperText}>{helperText}</p>
       )}
     </div>
   );
