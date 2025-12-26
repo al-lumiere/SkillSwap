@@ -2,12 +2,13 @@ import { FC } from 'react';
 import { SectionUI } from '@components/section';
 import { ButtonUI } from '@ui/button';
 import { useSelector } from 'react-redux';
-import { selectSkillsByList } from '@slices/skills/skillsSlice';
+import { selectSkillsByList, toggleFavorite } from '@slices/skills/skillsSlice';
 import { CatalogCardUI } from '@components/catalog-card';
 import { useNavigate } from 'react-router-dom';
 import ChevronRightIcon from '@icons/chevron-right-icon';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
+import { useDispatch } from '@store/store';
 import formatAge from '../../shared/helpers/format-age';
 
 export const NewSkills: FC = () => {
@@ -16,6 +17,8 @@ export const NewSkills: FC = () => {
   const firstThree: Skill[] = newSkills.slice(0, 3);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   return (
     <SectionUI
@@ -51,7 +54,7 @@ export const NewSkills: FC = () => {
             onDetailsClick={() => {
               navigate(`/skills/:${skill.id}`);
             }}
-            onFavoriteToggle={(_nextValue: boolean) => {}}
+            onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
           />
         );
       })}
