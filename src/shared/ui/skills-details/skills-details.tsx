@@ -20,15 +20,13 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.actionsWrapper}>
-        <CardActionsUI
-          onShareClick={() => console.log('Share clicked')}
-          onMoreClick={() => console.log('More clicked')}
-          // Если нужно состояние лайка:
-          isFavorite={false}
-          onFavoriteToggle={(val) => console.log('Favorite:', val)}
-        />
-      </div>
+      <CardActionsUI
+        onShareClick={() => console.log('Share clicked')}
+        onMoreClick={() => console.log('More clicked')}
+        // Если нужно состояние лайка:
+        isFavorite={false}
+        onFavoriteToggle={(val) => console.log('Favorite:', val)}
+      />
 
       <div className={styles.content}>
         <div className={styles.infoSide}>
