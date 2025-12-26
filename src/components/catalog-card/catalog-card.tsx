@@ -49,7 +49,7 @@ export const CatalogCardUI: FC<TCatalogCardUIProps> = ({
             isActive={isFavorited}
             onClick={handleFavorite}
           >
-            {isFavorited ? <LikeFullIcon /> : <LikeIcon />}
+            {isFavorited ? <LikeFullIcon color="var(--accent-color)" /> : <LikeIcon />}
           </IconButtonUI>
         </div>
       </header>
