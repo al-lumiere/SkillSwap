@@ -1,9 +1,17 @@
+/* eslint-disable import/no-unresolved */
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import type { Swiper as SwiperType } from 'swiper';
 import { ButtonUI } from '@ui/button';
+import { SwiperNavigation } from '@ui/swiper-navigation';
 import ChevronRightIcon from '@icons/chevron-right-icon';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { SectionUI } from './section';
 import { CatalogCardUI } from '../catalog-card';
+import styles from './section.module.css';
+
+// import Swiper styles
+import 'swiper/css';
 
 const meta: Meta<typeof SectionUI> = {
   title: 'ui/SectionLayout',
@@ -152,7 +160,10 @@ export const SimilarWithFilterButton: Story = {
       { id: 1, name: 'Виктория', city: 'Кемерово', age: '30 лет', likes: 15, favorited: false },
       { id: 2, name: 'Елена', city: 'Красноярск', age: '28 лет', likes: 25, favorited: true },
       { id: 3, name: 'Константин', city: 'Иркутск', age: '36 лет', likes: 35, favorited: false },
+      { id: 4, name: 'София', city: 'Абакан', age: '24 года', likes: 45, favorited: false },
+      { id: 5, name: 'Екатерина', city: 'Пермь', age: '33 года', likes: 55, favorited: true },
     ]);
+    const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
     const handleFavoriteToggle = (cardId: number, nextValue: boolean) => {
       setCards((prevCards) =>
@@ -169,23 +180,35 @@ export const SimilarWithFilterButton: Story = {
     };
 
     return (
-      <div style={{ width: '1368px' }}>
-        <SectionUI title={`Похожие предложения: ${cards.length}`}>
-          {cards.map((card) => (
-            <CatalogCardUI
-              key={card.id}
-              avatar={`https://i.pravatar.cc/150?img=${card.id + 1}`}
-              name={card.name}
-              cityName={card.city}
-              ageText={card.age}
-              teachTag={mockCardData.teachTag}
-              learnTags={mockCardData.learnTags}
-              likesCount={card.likes}
-              isFavorited={card.favorited}
-              onDetailsClick={() => console.log(`Details clicked for ${card.name}`)}
-              onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
-            />
-          ))}
+      <div style={{ width: '100%', maxWidth: 1368 }}>
+        <SectionUI title={`Похожие предложения: ${cards.length}`} hasSlider>
+          <Swiper
+            className={styles.swiper}
+            spaceBetween={24}
+            slidesPerView={4}
+            observer
+            observeParents
+            onSwiper={setSwiperInstance}
+          >
+            {cards.map((card) => (
+              <SwiperSlide key={card.id}>
+                <CatalogCardUI
+                  key={card.id}
+                  avatar={`https://i.pravatar.cc/150?img=${card.id + 1}`}
+                  name={card.name}
+                  cityName={card.city}
+                  ageText={card.age}
+                  teachTag={mockCardData.teachTag}
+                  learnTags={mockCardData.learnTags}
+                  likesCount={card.likes}
+                  isFavorited={card.favorited}
+                  onDetailsClick={() => console.log(`Details clicked for ${card.name}`)}
+                  onFavoriteToggle={(value) => handleFavoriteToggle(card.id, value)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <SwiperNavigation swiper={swiperInstance} />
         </SectionUI>
       </div>
     );
