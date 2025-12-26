@@ -77,10 +77,6 @@
   color: var(--caption-color);
 }
 
-.fieldWithIcon .input {
-  padding-right: 8px;
-}
-
 .iconButton {
   display: flex;
   align-items: center;
