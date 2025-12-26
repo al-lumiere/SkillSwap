@@ -28,13 +28,6 @@ export const FilteredSkills: FC = () => {
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  // это нужно будет убрать, когда на сервере будет использовать англ + в types тоже нужно будет поправить
-  const genderApi = useMemo(() => {
-    if (filters.gender === 'male') return 'мужской';
-    if (filters.gender === 'female') return 'женский';
-    return undefined;
-  }, [filters.gender]);
-
   const hasSearch = Boolean(search?.trim());
   const hasGender = filters.gender !== 'any';
   const hasSubcats = filters.subcategoryId.length > 0;
@@ -51,7 +44,7 @@ export const FilteredSkills: FC = () => {
       ordering: '-createdAt' as const,
       ...(hasSearch ? { search: search!.trim() } : {}),
       ...(hasMode ? { mode: filters.mode as 'teach' | 'learn' } : {}),
-      ...(hasGender && genderApi ? { gender: genderApi } : {}),
+      ...(hasGender && filters.gender ? { gender: filters.gender } : {}),
       ...(hasSubcats ? { subcategoryId: filters.subcategoryId } : {}),
       ...(hasCities ? { cityIds: filters.cityIds } : {}),
     }),
@@ -61,7 +54,7 @@ export const FilteredSkills: FC = () => {
       hasMode,
       filters.mode,
       hasGender,
-      genderApi,
+      filters.gender,
       hasSubcats,
       filters.subcategoryId,
       hasCities,
@@ -126,7 +119,7 @@ export const FilteredSkills: FC = () => {
         const learnTags = skill.author.learnSubcategories.map((subcat) => ({
           id: subcat.id,
           label: subcat.name,
-          bgColor: '#F5F5F5',
+          bgColor: subcat.color || '#F5F5F5',
         }));
 
         const age = formatAge(skill.author.birthDate);

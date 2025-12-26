@@ -9,6 +9,7 @@ export type Subcategory = {
   categoryId: number;
   name: string;
   slug: string;
+  color: string;
 };
 
 export type Category = {
@@ -76,10 +77,8 @@ export type SkillsQueryParams = {
   // фильтры
   mode?: 'all' | 'teach' | 'learn'; // "Всё / Могу научить / Хочу научиться"
   subcategoryId?: number[]; // repeated query param: ?subcategoryId=9&subcategoryId=10
-  // gender?: 'any' | 'male' | 'female';
-  gender?: 'любой' | 'мужской' | 'женский'; // переделать на инглиш тут и в фикстурах
+  gender?: 'any' | 'male' | 'female'; // 'любой' | 'мужской' | 'женский'
   cityIds?: number[];
-  // список favorites запилить пожже, пока просто зарезервируем поля
   favorites_only?: boolean; // страница избранного
   user_id?: number; // для избранного (возможно не понадобится, т.к. пользователь будет в запросе)
 };

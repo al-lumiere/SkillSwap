@@ -50,7 +50,7 @@ export const RecommendedSkills: FC = () => {
         const learnTags = skill.author.learnSubcategories.map((subcat) => ({
           id: subcat.id,
           label: subcat.name,
-          bgColor: '#F5F5F5', // TODO: добавить цвет в фикстуры
+          bgColor: subcat.color || '#F5F5F5',
         }));
 
         return (
