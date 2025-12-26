@@ -1,0 +1,9 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-color);
+}
+
+.container button[aria-pressed='true'] {
+  color: var(--accent-color);
+}
