@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
