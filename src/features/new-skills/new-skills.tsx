@@ -34,7 +34,7 @@ export const NewSkills: FC = () => {
         const learnTags = skill.author.learnSubcategories.map((subcat) => ({
           id: subcat.id,
           label: subcat.name,
-          bgColor: '#F5F5F5', // TODO: добавить цвет в фикстуры
+          bgColor: subcat.color || '#F5F5F5',
         }));
 
         return (
@@ -52,7 +52,7 @@ export const NewSkills: FC = () => {
             likesCount={skill.favoritesCount}
             isFavorited={skill.isFavorited}
             onDetailsClick={() => {
-              navigate(`/skills/:${skill.id}`);
+              navigate(`/skills/${skill.id}`);
             }}
             onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
           />

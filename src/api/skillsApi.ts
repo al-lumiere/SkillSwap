@@ -59,7 +59,7 @@ function applyFilters(skills: Skill[], params: SkillsQueryParams): Skill[] {
   }
 
   // gender (в фикстурах "мужской/женский", лучше привести к male/female)
-  if (params.gender && params.gender !== 'любой') {
+  if (params.gender && params.gender !== 'any') {
     out = out.filter((s) => s.author.gender === params.gender);
   }
 
