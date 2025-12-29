@@ -18,7 +18,7 @@
 .calendarWrapper :global(.react-datepicker__header) {
   background-color: white;
   border-bottom: none;
-  padding: 25px 32px 0px 32px;
+  padding: 15px 32px 0px 32px;
   margin-bottom: 12px;
 }
 
@@ -61,7 +61,7 @@
 .customHeader {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 12px;
   font-size: 16px;
 }
 
@@ -93,9 +93,18 @@
 
 .selectContainer {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  width: fit-content;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+
+.selectContainer:hover {
+  box-shadow: 0 0 0 6px var(--icon-button-hover-color, #e9edf0);
+  border-radius: 12px;
+  background-color: var(--icon-button-hover-color, #e9edf0);
 }
 
 .calendarWrapper :global(.react-datepicker__children-container) {
@@ -105,18 +114,29 @@
   border-left: none;
 }
 
-.icon {
-  right: 0;
-  position: absolute;
-  pointer-events: none;
-  color: #4a4a4a;
-  z-index: 1;
-}
-
 .iconContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
   color: #4a4a4a;
+}
+
+.selectLabel {
+  font-size: 16px;
+  margin-right: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hiddenSelect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+  appearance: none;
 }

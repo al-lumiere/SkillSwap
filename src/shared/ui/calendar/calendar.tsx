@@ -62,12 +62,16 @@ export const CalendarUI: FC<CalendarUIProps> = ({ selectedDate = null, onChange 
         renderCustomHeader={({ date, changeMonth, changeYear }) => (
           <div className={styles.customHeader}>
             <div className={styles.selectContainer}>
+              <span className={styles.selectLabel}>{months[getMonth(date)]}</span>
               <select
                 value={months[getMonth(date)]}
-                onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
-                onMouseDown={() => setIsMonthOpen(true)}
+                onChange={({ target: { value } }) => {
+                  changeMonth(months.indexOf(value));
+                  setIsMonthOpen(false);
+                }}
+                onMouseDown={() => setIsMonthOpen((prev) => !prev)}
                 onBlur={() => setIsMonthOpen(false)}
-                className={styles.headerSelectMonth}
+                className={styles.hiddenSelect}
               >
                 {months.map((option) => (
                   <option key={option} value={option}>
@@ -76,21 +80,21 @@ export const CalendarUI: FC<CalendarUIProps> = ({ selectedDate = null, onChange 
                 ))}
               </select>
               <div className={styles.iconContainer}>
-                {isMonthOpen ? (
-                  <ChevronUpIcon size={24} className={styles.icon} />
-                ) : (
-                  <ChevronDownIcon size={24} className={styles.icon} />
-                )}
+                {isMonthOpen ? <ChevronUpIcon size={24} /> : <ChevronDownIcon size={24} />}
               </div>
             </div>
 
             <div className={styles.selectContainer}>
+              <span className={styles.selectLabel}>{getYear(date)}</span>
               <select
                 value={getYear(date)}
-                onChange={({ target: { value } }) => changeYear(Number(value))}
-                onMouseDown={() => setIsYearOpen(true)}
+                onChange={({ target: { value } }) => {
+                  changeYear(Number(value));
+                  setIsYearOpen(false);
+                }}
+                onMouseDown={() => setIsYearOpen((prev) => !prev)}
                 onBlur={() => setIsYearOpen(false)}
-                className={styles.headerSelectYears}
+                className={styles.hiddenSelect}
               >
                 {years.map((option) => (
                   <option key={option} value={option}>
@@ -99,11 +103,7 @@ export const CalendarUI: FC<CalendarUIProps> = ({ selectedDate = null, onChange 
                 ))}
               </select>
               <div className={styles.iconContainer}>
-                {isYearOpen ? (
-                  <ChevronUpIcon size={24} className={styles.icon} />
-                ) : (
-                  <ChevronDownIcon size={24} className={styles.icon} />
-                )}
+                {isYearOpen ? <ChevronUpIcon size={24} /> : <ChevronDownIcon size={24} />}
               </div>
             </div>
           </div>
@@ -122,3 +122,5 @@ export const CalendarUI: FC<CalendarUIProps> = ({ selectedDate = null, onChange 
     </div>
   );
 };
+
+// до
