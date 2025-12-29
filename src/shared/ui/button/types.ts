@@ -6,4 +6,6 @@ export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonEleme
   children: ReactNode;
   variant?: ButtonUIVariant;
   padding?: CSSProperties['padding'];
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
 }
