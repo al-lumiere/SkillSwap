@@ -179,4 +179,9 @@ export const skillsApi = {
     // пагинация (в стиле DRF)
     return paginateDRF(filtered, params);
   },
+
+  async getSkillById(id: number): Promise<Skill | null> {
+    const all = await fetchJson<Skill[]>('skills.json');
+    return all.find((skill) => skill.id === id) ?? null;
+  },
 };
