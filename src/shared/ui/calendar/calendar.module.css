@@ -18,8 +18,7 @@
 .calendarWrapper :global(.react-datepicker__header) {
   background-color: white;
   border-bottom: none;
-  padding: 15px 32px 0px 32px;
-  margin-bottom: 12px;
+  padding: 19px 32px 4px;
 }
 
 .calendarWrapper :global(.react-datepicker__day--outside-month) {
@@ -28,7 +27,7 @@
 
 .calendarFooter {
   display: flex;
-  margin-top: 10px;
+  margin-top: 6px;
   gap: 8px;
 }
 
