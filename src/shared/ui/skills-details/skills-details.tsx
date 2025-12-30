@@ -45,7 +45,7 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
               type="button"
               variant="secondary"
               padding="13px 109px"
-              iconRight={<ClockIcon />}
+              iconLeft={<ClockIcon />}
             >
               Обмен предложен
             </ButtonUI>
