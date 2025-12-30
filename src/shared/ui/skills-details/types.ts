@@ -7,4 +7,5 @@ export interface SkillDetailsCardProps {
   className?: string;
   isFavorite: boolean;
   onFavoriteToggle?: (nextValue: boolean) => void;
+  isOfferSent?: boolean;
 }
