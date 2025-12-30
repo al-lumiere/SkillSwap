@@ -13,7 +13,7 @@ export const IllustrationBlockUI = ({ illustration, title, description, actions 
       {actions && (
         <div className={styles.buttons}>
           {actions.map((action) => (
-            <ButtonUI variant={action.primary ? 'primary' : 'secondary'} onClick={action.onClick}>
+            <ButtonUI variant={action.primary ? 'primary' : 'secondary'} onClick={action.onClick} padding="12px 24px">
               {action.text}
             </ButtonUI>
           ))}
