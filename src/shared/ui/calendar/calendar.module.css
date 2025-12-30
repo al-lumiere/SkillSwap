@@ -1,0 +1,141 @@
+.calendarWrapper {
+  width: 280px;
+  height: 360px;
+  background-color: white;
+  border: 1px solid var(--caption-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.calendarWrapper :global(.react-datepicker) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  width: 100%;
+}
+
+.calendarWrapper :global(.react-datepicker__header) {
+  background-color: white;
+  border-bottom: none;
+  padding: 19px 32px 4px;
+}
+
+.calendarWrapper :global(.react-datepicker__day--outside-month) {
+  color: var(--button-disabled-text-color) !important;
+}
+
+.calendarFooter {
+  display: flex;
+  margin-top: 6px;
+  gap: 8px;
+}
+
+.calendarFooter > button {
+  flex: 1;
+}
+
+.calendarWrapper :global(.react-datepicker__day-name) {
+  color: var(--button-pressed-color);
+  font-weight: 400;
+}
+
+.calendarWrapper :global(.react-datepicker) {
+  border: none;
+  font-weight: 400;
+  font-family: var(--body-font-family);
+}
+
+.calendarWrapper :global(.react-datepicker__day--selected) {
+  background-color: var(--accent-color) !important;
+  border-radius: 50% !important;
+  color: black !important;
+}
+
+.calendarWrapper :global(.react-datepicker__day--keyboard-selected) {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.customHeader {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.monthLabel,
+.yearLabel {
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.headerSelectYears {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 20px;
+}
+
+.headerSelectMonth {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 3px;
+}
+
+.selectContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+
+.selectContainer:hover {
+  box-shadow: 0 0 0 6px var(--icon-button-hover-color, #e9edf0);
+  border-radius: 12px;
+  background-color: var(--icon-button-hover-color, #e9edf0);
+}
+
+.calendarWrapper :global(.react-datepicker__children-container) {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border-left: none;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: #4a4a4a;
+}
+
+.selectLabel {
+  font-size: 16px;
+  margin-right: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hiddenSelect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+  appearance: none;
+}
