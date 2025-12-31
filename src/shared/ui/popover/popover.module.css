@@ -1,0 +1,25 @@
+.root {
+  position: relative;
+}
+
+.anchor {
+  display: inline-flex;
+}
+
+.popover {
+  position: absolute;
+  z-index: 10;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--caption-color);
+}
+
+.popover[data-placement='bottom-start'] {
+  top: calc(100% + var(--popover-offset));
+  left: 0;
+}
+
+.popover[data-placement='bottom-end'] {
+  top: calc(100% + var(--popover-offset));
+  right: 0;
+}
