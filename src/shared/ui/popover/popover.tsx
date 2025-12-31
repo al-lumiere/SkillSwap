@@ -2,18 +2,7 @@ import { FC, useRef } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useEscape } from '../../hooks/useEscape';
 import styles from './popover.module.css';
-
-type Placement = 'bottom-start' | 'bottom-end';
-
-export type PopoverUIProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  anchor: React.ReactNode;
-  children: React.ReactNode;
-  placement: Placement;
-  maxWidth: number | null;
-  offset: number;
-};
+import { PopoverUIProps } from './type';
 
 export const PopoverUI: FC<PopoverUIProps> = ({
   isOpen,
