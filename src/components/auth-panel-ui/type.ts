@@ -9,5 +9,5 @@ export type AuthPanelUIProps = {
   onAppleClick?: () => void;
   className?: string;
   showRegisterLink?: boolean;
-  onRegisterClick?: () => void;
+  registerLinkTo?: string;
 };

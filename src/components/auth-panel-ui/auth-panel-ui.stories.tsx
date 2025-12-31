@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, type ChangeEvent } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { InputUI } from '@ui/input-ui';
 import { AuthPanelUI } from './auth-panel-ui';
 
@@ -9,6 +10,13 @@ const meta: Meta<typeof AuthPanelUI> = {
   parameters: {
     layout: 'centered',
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
@@ -44,7 +52,6 @@ const FormTemplate = ({
         onAppleClick={() => {}}
         errorText={errorText}
         showRegisterLink={showRegisterLink}
-        onRegisterClick={() => {}}
       >
         <InputUI
           label="Email"

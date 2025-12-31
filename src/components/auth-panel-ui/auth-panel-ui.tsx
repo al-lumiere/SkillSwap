@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { ButtonUI } from '@ui/button';
 import GoogleIcon from '@icons/google-icon';
 import AppleIcon from '@icons/apple-icon';
@@ -14,19 +15,19 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   onAppleClick,
   className,
   showRegisterLink = true,
-  onRegisterClick,
+  registerLinkTo = '/register',
 }) => (
   <div className={[styles.panel, className].filter(Boolean).join(' ')}>
     <div className={styles.groupUserData}>
       <div className={styles.socialButtons}>
-        <ButtonUI variant="secondary" onClick={onGoogleClick} padding="16px 24px">
+        <ButtonUI variant="secondary" onClick={onGoogleClick} padding="12px 20px">
           <span className={styles.socialIcon} aria-hidden="true">
             <GoogleIcon />
           </span>
           Продолжить с Google
         </ButtonUI>
 
-        <ButtonUI variant="secondary" onClick={onAppleClick} padding="16px 24px">
+        <ButtonUI variant="secondary" onClick={onAppleClick} padding="12px 20px">
           <span className={styles.socialIcon} aria-hidden="true">
             <AppleIcon />
           </span>
@@ -50,15 +51,15 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
     </div>
     <div className={styles.groupButtons}>
       <div className={styles.action}>
-        <ButtonUI variant="primary" onClick={onAction} padding="16px 24px">
+        <ButtonUI variant="primary" onClick={onAction} padding="12px 24px">
           {actionText}
         </ButtonUI>
       </div>
 
       {showRegisterLink && (
-        <button type="button" className={styles.registerLink} onClick={onRegisterClick}>
+        <Link className={styles.registerLink} to={registerLinkTo}>
           Зарегистрироваться
-        </button>
+        </Link>
       )}
     </div>
   </div>
