@@ -17,6 +17,8 @@ type SkillsListState = {
 type SkillsState = {
   entities: Record<number, Skill>;
   lists: Record<string, SkillsListState>;
+  detailsLoading: boolean;
+  detailsError?: string;
 };
 
 const createEmptyList = (pageSize = 18): SkillsListState => ({
@@ -34,6 +36,7 @@ const EMPTY_LIST: SkillsListState = createEmptyList();
 const initialState: SkillsState = {
   entities: {}, // склад карточек по id ( 41: { id: 41, title: "...", ... } )
   lists: {}, // "ленты" по listKey ("home:popular", "home:new", "home:recommended" )
+  detailsLoading: false,
 };
 
 export const fetchSkills = createAsyncThunk<
@@ -47,6 +50,17 @@ export const fetchSkills = createAsyncThunk<
     total: response.count,
   };
 });
+
+export const fetchSkillById = createAsyncThunk<Skill, number, { state: RootState }>(
+  'skills/fetchSkillById',
+  async (id) => {
+    const skill = await skillsApi.getSkillById(id);
+    if (!skill) {
+      throw new Error('Skill not found');
+    }
+    return skill;
+  },
+);
 
 const skillsSlice = createSlice({
   name: 'skills',
@@ -110,6 +124,19 @@ const skillsSlice = createSlice({
           list.loading = false;
           list.error = action.error.message;
         }
+      })
+      .addCase(fetchSkillById.pending, (state) => {
+        state.detailsLoading = true;
+        state.detailsError = undefined;
+      })
+      .addCase(fetchSkillById.fulfilled, (state, action) => {
+        const skill = action.payload;
+        state.entities[skill.id] = skill;
+        state.detailsLoading = false;
+      })
+      .addCase(fetchSkillById.rejected, (state, action) => {
+        state.detailsLoading = false;
+        state.detailsError = action.error.message;
       });
   },
 });
@@ -123,6 +150,12 @@ export const selectSkillsByList = (listKey: string) => (state: RootState) => {
   if (!list) return EMPTY_SKILLS;
   return list.ids.map((id) => state.skills.entities[id]).filter(Boolean);
 };
+
+// еденичный скилл по id
+export const selectSkillById =
+  (id: number) =>
+  (state: RootState): Skill | null =>
+    state.skills.entities[id] ?? null;
 
 export const { resetList, toggleFavorite } = skillsSlice.actions;
 export default skillsSlice.reducer;
