@@ -22,7 +22,11 @@ const ModalWrapper = ({ children }: { children: React.ReactNode }) => {
       <button type="button" onClick={() => setIsOpen(true)}>
         Open Modal
       </button>
-      {isOpen && <ModalUI onClose={() => setIsOpen(false)}>{children}</ModalUI>}
+      {isOpen && (
+        <ModalUI onClose={() => setIsOpen(false)}>
+          <div style={{ padding: '24px' }}>{children}</div>
+        </ModalUI>
+      )}
     </>
   );
 };
