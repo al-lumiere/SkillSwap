@@ -20,17 +20,11 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   <div className={[styles.panel, className].filter(Boolean).join(' ')}>
     <div className={styles.groupUserData}>
       <div className={styles.socialButtons}>
-        <ButtonUI variant="secondary" onClick={onGoogleClick} padding="12px 20px">
-          <span className={styles.socialIcon} aria-hidden="true">
-            <GoogleIcon />
-          </span>
+        <ButtonUI variant="secondary" onClick={onGoogleClick} padding="12px 20px" iconLeft={<GoogleIcon />}>
           Продолжить с Google
         </ButtonUI>
 
-        <ButtonUI variant="secondary" onClick={onAppleClick} padding="12px 20px">
-          <span className={styles.socialIcon} aria-hidden="true">
-            <AppleIcon />
-          </span>
+        <ButtonUI variant="secondary" onClick={onAppleClick} padding="12px 20px" iconLeft={<AppleIcon />}>
           Продолжить с Apple
         </ButtonUI>
       </div>

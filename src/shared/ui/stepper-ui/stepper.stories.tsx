@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { StepperUI } from './stepper';
 
 const meta: Meta<typeof StepperUI> = {
-  title: 'Shared/UI/StepperUI',
+  title: 'UI/StepperUI',
   component: StepperUI,
   parameters: {
     layout: 'centered',
