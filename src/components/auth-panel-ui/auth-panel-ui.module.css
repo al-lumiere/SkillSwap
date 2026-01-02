@@ -1,14 +1,15 @@
 .panel {
   width: 100%;
-  max-width: 556px;
+  max-width: 436px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
 .groupUserData {
   display: flex;
   flex-direction: column;
+  gap: 23px;
 }
 
 .socialButtons {
@@ -20,12 +21,7 @@
 .socialButtons button {
   width: 100%;
   border-color: var(--text-color);
-}
-
-.socialIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  letter-spacing: 0.02em;
 }
 
 .divider {
@@ -36,7 +32,6 @@
   font-family: var(--body-font-family);
   font-size: 16px;
   line-height: 24px;
-  margin: 24px 0 24px;
 }
 
 .dividerLine {
@@ -48,7 +43,7 @@
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
 }
 
 .formError {
@@ -56,7 +51,6 @@
   font-family: var(--body-font-family);
   font-size: 12px;
   line-height: 16px;
-  padding-top: 20px;
   letter-spacing: 0.02em;
 }
 

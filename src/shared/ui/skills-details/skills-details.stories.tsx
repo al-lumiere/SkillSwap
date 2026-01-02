@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SkillDetailsCard } from './skills-details';
 
 const meta: Meta<typeof SkillDetailsCard> = {
-  title: 'Shared/SkillDetailsCard',
+  title: 'UI/SkillDetailsCard',
   component: SkillDetailsCard,
   parameters: {
     layout: 'centered',

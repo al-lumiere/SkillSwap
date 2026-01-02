@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CalendarUI } from './calendar';
 
 const meta: Meta<typeof CalendarUI> = {
-  title: 'shared/ui/CalendarUI',
+  title: 'UI/CalendarUI',
   component: CalendarUI,
   parameters: {
     layout: 'centered',
