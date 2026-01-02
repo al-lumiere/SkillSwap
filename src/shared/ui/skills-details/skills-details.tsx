@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClockIcon from '@icons/clock-icon';
 import styles from './skills-details.module.css';
 import { SkillDetailsCardProps } from './types';
 import { ButtonUI } from '../button/button'; //
@@ -12,6 +13,7 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
   isFavorite,
   onFavoriteToggle,
   onOfferExchange,
+  isOfferSent = false,
 }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -37,9 +39,21 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
           </div>
 
           <div className={styles.description}>{description}</div>
-          <ButtonUI onClick={onOfferExchange} type="button" variant="primary" padding="12px 123px">
-            Предложить обмен
-          </ButtonUI>
+          {isOfferSent ? (
+            <ButtonUI
+              onClick={onOfferExchange}
+              type="button"
+              variant="secondary"
+              padding="13px 109px"
+              iconLeft={<ClockIcon />}
+            >
+              Обмен предложен
+            </ButtonUI>
+          ) : (
+            <ButtonUI onClick={onOfferExchange} type="button" variant="primary" padding="13px 123px">
+              Предложить обмен
+            </ButtonUI>
+          )}
         </div>
 
         <div className={styles.gallerySide}>

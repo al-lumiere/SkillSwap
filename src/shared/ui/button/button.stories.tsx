@@ -1,6 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import CrossIcon from '@icons/cross-icon';
+import PencilIcon from '@icons/pencil-icon';
+import ClockIcon from '@icons/clock-icon';
 import { ButtonUI } from './button';
+
+const iconsMap = {
+  None: null,
+  Cross: <CrossIcon />,
+  Pencil: <PencilIcon />,
+  Clock: <ClockIcon />,
+};
 
 const meta: Meta<typeof ButtonUI> = {
   title: 'ui/ButtonUI',
@@ -16,7 +25,21 @@ const meta: Meta<typeof ButtonUI> = {
       control: 'radio',
       options: ['primary', 'secondary', 'tertiary'],
     },
+    padding: {
+      control: 'text',
+      description: 'CSS padding (например, "12px 24px")',
+    },
     disabled: { control: 'boolean' },
+    iconLeft: {
+      control: 'select',
+      options: Object.keys(iconsMap),
+      mapping: iconsMap,
+    },
+    iconRight: {
+      control: 'select',
+      options: Object.keys(iconsMap),
+      mapping: iconsMap,
+    },
   },
   parameters: {
     layout: 'centered',
@@ -27,49 +50,17 @@ export default meta;
 
 type Story = StoryObj<typeof ButtonUI>;
 
+export const SecondaryWithEditIcon: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Редактировать',
+    iconRight: 'Pencil', //
+  },
+};
+
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary',
-    disabled: false,
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary',
-    disabled: true,
-  },
-};
-
-export const Tertiary: Story = {
-  args: {
-    variant: 'tertiary',
-    children: 'Пример tertiary',
-  },
-};
-
-export const TertiaryIconLeft: Story = {
-  args: {
-    variant: 'tertiary',
-    children: (
-      <>
-        <CrossIcon />
-        Tertiary
-      </>
-    ),
-  },
-};
-
-export const TertiaryIconRight: Story = {
-  args: {
-    variant: 'tertiary',
-    children: (
-      <>
-        Tertiary
-        <CrossIcon />
-      </>
-    ),
+    children: 'Готово',
   },
 };
