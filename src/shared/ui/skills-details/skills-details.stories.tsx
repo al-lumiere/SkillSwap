@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SkillDetailsCard } from './skills-details';
+import { SkillDetailsCardUI } from './skills-details';
 
-const meta: Meta<typeof SkillDetailsCard> = {
-  title: 'UI/SkillDetailsCard',
-  component: SkillDetailsCard,
+const meta: Meta<typeof SkillDetailsCardUI> = {
+  title: 'UI/SkillDetailsCardUI',
+  component: SkillDetailsCardUI,
   parameters: {
     layout: 'centered',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof SkillDetailsCard>;
+type Story = StoryObj<typeof SkillDetailsCardUI>;
 
 export const Default: Story = {
   args: {
@@ -24,8 +24,6 @@ export const Default: Story = {
       'https://picsum.photos/id/2/200/200',
       'https://picsum.photos/id/3/200/200',
       'https://picsum.photos/id/4/200/200',
-      'https://picsum.photos/id/5/200/200',
-      'https://picsum.photos/id/6/200/200',
     ],
   },
 };

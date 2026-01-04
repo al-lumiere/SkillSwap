@@ -34,7 +34,15 @@ export const GalleryUI: FC<GalleryUIProps> = ({ variant, images, navigationButto
     <div className={styles.container}>
       <div className={styles.main}>
         {shouldUseSwiper ? (
-          <div className={styles.slider}>
+          <div
+            className={styles.slider}
+            style={
+              {
+                '--nav-left': '16px',
+                '--nav-right': '16px',
+              } as React.CSSProperties
+            }
+          >
             <Swiper
               className={styles.swiper}
               slidesPerView={1}

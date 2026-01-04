@@ -6,7 +6,7 @@ import { ButtonUI } from '../button/button'; //
 import { CardActionsUI } from '../card-actions/card-actions';
 import { GalleryUI } from '../gallery-ui';
 
-export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
+export const SkillDetailsCardUI: React.FC<SkillDetailsCardProps> = ({
   title,
   category,
   description,

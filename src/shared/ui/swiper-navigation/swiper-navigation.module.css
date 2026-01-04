@@ -1,8 +1,8 @@
 .navigation {
   position: absolute;
   top: 0;
-  left: -16px;
-  right: -16px;
+  left: var(--nav-left, -16px);
+  right: var(--nav-right, -16px);
   bottom: 0;
   pointer-events: none;
   z-index: 10;
