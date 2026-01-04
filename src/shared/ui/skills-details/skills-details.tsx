@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClockIcon from '@icons/clock-icon';
 import styles from './skills-details.module.css';
 import { SkillDetailsCardProps } from './types';
 import { ButtonUI } from '../button/button'; //
 import { CardActionsUI } from '../card-actions/card-actions';
+import { GalleryUI } from '../gallery-ui';
 
-export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
+export const SkillDetailsCardUI: React.FC<SkillDetailsCardProps> = ({
   title,
   category,
   description,
@@ -15,12 +16,15 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
   onOfferExchange,
   isOfferSent = false,
 }) => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const normalizedImages = images.slice(0, 4).map((src) => ({ src, alt: title }));
 
-  const MAX_THUMBNAILS = 3;
-  const mainImage = images[activeImageIndex];
-  const thumbnails = images.slice(1, 1 + MAX_THUMBNAILS);
-  const remainingCount = Math.max(0, images.length - (MAX_THUMBNAILS + 1));
+  const galleryVariant = (() => {
+    const count = normalizedImages.length;
+
+    if (count <= 1) return 'single' as const;
+    if (count <= 3) return 'slider' as const;
+    return 'sliderWithThumbs' as const;
+  })();
 
   return (
     <div className={styles.container}>
@@ -57,49 +61,7 @@ export const SkillDetailsCard: React.FC<SkillDetailsCardProps> = ({
         </div>
 
         <div className={styles.gallerySide}>
-          <div className={styles.mainImageWrapper}>
-            <img src={mainImage} alt={title} className={styles.mainImage} />
-
-            {images.length > 1 && (
-              <div className={styles.navArrows}>
-                <button
-                  type="button"
-                  onClick={() => setActiveImageIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1))}
-                  aria-label="Предыдущее фото"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0))}
-                  aria-label="Следующее фото"
-                >
-                  ›
-                </button>
-              </div>
-            )}
-          </div>
-
-          <div className={styles.thumbnailsColumn}>
-            {thumbnails.map((src, index) => {
-              const realIndex = index + 1;
-              const isLastThumbnail = index === MAX_THUMBNAILS - 1;
-              const hasMore = isLastThumbnail && remainingCount > 0;
-
-              return (
-                <button
-                  key={src} // Лучше использовать src или id, если они уникальны
-                  type="button"
-                  className={styles.thumbItem}
-                  onClick={() => setActiveImageIndex(realIndex)}
-                  aria-label={`Показать фото ${realIndex + 1}`}
-                >
-                  <img src={src} alt="" aria-hidden="true" />
-                  {hasMore && <div className={styles.overlay}>+{remainingCount}</div>}
-                </button>
-              );
-            })}
-          </div>
+          <GalleryUI variant={galleryVariant} images={normalizedImages} />
         </div>
       </div>
     </div>
