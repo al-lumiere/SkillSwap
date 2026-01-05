@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from './nav-element-ui.module.css';
+import styles from './nav-element.module.css';
 import { TNavElementUIProps } from './type';
 
 export const NavElementUI: FC<TNavElementUIProps> = ({ text, icon, onClick }) => (

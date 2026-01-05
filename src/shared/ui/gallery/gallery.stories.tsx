@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { GalleryUI } from './gallery-ui';
+import { GalleryUI } from './gallery';
 
 const meta: Meta<typeof GalleryUI> = {
   title: 'UI/GalleryUI',

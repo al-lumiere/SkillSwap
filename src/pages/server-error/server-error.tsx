@@ -1,6 +1,41 @@
 import type { FC } from 'react';
-// import styles from './server-error.module.css';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const ServerErrorPage: FC = () => <h1>Server Error Page</h1>;
+import { IllustrationBlockUI } from '@ui/illustration-block';
+import Error500Illustration from '@images/error-500';
+
+import styles from './server-error.module.css';
+
+export const ServerErrorPage: FC = () => {
+  const navigate = useNavigate();
+
+  const handleGoHome = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <IllustrationBlockUI
+          illustration={<Error500Illustration />}
+          title="На сервере произошла ошибка"
+          description="Попробуйте позже или вернитесь на главную страницу"
+          actions={[
+            {
+              text: 'Сообщить об ошибке',
+              onClick: () => {},
+            },
+            {
+              primary: true,
+              text: 'На главную',
+              onClick: handleGoHome,
+            },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default ServerErrorPage;

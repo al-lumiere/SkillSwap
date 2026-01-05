@@ -1,4 +1,4 @@
-export interface SkillDetailsCardProps {
+export interface SkillDetailsCardUIProps {
   title: string;
   category: string;
   description: string;

@@ -3,7 +3,7 @@ import { useId, useState } from 'react';
 import EyeIcon from '@icons/eye-icon';
 import EyeOffIcon from '@icons/eye-off-icon';
 import { TInputUIProps } from './type';
-import styles from './input-ui.module.css';
+import styles from './input.module.css';
 
 export const InputUI: FC<TInputUIProps> = ({
   label,

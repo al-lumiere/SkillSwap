@@ -3,7 +3,7 @@ import BriefcaseIcon from '@icons/briefcase-icon';
 import GlobalIcon from '@icons/global-icon';
 import LifestyleIcon from '@icons/lifestyle-icon';
 import PaletteIcon from '@icons/palette-icon';
-import { ModalCategoryUI } from './modal-category-ui';
+import { ModalCategoryUI } from './modal-category';
 
 const meta: Meta<typeof ModalCategoryUI> = {
   title: 'UI/ModalCategoryUI',

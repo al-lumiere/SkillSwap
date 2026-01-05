@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, type ChangeEvent } from 'react';
 import PencilIcon from '@icons/pencil-icon';
-import { InputUI } from './input-ui';
+import { InputUI } from './input';
 import type { TInputUIProps } from './type';
 
 const meta: Meta<typeof InputUI> = {

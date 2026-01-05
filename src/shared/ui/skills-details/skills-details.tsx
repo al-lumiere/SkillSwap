@@ -1,12 +1,12 @@
 import React from 'react';
 import ClockIcon from '@icons/clock-icon';
 import styles from './skills-details.module.css';
-import { SkillDetailsCardProps } from './types';
+import { SkillDetailsCardUIProps } from './types';
 import { ButtonUI } from '../button/button'; //
 import { CardActionsUI } from '../card-actions/card-actions';
-import { GalleryUI } from '../gallery-ui';
+import { GalleryUI } from '../gallery';
 
-export const SkillDetailsCardUI: React.FC<SkillDetailsCardProps> = ({
+export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
   title,
   category,
   description,

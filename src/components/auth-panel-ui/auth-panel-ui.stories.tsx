@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, type ChangeEvent } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { InputUI } from '@ui/input-ui';
+import { InputUI } from '@ui/input';
 import { AuthPanelUI } from './auth-panel-ui';
 
 const meta: Meta<typeof AuthPanelUI> = {
