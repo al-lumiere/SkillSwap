@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { NavElementUI } from './nav-element-ui';
+import { NavElementUI } from './nav-element';
 
 const meta: Meta<typeof NavElementUI> = {
   title: 'UI/NavElementUI',

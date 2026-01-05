@@ -1,2 +1,2 @@
-export { GalleryUI } from './gallery-ui';
+export { GalleryUI } from './gallery';
 export type { GalleryUIProps, GalleryVariant, GalleryImage } from './type';

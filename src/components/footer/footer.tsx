@@ -1,5 +1,5 @@
 import { LogoUI } from '@ui/logo';
-import { NavElementUI } from '@ui/nav-element-ui';
+import { NavElementUI } from '@ui/nav-element';
 import styles from './footer.module.css';
 
 export const FooterLayout = () => (

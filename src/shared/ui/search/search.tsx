@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import CrossIcon from '@icons/cross-icon';
 import SearchIcon from '@icons/search-icon';
-import { TSearchInputProps } from './type';
+import { TSearchInputUIProps } from './type';
 import styles from './search.module.css';
 
-export const SearchUI: FC<TSearchInputProps> = ({ placeholder, value, onChange, onClear }) => (
+export const SearchUI: FC<TSearchInputUIProps> = ({ placeholder, value, onChange, onClear }) => (
   <div className={styles.wrapper}>
     <SearchIcon className={styles.searchIcon} />
     <input

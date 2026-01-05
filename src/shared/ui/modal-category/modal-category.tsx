@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import styles from './modal-category-ui.module.css';
+import styles from './modal-category.module.css';
 import { TModalCategoryUIProps } from './type';
 
 export const ModalCategoryUI: FC<TModalCategoryUIProps> = ({ title, bgColor, icon, subcategories }) => (

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { LogoUI } from '@ui/logo';
-import { NavElementUI } from '@ui/nav-element-ui';
+import { NavElementUI } from '@ui/nav-element';
 import { SearchUI } from '@ui/search';
 import { IconButtonUI } from '@ui/icon-button';
 import { GuestUserPanelUI } from '@ui/user-guest';
