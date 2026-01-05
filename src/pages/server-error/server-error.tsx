@@ -14,11 +14,6 @@ export const ServerErrorPage: FC = () => {
     navigate('/');
   }, [navigate]);
 
-  const handleReportError = useCallback(() => {
-    // тут заглушка
-    console.log('Сообщить об ошибке');
-  }, []);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -29,7 +24,7 @@ export const ServerErrorPage: FC = () => {
           actions={[
             {
               text: 'Сообщить об ошибке',
-              onClick: handleReportError,
+              onClick: () => {},
             },
             {
               primary: true,
