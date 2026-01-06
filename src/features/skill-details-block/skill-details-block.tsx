@@ -4,11 +4,7 @@ import { mediaUrl } from '@api/api';
 import { SkillDetailsCardUI } from '@ui/skills-details';
 import { useSelector } from '@store/store';
 import { selectSkillById } from '@slices/skills/skillsSlice';
-
-type SkillDetailsBlockProps = {
-  /** Айди навыка (из url на странице навыка) */
-  skillId: number;
-};
+import { SkillDetailsBlockProps } from './types';
 
 export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skillId }) => {
   const skill = useSelector(selectSkillById(skillId));
@@ -18,12 +14,10 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skillId }) => {
   const [isFavorite, setIsFavorite] = useState(() => Boolean(skill?.isFavorited));
   const [isOfferSent, setIsOfferSent] = useState(false);
 
-  // синхронизация локального избранного с "сервером" (стейтом)
   useEffect(() => {
     setIsFavorite(Boolean(skill?.isFavorited));
   }, [skill?.isFavorited]);
 
-  // при смене навыка — сбрасываем локальные состояния для кнопок
   useEffect(() => {
     setIsOfferSent(false);
   }, [skillId]);
@@ -39,12 +33,10 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skillId }) => {
   }, [skill]);
 
   const handleFavoriteToggle = useCallback((nextValue: boolean) => {
-    // только визуальный toggle по ТЗ
     setIsFavorite(nextValue);
   }, []);
 
   const handleOfferExchange = useCallback(() => {
-    // только визуальный toggle по ТЗ
     setIsOfferSent((prev) => !prev);
   }, []);
 
