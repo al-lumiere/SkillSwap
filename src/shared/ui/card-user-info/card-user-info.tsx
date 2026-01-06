@@ -13,7 +13,7 @@ export const CardUserInfoUI: FC<TCardUserInfoUIProps> = ({
   learnTags,
   bio,
 }) => {
-  const visibleTags = learnTags.slice(0, 2);
+  const visibleTags = learnTags.slice(0, 1);
   const hiddenTagsCount = learnTags.length > visibleTags.length ? learnTags.length - visibleTags.length : 0;
 
   return (

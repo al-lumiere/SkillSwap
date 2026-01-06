@@ -42,7 +42,7 @@ export const NewSkills: FC = () => {
             key={skill.id}
             avatar={mediaUrl(skill.author.avatar)}
             name={skill.author.name}
-            ageText={String(formatAge(skill.author.birthDate)) || ''}
+            ageText={formatAge(skill.author.birthDate) ?? ''}
             cityName={skill.author.city.name}
             teachTag={{
               label: skill.title,
