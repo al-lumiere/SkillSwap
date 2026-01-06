@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '@store/store';
 import { fetchSkillById, selectSkillById } from '@slices/skills/skillsSlice';
 import { SkillDetailsBlock } from '@features/skill-details-block';
+import { SimilarSkillsBlock } from '@features/skill-similar-block';
 import styles from './skill.module.css';
 
 export const SkillPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const skillId = Number(id);
+
   const dispatch = useDispatch();
 
   const skill = useSelector(selectSkillById(skillId));
@@ -25,11 +27,16 @@ export const SkillPage: FC = () => {
     return <p>Навык не найден</p>;
   }
 
+  const categoryId = skill.category.id;
+
   // return <pre>{JSON.stringify(skill, null, 2)}</pre>;
 
   return (
     <div className={styles.wrapper}>
-      <SkillDetailsBlock skill={skill} />
+      <div className={styles.author}>
+        <SkillDetailsBlock skill={skill} />
+      </div>
+      <SimilarSkillsBlock categoryId={categoryId} excludeSkillId={skill.id} />
     </div>
   );
 };
