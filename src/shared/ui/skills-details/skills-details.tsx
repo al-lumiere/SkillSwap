@@ -2,7 +2,7 @@ import React from 'react';
 import ClockIcon from '@icons/clock-icon';
 import styles from './skills-details.module.css';
 import { SkillDetailsCardUIProps } from './types';
-import { ButtonUI } from '../button/button'; //
+import { ButtonUI } from '../button/button';
 import { CardActionsUI } from '../card-actions/card-actions';
 import { GalleryUI } from '../gallery';
 
@@ -37,12 +37,14 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
 
       <div className={styles.content}>
         <div className={styles.infoSide}>
-          <div className={styles.titleWrapper}>
-            <h1 className={styles.title}>{title}</h1>
-            <p className={styles.category}>{category}</p>
-          </div>
+          <div className={styles.infoDetails}>
+            <div className={styles.titleWrapper}>
+              <h1 className={styles.title}>{title}</h1>
+              <p className={styles.category}>{category}</p>
+            </div>
 
-          <div className={styles.description}>{description}</div>
+            <div className={styles.description}>{description}</div>
+          </div>
           {isOfferSent ? (
             <ButtonUI
               onClick={onOfferExchange}

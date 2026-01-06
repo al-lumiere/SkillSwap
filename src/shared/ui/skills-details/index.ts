@@ -1,2 +1,2 @@
 export { SkillDetailsCardUI } from './skills-details';
-export type { SkillDetailsCardProps } from './types';
+export type { SkillDetailsCardUIProps as SkillDetailsCardProps } from './types';
