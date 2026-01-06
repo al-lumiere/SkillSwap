@@ -2,14 +2,14 @@ import { useEffect, type FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '@store/store';
 import { fetchSkillById, selectSkillById } from '@slices/skills/skillsSlice';
-// import styles from './skill.module.css';
-
-// export const SkillPage: FC = () => <h1>Skill Page</h1>;
+import { SkillDetailsBlock } from '@features/skill-details-block';
+import styles from './skill.module.css';
 
 export const SkillPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const skillId = Number(id);
   const dispatch = useDispatch();
+
   const skill = useSelector(selectSkillById(skillId));
   const loading = useSelector((s) => s.skills.detailsLoading);
   const error = useSelector((s) => s.skills.detailsError);
@@ -25,7 +25,13 @@ export const SkillPage: FC = () => {
     return <p>Навык не найден</p>;
   }
 
-  return <pre>{JSON.stringify(skill, null, 2)}</pre>;
+  // return <pre>{JSON.stringify(skill, null, 2)}</pre>;
+
+  return (
+    <div className={styles.wrapper}>
+      <SkillDetailsBlock skill={skill} />
+    </div>
+  );
 };
 
 export default SkillPage;

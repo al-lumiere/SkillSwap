@@ -5,9 +5,7 @@ import { ModalUIProps } from './type';
 
 export const ModalUI: FC<ModalUIProps> = memo(({ onClose, children }) => (
   <>
-    <div className={styles.modal}>
-      {children}
-    </div>
+    <div className={styles.modal}>{children}</div>
     <ModalOverlayUI onClick={onClose} />
   </>
 ));
