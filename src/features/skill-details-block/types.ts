@@ -1,3 +1,5 @@
+import type { Skill } from '@api/types';
+
 export type SkillDetailsBlockProps = {
-    skillId: number;
-  };
+  skill: Skill;
+};

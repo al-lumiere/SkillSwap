@@ -1,50 +1,42 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import type { FC } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import { mediaUrl } from '@api/api';
 import { SkillDetailsCardUI } from '@ui/skills-details';
-import { useSelector } from '@store/store';
-import { selectSkillById } from '@slices/skills/skillsSlice';
 import { SkillDetailsBlockProps } from './types';
 
-export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skillId }) => {
-  const skill = useSelector(selectSkillById(skillId));
-  const loading = useSelector((s) => s.skills.detailsLoading);
-  const error = useSelector((s) => s.skills.detailsError);
-
-  const [isFavorite, setIsFavorite] = useState(() => Boolean(skill?.isFavorited));
+export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isOfferSent, setIsOfferSent] = useState(false);
 
+  const serverSkillId = skill.id;
+  const serverIsFavorited = skill.isFavorited;
+
   useEffect(() => {
-    setIsFavorite(Boolean(skill?.isFavorited));
-  }, [skill?.isFavorited]);
+    setIsFavorite(Boolean(serverIsFavorited));
+  }, [serverSkillId, serverIsFavorited]);
 
   useEffect(() => {
     setIsOfferSent(false);
-  }, [skillId]);
+  }, [serverSkillId]);
 
-  const preparedCategory = useMemo(() => {
-    if (!skill) return '';
-    return [skill.category?.name, skill.subcategory?.name].filter(Boolean).join(' / ');
-  }, [skill]);
+  const preparedCategory = useMemo(
+    () => [skill.category?.name, skill.subcategory?.name].filter(Boolean).join(' / '),
+    [skill.category?.name, skill.subcategory?.name],
+  );
 
   const preparedImages = useMemo(() => {
     if (!skill?.images?.length) return [];
     return skill.images.map(mediaUrl);
-  }, [skill]);
+  }, [skill.images]);
 
-  const handleFavoriteToggle = useCallback((nextValue: boolean) => {
-    setIsFavorite(nextValue);
+  const handleFavoriteToggle = useCallback((nextValue?: boolean) => {
+    setIsFavorite((prev) => (typeof nextValue === 'boolean' ? nextValue : !prev));
   }, []);
 
   const handleOfferExchange = useCallback(() => {
     setIsOfferSent((prev) => !prev);
   }, []);
-
-  if (!skill) {
-    if (loading) return <p>Загружаем…</p>;
-    if (error) return <p>Ошибка: {error}</p>;
-    return <p>Навык не найден</p>;
-  }
 
   return (
     <SkillDetailsCardUI
