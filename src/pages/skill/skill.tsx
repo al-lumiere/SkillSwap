@@ -44,18 +44,13 @@ export const SkillPage: FC = () => {
 
   if (!preparedSkill) return <p>Навык не найден</p>;
 
-  return (
-    <div className={styles.wrapper}>
-      <SkillAuthorBlock skill={preparedSkill} />
-      <SkillDetailsBlock skill={preparedSkill} />
   const categoryId = skill.category.id;
-
-  // return <pre>{JSON.stringify(skill, null, 2)}</pre>;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.author}>
-        <SkillDetailsBlock skill={skill} />
+        <SkillAuthorBlock skill={preparedSkill} />
+        <SkillDetailsBlock skill={preparedSkill} />
       </div>
       <SimilarSkillsBlock categoryId={categoryId} excludeSkillId={skill.id} />
     </div>
