@@ -5,11 +5,13 @@ import { fetchSkillById, selectSkillById } from '@slices/skills/skillsSlice';
 import { mediaUrl } from '@api/api';
 import { SkillAuthorBlock } from '@features/skill-author-block';
 import { SkillDetailsBlock } from '@features/skill-details-block';
+import { SimilarSkillsBlock } from '@features/skill-similar-block';
 import styles from './skill.module.css';
 
 export const SkillPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const skillId = Number(id);
+
   const dispatch = useDispatch();
 
   const skill = useSelector(selectSkillById(skillId));
@@ -46,6 +48,16 @@ export const SkillPage: FC = () => {
     <div className={styles.wrapper}>
       <SkillAuthorBlock skill={preparedSkill} />
       <SkillDetailsBlock skill={preparedSkill} />
+  const categoryId = skill.category.id;
+
+  // return <pre>{JSON.stringify(skill, null, 2)}</pre>;
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.author}>
+        <SkillDetailsBlock skill={skill} />
+      </div>
+      <SimilarSkillsBlock categoryId={categoryId} excludeSkillId={skill.id} />
     </div>
   );
 };

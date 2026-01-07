@@ -6,4 +6,13 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
