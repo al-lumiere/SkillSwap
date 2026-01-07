@@ -1,5 +1,5 @@
 import type { Skill } from '@api/types';
 
-export type SkillDetailsBlockProps = {
+export type SkillAuthorBlockProps = {
   skill: Skill;
 };

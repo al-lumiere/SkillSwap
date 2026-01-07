@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 32px 36px 60px;
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
   flex-direction: column;
   gap: 60px;
   justify-content: center;

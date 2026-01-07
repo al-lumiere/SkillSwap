@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
-import { mediaUrl } from '@api/api';
 import { SkillDetailsCardUI } from '@ui/skills-details';
 import { SkillDetailsBlockProps } from './types';
 
@@ -25,11 +24,6 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
     [skill.category?.name, skill.subcategory?.name],
   );
 
-  const preparedImages = useMemo(() => {
-    if (!skill?.images?.length) return [];
-    return skill.images.map(mediaUrl);
-  }, [skill.images]);
-
   const handleFavoriteToggle = useCallback((nextValue?: boolean) => {
     setIsFavorite((prev) => (typeof nextValue === 'boolean' ? nextValue : !prev));
   }, []);
@@ -43,7 +37,7 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
       title={skill.title}
       category={preparedCategory}
       description={skill.description}
-      images={preparedImages}
+      images={skill.images}
       isFavorite={isFavorite}
       onFavoriteToggle={handleFavoriteToggle}
       onOfferExchange={handleOfferExchange}
