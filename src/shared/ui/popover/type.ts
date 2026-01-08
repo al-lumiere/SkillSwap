@@ -4,7 +4,7 @@ export type PopoverUIProps = {
   isOpen: boolean;
   onClose: () => void;
   anchor: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   placement: Placement;
   maxWidth?: number | null;
   offset: number;
