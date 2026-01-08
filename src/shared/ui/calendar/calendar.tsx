@@ -110,11 +110,11 @@ export const CalendarUI: FC<CalendarUIProps> = ({ selectedDate = null, onChange 
         )}
       >
         <div className={styles.calendarFooter}>
-          <ButtonUI variant="secondary" onClick={handleCancel} padding="12px 24px">
+          <ButtonUI variant="secondary" onClick={handleCancel}>
             Отменить
           </ButtonUI>
 
-          <ButtonUI variant="primary" onClick={handleSelect} padding="12px 24px">
+          <ButtonUI variant="primary" onClick={handleSelect}>
             Выбрать
           </ButtonUI>
         </div>

@@ -25,9 +25,11 @@ const meta: Meta<typeof ButtonUI> = {
       control: 'radio',
       options: ['primary', 'secondary', 'tertiary'],
     },
-    padding: {
-      control: 'text',
-      description: 'CSS padding (например, "12px 24px")',
+    isWide: {
+      control: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      description: 'В ширину родителя',
     },
     disabled: { control: 'boolean' },
     iconLeft: {
@@ -63,4 +65,19 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Готово',
   },
+};
+
+export const WithinContainer: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Готово',
+    isWide: true,
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '300px', display: 'flex', justifyContent: 'center' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };

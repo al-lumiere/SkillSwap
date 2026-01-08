@@ -17,7 +17,7 @@ export const IllustrationBlockUI = ({ illustration, title, description, actions 
               key={`${action.primary ? 'primary' : 'secondary'}-${action.text}`}
               variant={action.primary ? 'primary' : 'secondary'}
               onClick={action.onClick}
-              padding="12px 24px"
+              isWide
             >
               {action.text}
             </ButtonUI>

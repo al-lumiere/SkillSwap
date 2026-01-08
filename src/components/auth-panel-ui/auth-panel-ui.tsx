@@ -20,11 +20,11 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   <div className={[styles.panel, className].filter(Boolean).join(' ')}>
     <div className={styles.groupUserData}>
       <div className={styles.socialButtons}>
-        <ButtonUI variant="secondary" onClick={onGoogleClick} padding="12px 20px" iconLeft={<GoogleIcon />}>
+        <ButtonUI variant="secondary" onClick={onGoogleClick} isWide iconLeft={<GoogleIcon />}>
           Продолжить с Google
         </ButtonUI>
 
-        <ButtonUI variant="secondary" onClick={onAppleClick} padding="12px 20px" iconLeft={<AppleIcon />}>
+        <ButtonUI variant="secondary" onClick={onAppleClick} isWide iconLeft={<AppleIcon />}>
           Продолжить с Apple
         </ButtonUI>
       </div>
@@ -45,7 +45,7 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
     </div>
     <div className={styles.groupButtons}>
       <div className={styles.action}>
-        <ButtonUI variant="primary" onClick={onAction} padding="12px 24px">
+        <ButtonUI variant="primary" onClick={onAction} isWide>
           {actionText}
         </ButtonUI>
       </div>

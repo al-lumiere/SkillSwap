@@ -5,7 +5,7 @@ export type ButtonUIVariant = 'primary' | 'secondary' | 'tertiary';
 export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   children: ReactNode;
   variant?: ButtonUIVariant;
-  padding?: CSSProperties['padding'];
+  isWide?: boolean;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
 }

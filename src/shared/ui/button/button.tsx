@@ -6,12 +6,12 @@ export const ButtonUI = ({
   variant = 'primary',
   disabled = false,
   onClick,
-  padding,
+  isWide = false,
   iconLeft,
   iconRight,
 }: ButtonUIProps) => {
   const className = [styles.button, styles[variant], disabled ? styles.isDisabled : ''].filter(Boolean).join(' ');
-  const style = padding !== undefined ? { padding } : undefined;
+  const style = isWide ? { width: '100%' } : undefined;
 
   return (
     <button type="button" disabled={disabled} onClick={onClick} className={className} style={style}>
