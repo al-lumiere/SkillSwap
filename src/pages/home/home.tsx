@@ -5,7 +5,6 @@ import { PopularSkills } from '@features/popular-skills';
 import { NewSkills } from '@features/new-skills';
 import { RecommendedSkills } from '@features/recommended-skills';
 import { FilteredSkills } from '@features/filtered-skills';
-import { SelectCategory } from '@features/select-category';
 
 import style from './home.module.css';
 
@@ -23,11 +22,7 @@ export const HomePage: FC = () => {
   }, [debounced, filters]);
 
   return (
-    <>
-      <div style={{ width: '436px' }}>
-        <SelectCategory />
-      </div>
-      <div className={style.wrapper}>
+    <div className={style.wrapper}>
         <Filters />
         <div className={style.sections}>
           {isFilterActive ? (
@@ -40,7 +35,6 @@ export const HomePage: FC = () => {
             </>
           )}
         </div>
-      </div>
-    </>
+    </div>
   );
 };
