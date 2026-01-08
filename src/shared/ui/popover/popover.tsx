@@ -12,6 +12,7 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   placement = 'bottom-start',
   maxWidth = null,
   offset = 8,
+  matchWidth = false,
 }) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,6 +32,7 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   } = {
     '--popover-offset': `${offset}px`,
     maxWidth: maxWidth !== null ? `${maxWidth}px` : undefined,
+    width: matchWidth ? '100%' : undefined,
   };
 
   return (

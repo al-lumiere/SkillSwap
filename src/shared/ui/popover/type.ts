@@ -6,6 +6,7 @@ export type PopoverUIProps = {
   anchor: React.ReactNode;
   children: React.ReactNode;
   placement: Placement;
-  maxWidth: number | null;
+  maxWidth?: number | null;
   offset: number;
+  matchWidth?: boolean;
 };

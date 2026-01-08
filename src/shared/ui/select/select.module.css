@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.label,
+.placeholder,
+.value {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-color, #253017);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  width: 100%;
+  justify-content: space-between;
+  border: 1px solid var(--caption-color, #69735d);
+  border-radius: 12px;
+}
+
+.placeholder {
+  color: var(--caption-color, #69735d);
+}
