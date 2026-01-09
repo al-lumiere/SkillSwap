@@ -9,6 +9,17 @@
   justify-content: space-between;
 }
 
+.header_compact {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 36px 0px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  justify-content: space-between;
+}
+
 .navBlock {
   display: flex;
   align-items: center;
