@@ -1,4 +1,4 @@
-export type SkillSimilarBlockProps  = {
+export type SkillSimilarBlockProps = {
   categoryId: number;
   excludeSkillId: number;
 };

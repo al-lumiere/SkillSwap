@@ -24,7 +24,7 @@ export const PopularSkills: FC = () => {
     <SectionUI
       title="Популярное"
       actionButton={
-        <ButtonUI variant="tertiary" padding="12px 24px" onClick={() => {}}>
+        <ButtonUI variant="tertiary" onClick={() => {}}>
           Смотреть все
           <ChevronRightIcon />
         </ButtonUI>

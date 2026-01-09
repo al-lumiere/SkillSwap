@@ -46,17 +46,11 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
             <div className={styles.description}>{description}</div>
           </div>
           {isOfferSent ? (
-            <ButtonUI
-              onClick={onOfferExchange}
-              type="button"
-              variant="secondary"
-              padding="13px 109px"
-              iconLeft={<ClockIcon />}
-            >
+            <ButtonUI onClick={onOfferExchange} type="button" variant="secondary" isWide iconLeft={<ClockIcon />}>
               Обмен предложен
             </ButtonUI>
           ) : (
-            <ButtonUI onClick={onOfferExchange} type="button" variant="primary" padding="13px 123px">
+            <ButtonUI onClick={onOfferExchange} type="button" variant="primary" isWide>
               Предложить обмен
             </ButtonUI>
           )}
