@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, type ReactElement } from 'react';
 import { useDispatch, useSelector } from '@store/store';
 import { fetchCategories } from '@slices/categories/categoriesSlice';
 
@@ -8,9 +8,24 @@ import { NavElementUI } from '@ui/nav-element';
 
 import ChevronDownIcon from '@icons/chevron-down';
 import ChevronUpIcon from '@icons/chevron-up';
+import GlobalIcon from '@icons/global-icon';
+import HomeIcon from '@icons/home-icon';
+import LifestyleIcon from '@icons/lifestyle-icon';
+import PaletteIcon from '@icons/palette-icon';
+import BriefcaseIcon from '@icons/briefcase-icon';
+import BookIcon from '@icons/book-icon';
 import styles from './all-skills-popover.module.css';
 
 export const AllSkillsPopover: FC = () => {
+  const categoryIcon: Record<string, ReactElement> = {
+    'business-career': <BriefcaseIcon />,
+    languages: <GlobalIcon />,
+    'home-comfort': <HomeIcon />,
+    'arts-creativity': <PaletteIcon />,
+    'education-development': <BookIcon />,
+    'health-lifestyle': <LifestyleIcon />,
+  };
+
   const dispatch = useDispatch();
 
   const { data: categories = [], status } = useSelector((s) => s.categories);
@@ -46,7 +61,7 @@ export const AllSkillsPopover: FC = () => {
               key={category.id}
               title={category.name}
               bgColor={category.color}
-              icon=""
+              icon={categoryIcon[category.slug]}
               subcategories={category.subcategories}
             />
           ))}
@@ -57,7 +72,7 @@ export const AllSkillsPopover: FC = () => {
               key={category.id}
               title={category.name}
               bgColor={category.color}
-              icon=""
+              icon={categoryIcon[category.slug]}
               subcategories={category.subcategories}
             />
           ))}
