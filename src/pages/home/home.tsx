@@ -23,18 +23,18 @@ export const HomePage: FC = () => {
 
   return (
     <div className={style.wrapper}>
-        <Filters />
-        <div className={style.sections}>
-          {isFilterActive ? (
-            <FilteredSkills />
-          ) : (
-            <>
-              <PopularSkills />
-              <NewSkills />
-              <RecommendedSkills />
-            </>
-          )}
-        </div>
+      <Filters />
+      <div className={style.sections}>
+        {isFilterActive ? (
+          <FilteredSkills />
+        ) : (
+          <>
+            <PopularSkills />
+            <NewSkills />
+            <RecommendedSkills />
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { SwiperNavigation } from '@ui/swiper-navigation';
 import type { GalleryUIProps } from './type';
-import styles from './gallery-ui.module.css';
+import styles from './gallery.module.css';
 
 import 'swiper/css';
 

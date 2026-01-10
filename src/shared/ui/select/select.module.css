@@ -7,7 +7,8 @@
 
 .label,
 .placeholder,
-.value {
+.value,
+.searchField {
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 16px;
@@ -19,7 +20,7 @@
 .field {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 11px 20px;
   width: 100%;
   justify-content: space-between;
   border: 1px solid var(--caption-color, #69735d);
@@ -28,4 +29,29 @@
 
 .placeholder {
   color: var(--caption-color, #69735d);
+}
+
+.searchField {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--caption-color, #69735d);
+  padding-left: 20px;
+}
+
+.searchField:focus {
+  outline: none;
+  caret-color: var(--button-pressed-color, #508826);
+  padding-left: 20px;
+}
+
+.searchWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.clearButton {
+  position: absolute;
+  top: 12px;
+  right: 20px;
 }
