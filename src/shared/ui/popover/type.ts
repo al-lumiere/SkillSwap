@@ -8,4 +8,6 @@ export type PopoverUIProps = {
   placement: Placement;
   maxWidth: number | null;
   offset: number;
+  matchWidth: boolean;
+  popoverClassName?: string;
 };

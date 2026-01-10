@@ -46,6 +46,7 @@ export const AllSkillsPopover: FC = () => {
       placement="bottom-start"
       offset={8}
       maxWidth={1090}
+      matchWidth={false}
       anchor={
         <NavElementUI
           text="Все навыки"
