@@ -1,9 +1,10 @@
 .root {
   position: relative;
+  width: 100%;
 }
 
 .anchor {
-  display: inline-flex;
+  width: 100%;
 }
 
 .rootFullWidth {
