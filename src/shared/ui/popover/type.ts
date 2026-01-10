@@ -9,4 +9,5 @@ export type PopoverUIProps = {
   maxWidth?: number | null;
   offset: number;
   matchWidth?: boolean;
+  popoverClassName?: string;
 };

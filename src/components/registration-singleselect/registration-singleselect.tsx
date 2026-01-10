@@ -3,6 +3,7 @@ import { PopoverUI } from '@ui/popover';
 import { SelectUI } from '@ui/select';
 import type { SingleselectUIProps } from './type';
 import styles from './regisration-singleselect.module.css';
+import popoverStyles from '../../shared/ui/popover/popover.module.css';
 
 export const SingleselectUI: FC<SingleselectUIProps> = ({
   label,
@@ -12,7 +13,7 @@ export const SingleselectUI: FC<SingleselectUIProps> = ({
   handleToggle,
   onClose,
   placement = 'bottom-start',
-  offset = -1,
+  offset = 0,
   matchWidth = true,
   maxWidth = null,
   options,
@@ -26,6 +27,7 @@ export const SingleselectUI: FC<SingleselectUIProps> = ({
     offset={offset}
     matchWidth={matchWidth}
     maxWidth={maxWidth}
+    popoverClassName={popoverStyles.popoverJoined}
     anchor={
       <SelectUI isOpen={isOpen} label={label} placeholder={placeholder} value={value} handleToggle={handleToggle} />
     }

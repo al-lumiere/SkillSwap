@@ -15,6 +15,11 @@
   border: 1px solid var(--caption-color);
 }
 
+.popoverJoined {
+  border-top-color: transparent;
+  border-radius: 0 0 12px 12px;
+}
+
 .popover[data-placement='bottom-start'] {
   top: calc(100% + var(--popover-offset));
   left: 0;

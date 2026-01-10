@@ -22,6 +22,7 @@
   align-items: center;
   padding: 11px 20px;
   width: 100%;
+  height: 48px;
   justify-content: space-between;
   border: 1px solid var(--caption-color, #69735d);
   border-radius: 12px;
@@ -54,4 +55,11 @@
   position: absolute;
   top: 12px;
   right: 20px;
+}
+
+.open {
+  border-bottom-color: transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: inset 0 -1px #e4e8df;
 }

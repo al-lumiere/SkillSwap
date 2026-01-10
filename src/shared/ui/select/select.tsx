@@ -35,7 +35,7 @@ export const SelectUI: FC<SelectUIProps> = ({
         <div className={styles.searchWrapper}>
           <input
             ref={inputRef}
-            className={styles.searchField}
+            className={`${styles.searchField} ${isOpen ? styles.open : ''}`}
             value={query}
             onChange={(e) => handleQueryChange?.(e.target.value)}
           />
@@ -55,7 +55,7 @@ export const SelectUI: FC<SelectUIProps> = ({
           )}
         </div>
       ) : (
-        <button type="button" className={styles.field} onClick={handleToggle}>
+        <button type="button" className={`${styles.field} ${isOpen ? styles.open : ''}`} onClick={handleToggle}>
           {value ? (
             <span className={styles.value}>{value}</span>
           ) : (

@@ -3,6 +3,7 @@ import { PopoverUI } from '@ui/popover';
 import { SelectUI } from '@ui/select';
 import { SearchSelectUIProps } from './type';
 import styles from './registration-search.module.css';
+import popoverStyles from '../../shared/ui/popover/popover.module.css';
 
 export const SearchSelectUI: FC<SearchSelectUIProps> = ({
   label,
@@ -12,7 +13,7 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
   handleToggle,
   onClose,
   placement = 'bottom-start',
-  offset = -1,
+  offset = 0,
   matchWidth = true,
   maxWidth = null,
   options,
@@ -35,6 +36,7 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
       offset={offset}
       matchWidth={matchWidth}
       maxWidth={maxWidth}
+      popoverClassName={popoverStyles.popoverJoined}
       anchor={
         <SelectUI
           isOpen={isOpen}
