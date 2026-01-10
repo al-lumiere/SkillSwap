@@ -12,6 +12,8 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   placement = 'bottom-start',
   maxWidth = null,
   offset = 8,
+  matchWidth = false,
+  popoverClassName,
 }) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,6 +33,7 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   } = {
     '--popover-offset': `${offset}px`,
     maxWidth: maxWidth !== null ? `${maxWidth}px` : undefined,
+    width: matchWidth ? '100%' : undefined,
   };
 
   return (
@@ -38,7 +41,13 @@ export const PopoverUI: FC<PopoverUIProps> = ({
       <div className={styles.anchor}>{anchor}</div>
 
       {isOpen && (
-        <div className={styles.popover} data-placement={placement} style={style} role="dialog" aria-modal="false">
+        <div
+          className={[styles.popover, popoverClassName].filter(Boolean).join(' ')}
+          data-placement={placement}
+          style={style}
+          role="dialog"
+          aria-modal="false"
+        >
           {children}
         </div>
       )}

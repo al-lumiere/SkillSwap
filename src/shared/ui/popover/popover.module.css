@@ -1,9 +1,10 @@
 .root {
   position: relative;
+  width: 100%;
 }
 
 .anchor {
-  display: inline-flex;
+  width: 100%;
 }
 
 .popover {
@@ -12,6 +13,11 @@
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid var(--caption-color);
+}
+
+.popoverJoined {
+  border-top-color: transparent;
+  border-radius: 0 0 12px 12px;
 }
 
 .popover[data-placement='bottom-start'] {
