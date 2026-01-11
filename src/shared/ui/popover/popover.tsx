@@ -37,8 +37,8 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   };
 
   return (
-    <div ref={rootRef} className={styles.root}>
-      <div className={styles.anchor}>{anchor}</div>
+    <div ref={rootRef} className={[styles.root, matchWidth && styles.rootFullWidth].filter(Boolean).join(' ')}>
+      <div className={[styles.anchor, matchWidth && styles.anchorFullWidth].filter(Boolean).join(' ')}>{anchor}</div>
 
       {isOpen && (
         <div

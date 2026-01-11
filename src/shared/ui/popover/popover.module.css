@@ -7,6 +7,15 @@
   width: 100%;
 }
 
+.rootFullWidth {
+  width: 100%;
+}
+
+.anchorFullWidth {
+  width: 100%;
+  display: block;
+}
+
 .popover {
   position: absolute;
   z-index: 10;

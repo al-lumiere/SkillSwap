@@ -3,10 +3,10 @@ import { LogoUI } from '@ui/logo';
 import { NavElementUI } from '@ui/nav-element';
 import { SearchUI } from '@ui/search';
 import { IconButtonUI } from '@ui/icon-button';
+import { AllSkillsPopover } from '@features/all-skills-popover';
 import { GuestUserPanelUI } from '@ui/user-guest';
 import { UserAuthedPanelUI } from '@ui/user-authed-panel';
 import { ButtonUI } from '@ui/button';
-import ChevronDownIcon from '@icons/chevron-down';
 import MoonIcon from '@icons/moon-icon';
 import NotificationIcon from '@icons/notification-icon';
 import LikeIcon from '@icons/like-icon';
@@ -24,7 +24,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
         <LogoUI />
         <div className={style.navBlock}>
           <NavElementUI text="О проекте" onClick={() => {}} />
-          <NavElementUI text="Все навыки" onClick={() => {}} icon={<ChevronDownIcon />} />
+          <AllSkillsPopover />
         </div>
         <div className={style.search}>
           <SearchUI
