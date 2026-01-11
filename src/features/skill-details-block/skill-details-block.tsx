@@ -56,7 +56,7 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
 
       {isExchangeModalOpen && (
         <ModalUI onClose={handleCloseExchangeModal}>
-          <div style={{ padding: '80px 60px' }}>
+          <div style={{ padding: '80px 60px', width: '556px' }}>
             <ActionResultUI
               icon={<NotificationIcon />}
               title="Вы предложили обмен"
