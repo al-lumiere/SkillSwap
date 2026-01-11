@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable arrow-body-style */
 import { Gender, RegisterPayload } from '@api/types';
-import { fetchCurrentUserThunk, registerUserThunk } from '@slices/auth/userSlice';
+import { registerUserThunk } from '@slices/auth/userSlice';
 import { useDispatch, useSelector } from '@store/store';
 import { ChangeEvent, useEffect, useMemo, useRef, useState, type FC, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   setStep,
   saveDraft,
@@ -23,9 +22,8 @@ type StepData = Step1Account | Step2Profile | Step3Skill;
 
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { currentUser, status, error } = useSelector((s) => s.user);
+  const { status, error } = useSelector((s) => s.user);
   const { step, formData, draft } = useSelector((s) => s.registration);
   const cities = useSelector((s) => s.cities.data);
   const citiesStatus = useSelector((s) => s.cities.status);
@@ -84,15 +82,6 @@ export const RegisterPage: FC = () => {
     setLocalDraft(stepInitialValues);
     setLocalError(null);
   }, [stepInitialValues, step]);
-
-  useEffect(() => {
-    dispatch(fetchCurrentUserThunk());
-  }, [dispatch]);
-
-  // todo: убрать, кода будет подключен ProtectedRoute
-  useEffect(() => {
-    if (currentUser) navigate('/');
-  }, [currentUser, navigate]);
 
   const isLoading = status === 'loading';
 
