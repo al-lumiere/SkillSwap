@@ -1,6 +1,5 @@
 import type { ChangeEvent, FC, FormEvent } from 'react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useDispatch, useSelector } from '@store/store';
 import { loginUserThunk } from '@slices/auth/userSlice';
 // import styles from './login.module.css';
@@ -12,17 +11,12 @@ type LoginForm = {
 
 export const LoginPage: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { currentUser, status, error } = useSelector((s) => s.user);
+  const { status, error } = useSelector((s) => s.user);
   const isLoading = status === 'loading';
 
   const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
   const [localError, setLocalError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (currentUser) navigate('/');
-  }, [currentUser, navigate]);
 
   const onField = (field: keyof LoginForm) => (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
