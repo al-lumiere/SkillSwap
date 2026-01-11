@@ -7,6 +7,7 @@ import { AuthLayout } from '@layouts/auth-layout';
 import { ProtectedRoute } from '@features/protected-route';
 import { useDispatch } from '@store/store';
 import { fetchSkills } from '@slices/skills/skillsSlice';
+import { fetchCurrentUserThunk } from '@slices/auth/userSlice';
 import style from './app.module.css';
 
 const SkillPage = lazy(() => import('@pages/skill/skill'));
@@ -40,6 +41,7 @@ const App = () => {
         params: { page: 1, page_size: 18 },
       }),
     );
+    dispatch(fetchCurrentUserThunk());
   }, [dispatch]);
 
   return (

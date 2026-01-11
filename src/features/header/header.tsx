@@ -6,9 +6,10 @@ import { HeaderProps } from './type';
 
 export const Header: FC<HeaderProps> = (props) => {
   const { variant, onCloseClick } = props;
-  // todo: запросить юзера из слайса (когда будет),
-  // и отдавать его как: isUserAuth, userName, avatarUrl
-  const isUserAuth = false;
+
+  const user = useSelector((s) => s.user.currentUser);
+  const isUserAuth = !!user;
+
   const query = useSelector((s) => s.search.query);
   const dispatch = useDispatch();
 
@@ -28,6 +29,9 @@ export const Header: FC<HeaderProps> = (props) => {
     <HeaderUI
       variant="full"
       isUserAuth={isUserAuth}
+      userName={user?.name}
+      // avatarUrl={mediaUrl(user?.avatar ?? '')} // если ссылка на картинку
+      avatarUrl={user?.avatar ?? ''} // если картинка закодированна в base64
       searchValue={query}
       onSearchChange={(v: string) => dispatch(setQuery(v))}
       onSearchClear={() => dispatch(clearSearch())}
