@@ -9,7 +9,7 @@ export const ActionResultUI: FC<ActionResultUIProps> = ({ title, description, ic
     <div className={styles.title}>{title}</div>
     <div className={styles.description}>{description}</div>
     <div className={styles.buttonContainer}>
-      <ButtonUI isWide variant="primary" onClick={buttonOnClick}>
+      <ButtonUI padding="12px 24px" variant="primary" onClick={buttonOnClick}>
         {buttonText}
       </ButtonUI>
     </div>

@@ -63,7 +63,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
 
   const { onCloseClick } = props;
   return (
-    <header className={style.header_compact}>
+    <header className={style.header}>
       <LogoUI />
       <ButtonUI variant="tertiary" onClick={onCloseClick}>
         Закрыть
