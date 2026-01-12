@@ -1,0 +1,33 @@
+.element {
+  display: flex;
+  gap: 12px;
+  padding: 12px 20px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-color);
+  transition: background-color 0.2s ease;
+}
+.element.isActive {
+  background-color: #DEEBC5;
+}
+
+.element:hover,
+.element:focus-visible {
+  background-color: #e9edf0;
+}
+.element:active {
+  background-color: #dee0e3;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
