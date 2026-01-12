@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
+import type { MouseEventHandler, ReactNode } from 'react';
 
 export type AuthPanelUIProps = {
   actionText: string;
-  onAction?: () => void;
+  onAction?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
   errorText?: string;
   onGoogleClick?: () => void;
