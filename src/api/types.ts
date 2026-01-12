@@ -20,12 +20,14 @@ export type Category = {
   subcategories: Subcategory[];
 };
 
+export type Gender = 'any' | 'male' | 'female';
+
 export type Author = {
   id: number;
   name: string;
   avatar: string;
   birthDate: string;
-  gender: string;
+  gender: Gender;
   bio: string;
   city: City;
   learnSubcategories: Subcategory[];
@@ -52,6 +54,7 @@ export type UserSkill = {
   description: string;
   favoritesCount: number;
   isFavorited: boolean;
+  createdAt: string;
   images: string[];
 };
 
@@ -77,8 +80,46 @@ export type SkillsQueryParams = {
   // фильтры
   mode?: 'all' | 'teach' | 'learn'; // "Всё / Могу научить / Хочу научиться"
   subcategoryId?: number[]; // repeated query param: ?subcategoryId=9&subcategoryId=10
-  gender?: 'any' | 'male' | 'female'; // 'любой' | 'мужской' | 'женский'
+  gender?: Gender; // 'любой' | 'мужской' | 'женский'
   cityIds?: number[];
   favorites_only?: boolean; // страница избранного
   user_id?: number; // для избранного (возможно не понадобится, т.к. пользователь будет в запросе)
+};
+
+// авторизация и ко
+export type AuthUser = User & {
+  email: string;
+};
+
+export type AuthResponse = {
+  token: string; // access token, без рефреша
+  user: AuthUser;
+};
+
+// данные для регистрации (многошаговая форма в сумме)
+export type RegisterPayload = {
+  // Шаг 1
+  email: string;
+  password: string;
+
+  // Шаг 2 — профиль
+  name: string;
+  birthDate: string; // 'YYYY-MM-DD'
+  gender: Gender;
+  cityId: number;
+  learnSubcategoryId: number; // один штука
+  avatar?: string; // должен быть предусмотрен фолбек
+  bio?: string; // в форме регистрации нету, а в карточке и на персональной странице есть
+
+  // Шаг 3 — свой навык
+  skillTitle: string;
+  skillCategoryId: number;
+  skillSubcategoryId: number;
+  skillDescription: string;
+  skillImages: string[];
+};
+
+export type LoginPayload = {
+  email: string;
+  password: string;
 };

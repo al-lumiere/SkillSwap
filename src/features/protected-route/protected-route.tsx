@@ -1,42 +1,33 @@
-// import { Preloader } from '@ui';
-// import { Navigate, useLocation } from 'react-router';
-// import { useSelector } from '../../services/store';
+/* eslint-disable react/require-default-props */
+import { Navigate, useLocation } from 'react-router-dom';
+import { useSelector } from '@store/store';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
   children: React.ReactElement;
 };
 
-export const ProtectedRoute = ({
-  // onlyUnAuth,
-  children,
-}: ProtectedRouteProps) => children;
+export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
+  const { currentUser, status } = useSelector((store) => store.user);
+  const location = useLocation();
 
-// todo: оживить блокировщик когда будет готова авторизация
-// }: ProtectedRouteProps) => {
-//   const isAuthChecked = useSelector((store) => store.user.isAuthChecked); //  isAuthCheckedSelector — селектор получения состояния загрузки пользователя
-//   const user = useSelector((store) => store.user.user); //  userDataSelector — селектор получения пользователя из store
-//   const location = useLocation();
+  const isAuthChecking = status === 'idle' || status === 'loading';
 
-//   if (!isAuthChecked) {
-//     // пока идёт чекаут пользователя , показываем прелоадер
-//     return <Preloader />;
-//   }
+  if (isAuthChecking) {
+    // return <Preloader />;
+    return <h1>Загрузка</h1>;
+  }
 
-//   if (!onlyUnAuth && !user) {
-//     //  если маршрут для авторизованного пользователя, но пользователь неавторизован, то делаем редирект
-//     return <Navigate replace to='/login' state={{ from: location }} />; // в поле from объекта location.state записываем информацию о URL
-//   }
+  // Маршруты "только для авторизованных"
+  if (!onlyUnAuth && !currentUser) {
+    return <Navigate replace to="/login" state={{ from: location }} />;
+  }
 
-//   if (onlyUnAuth && user) {
-//     //  если маршрут для неавторизованного пользователя, но пользователь авторизован
-//     // при обратном редиректе  получаем данные о месте назначения редиректа из объекта location.state
-//     // в случае если объекта location.state?.from нет — а такое может быть , если мы зашли на страницу логина по прямому URL
-//     // мы сами создаём объект c указанием адреса и делаем переадресацию на главную страницу
-//     const from = location.state?.from || { pathname: '/' };
+  // Маршруты "только для гостей"
+  if (onlyUnAuth && currentUser) {
+    const from = location.state?.from || { pathname: '/' };
+    return <Navigate replace to={from} />;
+  }
 
-//     return <Navigate replace to={from} />;
-//   }
-
-//   return children;
-// };
+  return children;
+};
