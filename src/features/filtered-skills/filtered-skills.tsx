@@ -106,7 +106,7 @@ export const FilteredSkills: FC = () => {
     <SectionUI
       title={`Подходящие предложения (${filteredMeta.total || filteredSkills.length})`}
       actionButton={
-        <ButtonUI variant="tertiary" isWide onClick={() => {}}>
+        <ButtonUI variant="tertiary" onClick={() => {}}>
           <SortIcon />
           Сначала новые
         </ButtonUI>

@@ -52,8 +52,8 @@ export const LoginAuthPanel: FC = () => {
   const onSubmit: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     if (isLoading) return;
-
     if (!validate()) return;
+    setFormError(null);
 
     try {
       await dispatch(
@@ -63,14 +63,8 @@ export const LoginAuthPanel: FC = () => {
         }),
       ).unwrap();
     } catch (err) {
-      let msg = 'Не удалось войти';
-
-      if (typeof err === 'string') {
-        msg = err;
-      } else if (typeof error === 'string') {
-        msg = error;
-      }
-
+      let msg = 'Неверный email или пароль';
+      if (typeof err === 'string') msg = err;
       setFormError(msg);
     }
   };
