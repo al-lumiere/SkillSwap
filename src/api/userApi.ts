@@ -119,7 +119,7 @@ async function loginUser(credentials: LoginPayload): Promise<AuthResponse> {
   );
 
   if (!user) {
-    throw new Error('Неверный email или пароль');
+    throw new Error('Email или пароль введён неверно. Пожалуйста проверьте правильность введённых данных');
   }
 
   const token = generateTokenForUser(user.id);

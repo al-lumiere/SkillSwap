@@ -63,11 +63,14 @@ export const LoginAuthPanel: FC = () => {
         }),
       ).unwrap();
     } catch (err) {
-      let msg = 'Неверный email или пароль';
+      let msg = 'Ошибка входа';
       if (typeof err === 'string') msg = err;
       setFormError(msg);
     }
   };
+
+  const serverError = typeof error === 'string' ? error : null;
+  const errorText = formError ?? serverError ?? '';
 
   return (
     <AuthPanelUI
@@ -75,10 +78,12 @@ export const LoginAuthPanel: FC = () => {
       onAction={onSubmit}
       onGoogleClick={() => {}}
       onAppleClick={() => {}}
-      errorText={formError ?? ''}
+      errorText={errorText}
       showRegisterLink
     >
       <InputUI
+        id="login-email"
+        disabled={isLoading}
         label="Email"
         name="login-email"
         type="email"
@@ -88,6 +93,8 @@ export const LoginAuthPanel: FC = () => {
         errorText={fieldErrors.email}
       />
       <InputUI
+        id="login-password"
+        disabled={isLoading}
         label="Пароль"
         name="login-password"
         type="password"
