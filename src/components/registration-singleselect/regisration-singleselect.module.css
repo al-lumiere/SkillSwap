@@ -1,0 +1,27 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.list_item {
+  font-family: 'Roboto';
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-color, #253017);
+  padding: 4px 20px;
+  width: 100%;
+  text-align: left;
+  border-radius: 2px;
+}
+
+.list_item:hover {
+  background-color: var(--button-disabled-color, #e4e8df);
+  cursor: pointer;
+}
+
+.selected {
+  color: var(--button-pressed-color, #508826);
+}

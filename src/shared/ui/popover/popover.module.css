@@ -6,12 +6,26 @@
   display: inline-flex;
 }
 
+.rootFullWidth {
+  width: 100%;
+}
+
+.anchorFullWidth {
+  width: 100%;
+  display: block;
+}
+
 .popover {
   position: absolute;
   z-index: 10;
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid var(--caption-color);
+}
+
+.popoverJoined {
+  border-top-color: transparent;
+  border-radius: 0 0 12px 12px;
 }
 
 .popover[data-placement='bottom-start'] {

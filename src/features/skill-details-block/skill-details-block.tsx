@@ -1,12 +1,16 @@
 import type { FC } from 'react';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
+import NotificationIcon from '@icons/notification-icon';
 import { SkillDetailsCardUI } from '@ui/skills-details';
+import { ActionResultUI } from '@ui/action-result';
+import { ModalUI } from '@ui/modal-ui';
 import { SkillDetailsBlockProps } from './types';
 
 export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOfferSent, setIsOfferSent] = useState(false);
+  const [isExchangeModalOpen, setIsExchangeModalOpen] = useState(false);
 
   const serverSkillId = skill.id;
   const serverIsFavorited = skill.isFavorited;
@@ -29,19 +33,41 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
   }, []);
 
   const handleOfferExchange = useCallback(() => {
-    setIsOfferSent((prev) => !prev);
+    setIsOfferSent(true);
+    setIsExchangeModalOpen(true);
+  }, []);
+
+  const handleCloseExchangeModal = useCallback(() => {
+    setIsExchangeModalOpen(false);
   }, []);
 
   return (
-    <SkillDetailsCardUI
-      title={skill.title}
-      category={preparedCategory}
-      description={skill.description}
-      images={skill.images}
-      isFavorite={isFavorite}
-      onFavoriteToggle={handleFavoriteToggle}
-      onOfferExchange={handleOfferExchange}
-      isOfferSent={isOfferSent}
-    />
+    <>
+      <SkillDetailsCardUI
+        title={skill.title}
+        category={preparedCategory}
+        description={skill.description}
+        images={skill.images}
+        isFavorite={isFavorite}
+        onFavoriteToggle={handleFavoriteToggle}
+        onOfferExchange={handleOfferExchange}
+        isOfferSent={isOfferSent}
+      />
+
+      {isExchangeModalOpen && (
+        <ModalUI onClose={handleCloseExchangeModal}>
+          <div style={{ padding: '80px 60px', width: '556px' }}>
+            <ActionResultUI
+              icon={<NotificationIcon />}
+              title="Вы предложили обмен"
+              description="Теперь дождитесь подтверждения. Вам придёт уведомление"
+              buttonText="Готово"
+              buttonLink=""
+              buttonOnClick={handleCloseExchangeModal}
+            />
+          </div>
+        </ModalUI>
+      )}
+    </>
   );
 };
