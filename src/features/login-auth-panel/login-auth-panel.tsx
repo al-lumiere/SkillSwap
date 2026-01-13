@@ -72,6 +72,7 @@ export const LoginAuthPanel: FC = () => {
 
   const serverError = typeof error === 'string' ? error : null;
   const errorText = formError ?? serverError ?? '';
+  const hasFormError = Boolean(errorText);
 
   return (
     <AuthPanelUI
@@ -93,6 +94,7 @@ export const LoginAuthPanel: FC = () => {
         value={form.email}
         onChange={onField('email')}
         errorText={fieldErrors.email}
+        hasError={hasFormError}
       />
       <InputUI
         id="login-password"
@@ -104,6 +106,7 @@ export const LoginAuthPanel: FC = () => {
         value={form.password}
         onChange={onField('password')}
         errorText={fieldErrors.password}
+        hasError={hasFormError}
       />
     </AuthPanelUI>
   );
