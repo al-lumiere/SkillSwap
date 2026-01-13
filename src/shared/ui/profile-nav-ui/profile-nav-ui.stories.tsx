@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-
-import MessageTextIcon from '@icons/message-text-icon';
+import { MemoryRouter } from 'react-router-dom';
 import RequestIcon from '@icons/request-icon';
+import MessageTextIcon from '@icons/message-text-icon';
 import LikeIcon from '@icons/like-icon';
 import IdeaIcon from '@icons/idea-icon';
 import UserIcon from '@icons/user-icon';
-
-import { ProfileNavElementUI } from '../profile-nav-element-ui';
 import { ProfileNavUI } from './profile-nav-ui';
+import { ProfileNavElementUI } from '../profile-nav-element-ui';
 
 const meta: Meta<typeof ProfileNavUI> = {
   title: 'shared/ProfileNavUI',
@@ -15,6 +14,15 @@ const meta: Meta<typeof ProfileNavUI> = {
   parameters: {
     layout: 'centered',
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={['/']}>
+        <div style={{ width: '320px' }}>
+          <Story />
+        </div>
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
@@ -25,23 +33,23 @@ export const Default: Story = {
     items: [
       {
         id: '1',
-        element: <ProfileNavElementUI text="Заявки" icon={<RequestIcon />} />,
+        element: <ProfileNavElementUI text="Заявки" icon={<RequestIcon />} to="/" />,
       },
       {
         id: '2',
-        element: <ProfileNavElementUI text="Мои обмены" icon={<MessageTextIcon />} />,
+        element: <ProfileNavElementUI text="Мои обмены" icon={<MessageTextIcon />} to="/" />,
       },
       {
         id: '3',
-        element: <ProfileNavElementUI text="Избранное" icon={<LikeIcon />} />,
+        element: <ProfileNavElementUI text="Избранное" icon={<LikeIcon />} to="/" />,
       },
       {
         id: '4',
-        element: <ProfileNavElementUI text="Мои навыки" icon={<IdeaIcon />} />,
+        element: <ProfileNavElementUI text="Мои навыки" icon={<IdeaIcon />} to="/" />,
       },
       {
         id: '5',
-        element: <ProfileNavElementUI text="Личные данные" icon={<UserIcon />} isActive />,
+        element: <ProfileNavElementUI text="Личные данные" icon={<UserIcon />} to="/" isActive/>,
       },
     ],
   },

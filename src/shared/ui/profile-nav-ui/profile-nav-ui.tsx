@@ -4,8 +4,10 @@ import { ProfileNavUIProps } from './type';
 
 export const ProfileNavUI: FC<ProfileNavUIProps> = ({ items }) => (
   <div className={styles.container}>
-    {items.map(({ element }) => (
-      <div className={styles.item}>{element}</div>
+    {items.map(({ id, element }) => (
+      <div key={id} className={styles.item}>
+        {element}
+      </div>
     ))}
   </div>
 );
