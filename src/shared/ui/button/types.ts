@@ -1,4 +1,4 @@
-import { ReactNode, ButtonHTMLAttributes, CSSProperties } from 'react';
+import { ReactNode, ButtonHTMLAttributes } from 'react';
 
 export type ButtonUIVariant = 'primary' | 'secondary' | 'tertiary';
 
@@ -8,4 +8,6 @@ export interface ButtonUIProps extends Omit<ButtonHTMLAttributes<HTMLButtonEleme
   isWide?: boolean;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  form?: string;
+  type?: 'button' | 'submit';
 }

@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FC, type MouseEventHandler } from 'react';
+import { useState, type ChangeEvent, type FC, type FormEventHandler } from 'react';
 
 import { useDispatch, useSelector } from '@store/store';
 import { loginUserThunk } from '@slices/auth/userSlice';
@@ -49,10 +49,11 @@ export const LoginAuthPanel: FC = () => {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const onSubmit: MouseEventHandler<HTMLButtonElement> = async (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (isLoading) return;
     if (!validate()) return;
+
     setFormError(null);
 
     try {
@@ -75,7 +76,8 @@ export const LoginAuthPanel: FC = () => {
   return (
     <AuthPanelUI
       actionText={isLoading ? 'Входим…' : 'Войти'}
-      onAction={onSubmit}
+      onSubmit={onSubmit}
+      isActionDisabled={isLoading}
       onGoogleClick={() => {}}
       onAppleClick={() => {}}
       errorText={errorText}

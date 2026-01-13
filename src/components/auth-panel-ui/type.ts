@@ -1,8 +1,9 @@
-import type { MouseEventHandler, ReactNode } from 'react';
+import type { FormEventHandler, ReactNode } from 'react';
 
 export type AuthPanelUIProps = {
   actionText: string;
-  onAction?: MouseEventHandler<HTMLButtonElement>;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+  isActionDisabled?: boolean;
   children: ReactNode;
   errorText?: string;
   onGoogleClick?: () => void;

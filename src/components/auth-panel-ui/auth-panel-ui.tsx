@@ -8,7 +8,8 @@ import type { AuthPanelUIProps } from './type';
 
 export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   actionText,
-  onAction,
+  onSubmit,
+  isActionDisabled = false,
   children,
   errorText,
   onGoogleClick,
@@ -17,7 +18,7 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   showRegisterLink = true,
   registerLinkTo = '/register',
 }) => (
-  <div className={[styles.panel, className].filter(Boolean).join(' ')}>
+  <form className={[styles.panel, className].filter(Boolean).join(' ')} onSubmit={onSubmit} noValidate>
     <div className={styles.groupUserData}>
       <div className={styles.socialButtons}>
         <ButtonUI variant="secondary" onClick={onGoogleClick} isWide iconLeft={<GoogleIcon />} type="button">
@@ -45,7 +46,7 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
     </div>
     <div className={styles.groupButtons}>
       <div className={styles.action}>
-        <ButtonUI variant="primary" onClick={onAction} isWide type="button">
+        <ButtonUI variant="primary" disabled={isActionDisabled} isWide type="submit">
           {actionText}
         </ButtonUI>
       </div>
@@ -56,5 +57,5 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
         </Link>
       )}
     </div>
-  </div>
+  </form>
 );
