@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react';
+
 export interface ProfileNavElementUIProps {
   text: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   to: string;
-  onClick?: () => void;
-  isActive?: boolean;
+  end?: boolean;
 }

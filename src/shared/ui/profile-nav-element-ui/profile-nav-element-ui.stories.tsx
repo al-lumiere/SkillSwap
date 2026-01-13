@@ -5,12 +5,12 @@ import UserIcon from '@icons/user-icon';
 import { ProfileNavElementUI } from './profile-nav-element-ui';
 
 const meta: Meta<typeof ProfileNavElementUI> = {
-  title: 'shared/ProfileNavElementUI',
+  title: 'UI/ProfileNavElementUI',
   component: ProfileNavElementUI,
   parameters: {
     layout: 'centered',
   },
-    decorators: [
+  decorators: [
     (Story, ctx) => (
       <MemoryRouter initialEntries={[ctx.args.to || '/']}>
         <div style={{ width: '320px' }}>
@@ -41,12 +41,10 @@ export const Active: Story = {
     text: 'Личные данные',
     icon: <UserIcon />,
     to: '/',
-    isActive: true
   },
   parameters: {
     docs: {
-      description: {
-      },
+      description: {},
     },
   },
 };

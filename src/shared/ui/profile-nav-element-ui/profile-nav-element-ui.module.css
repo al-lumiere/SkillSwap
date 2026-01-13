@@ -13,9 +13,11 @@
   line-height: 24px;
   color: var(--text-color);
   transition: background-color 0.2s ease;
+  text-decoration: none;
 }
-.element.isActive {
-  background-color: #DEEBC5;
+
+.isActive {
+  background-color: #deebc5;
 }
 
 .element:hover,
