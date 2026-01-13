@@ -16,6 +16,7 @@ export const InputUI: FC<TInputUIProps> = ({
   required,
   helperText,
   errorText,
+  hasError,
   className,
   disabled,
   id,
@@ -32,6 +33,8 @@ export const InputUI: FC<TInputUIProps> = ({
     inputType = isPasswordVisible ? 'text' : 'password';
   }
 
+  const isError = Boolean(errorText) || Boolean(hasError);
+
   return (
     <div className={[styles.container, className].filter(Boolean).join(' ')}>
       {label && (
@@ -42,7 +45,7 @@ export const InputUI: FC<TInputUIProps> = ({
       )}
 
       <div
-        className={[styles.field, errorText && styles.fieldError, disabled && styles.fieldDisabled]
+        className={[styles.field, isError && styles.fieldError, disabled && styles.fieldDisabled]
           .filter(Boolean)
           .join(' ')}
       >
@@ -56,7 +59,7 @@ export const InputUI: FC<TInputUIProps> = ({
             value={value}
             required={required}
             onChange={onChange}
-            aria-invalid={!!errorText}
+            aria-invalid={isError}
             disabled={disabled}
           />
 

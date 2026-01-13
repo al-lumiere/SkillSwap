@@ -11,6 +11,7 @@ export type TInputUIProps = {
   required?: boolean;
   helperText?: string;
   errorText?: string;
+  hasError?: boolean;
   className?: string;
   disabled?: boolean;
   id?: string;
