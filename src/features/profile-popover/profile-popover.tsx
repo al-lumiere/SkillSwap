@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from '@store/store';
 import { PopoverUI } from '@ui/popover';
 import { ButtonUI } from '@ui/button';
 import { UserAuthedPanelUI } from '@ui/user-authed-panel';
-import LogoutIcon from '../../shared/assets/icons/logout-icon';
-import styles from './profile-popover.module.css';
-import { logoutUserThunk } from '../../store/slices/auth/userSlice';
+import { logoutUserThunk } from '@slices/auth/userSlice';
+import LogoutIcon from '@icons/logout-icon';
 import { ProfilePopoverProps } from './type';
+
+import styles from './profile-popover.module.css';
 
 export const ProfilePopover: FC<ProfilePopoverProps> = ({ actions }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Получаем данные текущего пользователя из userSlice
   const { currentUser } = useSelector((state) => state.user);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -29,10 +29,8 @@ export const ProfilePopover: FC<ProfilePopoverProps> = ({ actions }) => {
   const handleLogoutClick = () => {
     dispatch(logoutUserThunk());
     handleClose();
-    // Навигация на главную или логин может быть обработана здесь или в useEffect в App
   };
 
-  // Элемент, на который кликаем в хедере (Имя + Аватар)
   const anchorElement = (
     <UserAuthedPanelUI
       userName={currentUser?.name || 'Гость'}
@@ -47,19 +45,22 @@ export const ProfilePopover: FC<ProfilePopoverProps> = ({ actions }) => {
       isOpen={isOpen}
       onClose={handleClose}
       placement="bottom-end"
-      offset={10}
-      maxWidth={320}
+      offset={25}
+      maxWidth={278}
       matchWidth={false}
       anchor={anchorElement}
     >
       <div className={styles.container}>
-        <ButtonUI variant="tertiary" isWide onClick={handleProfileClick}>
-          Личный кабинет
-        </ButtonUI>
-
-        <ButtonUI variant="tertiary" isWide onClick={handleLogoutClick} iconRight={<LogoutIcon />}>
-          Выйти из аккаунта
-        </ButtonUI>
+        <div className={styles.menuBtn}>
+          <ButtonUI variant="tertiary" isWide onClick={handleProfileClick}>
+            Личный кабинет
+          </ButtonUI>
+        </div>
+        <div className={styles.menuBtn}>
+          <ButtonUI variant="tertiary" isWide onClick={handleLogoutClick} iconRight={<LogoutIcon />}>
+            Выйти из аккаунта
+          </ButtonUI>
+        </div>
       </div>
     </PopoverUI>
   );
