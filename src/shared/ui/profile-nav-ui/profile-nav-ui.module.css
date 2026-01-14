@@ -1,6 +1,6 @@
 .container {
-    flex-direction: column;
-    height: 100%;
-    display: flex;
-    gap: 8px;
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+  gap: 8px;
 }

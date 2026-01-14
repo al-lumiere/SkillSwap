@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-color);
+  font-family: var(--body-font-family), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+.required {
+  margin-left: 4px;
+  color: var(--error-color);
+}
+
+.field {
+  border-radius: 12px;
+  background-color: var(--card-input-color);
+  border: 1px solid var(--caption-color);
+}
+
+.field:hover {
+  border-color: var(--accent-color);
+  cursor: text;
+}
+
+.field:focus-within {
+  border-color: var(--button-pressed-color);
+  cursor: text;
+}
+
+.fieldError {
+  border-color: var(--error-color);
+}
+
+.fieldError:hover,
+.fieldError:focus-within {
+  border-color: var(--error-color);
+}
+
+.fieldDisabled {
+  border-color: var(--button-disabled-color);
+  background-color: var(--button-disabled-color);
+}
+
+.fieldDisabled:hover,
+.fieldDisabled:focus-within {
+  border-color: var(--button-disabled-color);
+  cursor: not-allowed;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  gap: 10px;
+  color: var(--text-color);
+  background: transparent;
+}
+
+.textarea {
+  flex: 1;
+  outline: none;
+  padding: 0;
+  caret-color: var(--button-pressed-color);
+  font-family: var(--body-font-family), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  border: none;
+  resize: none;
+}
+
+.textarea::placeholder {
+  color: var(--caption-color);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.helperText {
+  margin: 0;
+  font-family: var(--body-font-family), sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.errorText {
+  color: var(--error-color);
+  font-size: 12px;
+  line-height: 16px;
+}
