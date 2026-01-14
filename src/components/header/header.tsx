@@ -5,7 +5,7 @@ import { SearchUI } from '@ui/search';
 import { IconButtonUI } from '@ui/icon-button';
 import { AllSkillsPopover } from '@features/all-skills-popover';
 import { GuestUserPanelUI } from '@ui/user-guest';
-import { UserAuthedPanelUI } from '@ui/user-authed-panel';
+import { ProfilePopover } from '@features/profile-popover';
 import { ButtonUI } from '@ui/button';
 import MoonIcon from '@icons/moon-icon';
 import NotificationIcon from '@icons/notification-icon';
@@ -39,9 +39,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
             <MoonIcon />
           </IconButtonUI>
           {isUserAuth ? (
-            <UserAuthedPanelUI
-              userName={userName ?? ''}
-              avatarUrl={avatarUrl ?? ''}
+            <ProfilePopover
               actions={
                 <>
                   <IconButtonUI onClick={() => {}}>
