@@ -25,6 +25,7 @@
     "react": "^18.2.0",
     "react-datepicker": "^9.1.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.71.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.11.0",
     "swiper": "^12.0.3"

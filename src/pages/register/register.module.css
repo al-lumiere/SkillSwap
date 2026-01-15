@@ -7,7 +7,7 @@
   margin: 0 auto auto;
 }
 
-.title {
+/* .title {
   font-family: var(--header-font-family);
   font-style: normal;
   font-weight: 500;
@@ -15,7 +15,7 @@
   line-height: 28px;
   letter-spacing: -0.011em;
   color: var(--text-color);
-}
+} */
 
 .blocks {
   display: flex;
@@ -31,4 +31,21 @@
   min-width: 556px;
   padding: 60px;
   background-color: var(--card-input-color);
+}
+
+.form_container {
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 692px;
+  min-width: 556px;
+  background-color: var(--card-input-color);
+  padding: 40px 60px;
+}
+
+.footer {
+  display: flex;
+  margin-top: 32px;
+  gap: 20px;
+  justify-content: space-between;
 }
