@@ -63,12 +63,12 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
     <div className={styles.container}>
       {isCardActions && (
         <div className={styles.actions}>
-        <CardActionsUI
-          onShareClick={() => console.log('Share clicked')}
-          onMoreClick={() => console.log('More clicked')}
-          isFavorite={isFavorite}
-          onFavoriteToggle={onFavoriteToggle}
-        />
+          <CardActionsUI
+            onShareClick={() => console.log('Share clicked')}
+            onMoreClick={() => console.log('More clicked')}
+            isFavorite={isFavorite}
+            onFavoriteToggle={onFavoriteToggle}
+          />
         </div>
       )}
 
