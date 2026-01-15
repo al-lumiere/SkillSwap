@@ -1,5 +1,8 @@
-import { FC } from 'react';
+import { FC, useState, useMemo } from 'react';
+import { InputUI } from '@ui/input';
+import { SingleselectUI } from '@components/registration-singleselect';
 import { RegistrationSkillUIProps } from './type';
+import styles from './registration-skill.module.css';
 
 export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
   localDraft,
@@ -10,81 +13,107 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
   skillCategoryId,
   skillSubcategories,
   onSkillCategoryChange,
-}) => (
-  <div>
-    <h2>Чему вы можете научить</h2>
+}) => {
+  const [isCategoryOpen, setCategoryOpen] = useState(false);
+  const [isSubcatOpen, setSubcatOpen] = useState(false);
 
-    <div>
-      <label htmlFor="register-skill-title">
-        Название навыка
-        <input
-          id="register-skill-title"
-          type="text"
-          value={localDraft.skillTitle ?? ''}
-          onChange={onField('skillTitle')}
-        />
-      </label>
-    </div>
+  const skillCategoryOptions = useMemo(() => categories.map((c) => ({ id: c.id, label: c.name })), [categories]);
 
-    <div>
-      <label htmlFor="register-skill-category">
-        Категория навыка
-        <select
-          id="register-skill-category"
-          value={localDraft.skillCategoryId ?? ''}
-          onChange={(e) => onSkillCategoryChange(e.target.value)}
-          disabled={categoriesStatus !== 'succeeded'}
-        >
-          <option value="">Выберите категорию навыка</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={String(cat.id)}>
-              {cat.name}
-            </option>
+  const selectedSkillCategoryId = localDraft.skillCategoryId ? Number(localDraft.skillCategoryId) : null;
+
+  const skillCategoryValue = useMemo(() => {
+    if (!selectedSkillCategoryId) return '';
+    return categories.find((c) => c.id === selectedSkillCategoryId)?.name ?? '';
+  }, [categories, selectedSkillCategoryId]);
+
+  const subcategoryOptions = useMemo(
+    () => skillSubcategories.map((sub) => ({ id: sub.id, label: sub.name })),
+    [skillSubcategories],
+  );
+
+  const selectedSubId = localDraft.skillSubcategoryId ? Number(localDraft.skillSubcategoryId) : null;
+
+  const subcategoryValue = useMemo(() => {
+    if (!selectedSubId) return '';
+    return skillSubcategories.find((s) => s.id === selectedSubId)?.name ?? '';
+  }, [skillSubcategories, selectedSubId]);
+
+  return (
+    <div className={styles.wrapper}>
+      <InputUI
+        label="Название навыка"
+        placeholder="Введите название вашего навыка"
+        name="register-skill-title"
+        value={localDraft.skillTitle ?? ''}
+        onChange={onField('skillTitle')}
+      />
+      <SingleselectUI<number>
+        isOpen={isCategoryOpen}
+        onClose={() => setCategoryOpen(false)}
+        handleToggle={() => {
+          if (categoriesStatus !== 'succeeded') return;
+          setCategoryOpen((v) => !v);
+        }}
+        placement="bottom-start"
+        matchWidth
+        offset={-1}
+        maxWidth={null}
+        label="Категория навыка"
+        placeholder="Выберите категорию навыка"
+        value={skillCategoryValue}
+        options={skillCategoryOptions}
+        selectedId={selectedSkillCategoryId}
+        onSelect={(id) => {
+          onSkillCategoryChange(String(id));
+          setCategoryOpen(false);
+        }}
+        disabled={categoriesStatus !== 'succeeded'}
+      />
+      <SingleselectUI
+        isOpen={isSubcatOpen}
+        onClose={() => setSubcatOpen(false)}
+        handleToggle={() => setSubcatOpen((current) => !current)}
+        placement="bottom-end"
+        matchWidth
+        offset={-1}
+        label="Подкатегория навыка"
+        placeholder="Выберите подкатегорию навыка"
+        value={subcategoryValue}
+        selectedId={selectedSubId}
+        onSelect={(id: number) => {
+          onField('skillSubcategoryId')({
+            target: { value: String(id) },
+          } as unknown as React.ChangeEvent<HTMLSelectElement>);
+          setSubcatOpen(false);
+        }}
+        options={subcategoryOptions}
+        disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
+      />
+
+      <div>
+        <label className={`${styles.label} ${styles.text}`} htmlFor="register-skill-description">
+          Описание
+          <textarea
+            className={`${styles.textareaField} ${styles.text}`}
+            placeholder="Коротко опишите, чему можете научить"
+            id="register-skill-description"
+            value={localDraft.skillDescription ?? ''}
+            onChange={onField('skillDescription')}
+          />
+        </label>
+      </div>
+
+      <div className={styles.dragndropWrapper}>
+        <label className={`${styles.dragndropField} ${styles.text}`} htmlFor="register-skill-images">
+          Перетащите или выберите изображения навыка
+          <input id="register-skill-images" type="file" multiple accept="image/*" onChange={onSkillImages} />
+        </label>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {localDraft.skillImages?.map((img: string) => (
+            <img key={img} src={img} alt="" style={{ width: 80, height: 80, objectFit: 'cover' }} />
           ))}
-        </select>
-      </label>
-    </div>
-
-    <div>
-      <label htmlFor="register-skill-subcategory">
-        Подкатегория навыка
-        <select
-          id="register-skill-subcategory"
-          value={localDraft.skillSubcategoryId ?? ''}
-          onChange={onField('skillSubcategoryId')}
-          disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
-        >
-          <option value="">Выберите подкатегорию навыка</option>
-          {skillSubcategories.map((sub) => (
-            <option key={sub.id} value={String(sub.id)}>
-              {sub.name}
-            </option>
-          ))}
-        </select>
-      </label>
-    </div>
-
-    <div>
-      <label htmlFor="register-skill-description">
-        Описание
-        <textarea
-          id="register-skill-description"
-          value={localDraft.skillDescription ?? ''}
-          onChange={onField('skillDescription')}
-        />
-      </label>
-    </div>
-
-    <div>
-      <label htmlFor="register-skill-images">
-        Картинки навыка
-        <input id="register-skill-images" type="file" multiple accept="image/*" onChange={onSkillImages} />
-      </label>
-      <div style={{ display: 'flex', gap: 8 }}>
-        {localDraft.skillImages?.map((img: string) => (
-          <img key={img} src={img} alt="" style={{ width: 80, height: 80, objectFit: 'cover' }} />
-        ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

@@ -1,9 +1,8 @@
 import type { FormEventHandler, ReactNode } from 'react';
 
 export type AuthPanelUIProps = {
-  actionText: string;
-  onSubmit: FormEventHandler<HTMLFormElement>;
-  isActionDisabled?: boolean;
+  actionText?: string;
+  onAction?: () => void;
   children: ReactNode;
   errorText?: string;
   onGoogleClick?: () => void;

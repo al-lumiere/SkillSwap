@@ -101,12 +101,6 @@ export const RegisterPage: FC = () => {
     setLocalError(null);
   };
 
-  // const onAvatarFile = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) return;
-  //   setLocalDraft((prev: any) => ({ ...prev, avatar: file.name }));
-  // };
-
   const onAvatarFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -121,12 +115,6 @@ export const RegisterPage: FC = () => {
 
     setLocalDraft((prev: any) => ({ ...prev, avatar: dataUrl }));
   };
-
-  // const onSkillImages = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const files = Array.from(e.target.files ?? []);
-  //   const names = files.map((f) => f.name);
-  //   setLocalDraft((prev: any) => ({ ...prev, skillImages: names }));
-  // };
 
   const onSkillImages = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []).slice(0, 3); // например не больше 3
@@ -318,7 +306,7 @@ export const RegisterPage: FC = () => {
             )}
 
             {step === 3 && (
-              <ButtonUI type="submit" disabled={isLoading} isWide>
+              <ButtonUI type="submit" disabled={isLoading} isWide onClick={handleSubmit}>
                 {isLoading ? 'Регистрируем…' : 'Продолжить'}
               </ButtonUI>
             )}

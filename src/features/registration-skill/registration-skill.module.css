@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.text {
+  font-family: var(--body-font-family), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+.label {
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.textareaField {
+  height: 96px;
+  max-height: 96px;
+  min-height: 48px;
+  padding: 12px 20px;
+  color: var(--text-color, #253017);
+  border: 1px solid var(--caption-color, #69735d);
+  border-radius: 12px;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.textareaField::placeholder {
+  color: var(--caption-color, #69735d);
+}
+
+.dragndropWrapper {
+  border: 1px dashed var(--caption-color, #69735d);
+  border-radius: 12px;
+}
+
+.dragndropField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: var(--caption-color, #69735d);
+  height: 96px;
+  width: 100%;
+}

@@ -40,7 +40,8 @@
   min-height: 692px;
   min-width: 556px;
   background-color: var(--card-input-color);
-  padding: 40px 60px;
+  padding: 0 60px;
+  justify-content: center;
 }
 
 .footer {

@@ -1,40 +1,33 @@
 import { FC } from 'react';
+import { AuthPanelUI } from '@components/auth-panel-ui';
+import { InputUI } from '@ui/input';
 import { RegistrationAccountUIProps } from './type';
 
 export const RegistrationAccountUI: FC<RegistrationAccountUIProps> = ({ isLoading, localDraft, onField }) => (
-  <div>
-    <button type="button" onClick={() => console.info('Google OAuth: заглушка')} disabled={isLoading}>
-      Продолжить с Google
-    </button>
+  <AuthPanelUI
+    onGoogleClick={() => console.info('Google OAuth: заглушка')}
+    onAppleClick={() => console.info('Apple OAuth: заглушка')}
+    showRegisterLink={false}
+  >
+    <InputUI
+      label="Email"
+      name="register-email"
+      type="email"
+      placeholder="Введите email"
+      value={localDraft.email ?? ''}
+      onChange={onField('email')}
+      disabled={isLoading}
+    />
 
-    <button type="button" onClick={() => console.info('Apple OAuth: заглушка')} disabled={isLoading}>
-      Продолжить с Apple
-    </button>
-
-    <div>
-      <label htmlFor="register-email">
-        Email
-        <input
-          id="register-email"
-          type="email"
-          value={localDraft.email ?? ''}
-          onChange={onField('email')}
-          autoComplete="email"
-        />
-      </label>
-    </div>
-
-    <div>
-      <label htmlFor="register-password">
-        Пароль
-        <input
-          id="register-password"
-          type="password"
-          value={localDraft.password ?? ''}
-          onChange={onField('password')}
-          autoComplete="new-password"
-        />
-      </label>
-    </div>
-  </div>
+    <InputUI
+      label="Пароль"
+      name="register-password"
+      type="password"
+      placeholder="Введите ваш пароль"
+      helperText="Пароль должен содержать не менее 8 знаков"
+      value={localDraft.password ?? ''}
+      onChange={onField('password')}
+      disabled={isLoading}
+    />
+  </AuthPanelUI>
 );

@@ -44,18 +44,22 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
         </p>
       )}
     </div>
-    <div className={styles.groupButtons}>
-      <div className={styles.action}>
-        <ButtonUI variant="primary" disabled={isActionDisabled} isWide type="submit">
-          {actionText}
-        </ButtonUI>
-      </div>
+    {(actionText || showRegisterLink) && (
+      <div className={styles.groupButtons}>
+        {actionText && onAction && (
+          <div className={styles.action}>
+            <ButtonUI variant="primary" onClick={onAction} isWide>
+              {actionText}
+            </ButtonUI>
+          </div>
+        )}
 
-      {showRegisterLink && (
-        <Link className={styles.registerLink} to={registerLinkTo}>
-          Зарегистрироваться
-        </Link>
-      )}
-    </div>
-  </form>
+        {showRegisterLink && (
+          <Link className={styles.registerLink} to={registerLinkTo}>
+            Зарегистрироваться
+          </Link>
+        )}
+      </div>
+    )}
+  </div>
 );

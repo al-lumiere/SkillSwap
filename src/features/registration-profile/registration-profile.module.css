@@ -36,10 +36,6 @@
   margin-top: 4px;
 }
 
-.datePicker::placeholder {
-  color: var(--caption-color, #253017);
-}
-
 .avatarLabel {
   display: inline-block;
   cursor: pointer;
