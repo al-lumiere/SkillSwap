@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable arrow-body-style */
 import { Gender, RegisterPayload } from '@api/types';
-import { registerUserThunk } from '@slices/auth/userSlice';
+import { registerUserThunk, acceptRegisteredUser } from '@slices/auth/userSlice';
 import { useDispatch, useSelector } from '@store/store';
-import { ChangeEvent, useEffect, useMemo, useRef, useState, type FC, type FormEvent } from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef, useState, type FC } from 'react';
 import {
   setStep,
   saveDraft,
@@ -16,7 +16,21 @@ import {
 import { fetchCities } from '@slices/cities/citiesSlice';
 import { fetchCategories } from '@slices/categories/categoriesSlice';
 import { compressImageToDataUrl } from '@api/compress';
-// import styles from './register.module.css';
+
+import { StepperUI } from '@ui/stepper';
+import { IllustrationBlockUI } from '@ui/illustration-block';
+import UserInfoIllustration from '@images/user-info';
+import LightBulb from '@images/light-bulb';
+import SchoolBoardIllustration from '@images/school-board';
+import { RegistrationAccountUI } from '@features/registration-account';
+import { RegistrationProfileUI } from '@features/registration-profile';
+import { RegistrationSkillUI } from '@features/registration-skill';
+import { ButtonUI } from '@ui/button';
+import { ModalUI } from '@ui/modal-ui';
+import { ActionResultUI } from '@ui/action-result';
+import { SkillDetailsCardUI } from '@ui/skills-details';
+import DoneIcon from '@icons/done-icon';
+import styles from './register.module.css';
 
 type StepData = Step1Account | Step2Profile | Step3Skill;
 
@@ -30,12 +44,18 @@ export const RegisterPage: FC = () => {
   const categories = useSelector((s) => s.categories.data);
   const categoriesStatus = useSelector((s) => s.categories.status);
 
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [pendingPayload, setPendingPayload] = useState<RegisterPayload | null>(null);
+
+  const didRequestSubmitRef = useRef(false);
+
   useEffect(() => {
     if (citiesStatus === 'idle') dispatch(fetchCities());
     if (categoriesStatus === 'idle') dispatch(fetchCategories());
   }, [dispatch, citiesStatus, categoriesStatus]);
-
-  const [localError, setLocalError] = useState<string | null>(null);
 
   function stepKey(st: Step): 'step1' | 'step2' | 'step3' {
     switch (st) {
@@ -83,6 +103,21 @@ export const RegisterPage: FC = () => {
     setLocalError(null);
   }, [stepInitialValues, step]);
 
+  useEffect(() => {
+    if (!didRequestSubmitRef.current) return;
+
+    if (status === 'succeeded') {
+      didRequestSubmitRef.current = false;
+      setIsPreviewOpen(false);
+      setIsSuccessOpen(true);
+      setPendingPayload(null);
+    }
+
+    if (status === 'failed') {
+      didRequestSubmitRef.current = false;
+    }
+  }, [status]);
+
   const isLoading = status === 'loading';
 
   const onField = (field: string) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -90,12 +125,6 @@ export const RegisterPage: FC = () => {
     setLocalDraft((prev: any) => ({ ...prev, [field]: value }));
     setLocalError(null);
   };
-
-  // const onAvatarFile = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) return;
-  //   setLocalDraft((prev: any) => ({ ...prev, avatar: file.name }));
-  // };
 
   const onAvatarFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -112,14 +141,8 @@ export const RegisterPage: FC = () => {
     setLocalDraft((prev: any) => ({ ...prev, avatar: dataUrl }));
   };
 
-  // const onSkillImages = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const files = Array.from(e.target.files ?? []);
-  //   const names = files.map((f) => f.name);
-  //   setLocalDraft((prev: any) => ({ ...prev, skillImages: names }));
-  // };
-
   const onSkillImages = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files ?? []).slice(0, 3); // например не больше 3
+    const files = Array.from(e.target.files ?? []).slice(0, 4); // например не больше 3
     const urls = await Promise.all(
       files.map((file) =>
         compressImageToDataUrl({
@@ -201,18 +224,12 @@ export const RegisterPage: FC = () => {
     dispatch(setStep((step - 1) as Step));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!validateStep3()) return;
-
-    // фиксируем шаг 3 (финальный)
-    dispatch(commitStep({ step: 3 as any, data: localDraft } as any));
-
+  const buildPayload = (): RegisterPayload => {
     const s1 = formData.step1;
     const s2 = formData.step2;
     const s3 = { ...formData.step3, ...localDraft }; // step3 точно актуальный
 
-    const payload: RegisterPayload = {
+    return {
       email: s1.email.trim(),
       password: s1.password,
 
@@ -230,286 +247,194 @@ export const RegisterPage: FC = () => {
       skillDescription: s3.skillDescription.trim(),
       skillImages: s3.skillImages ?? [],
     };
+  };
 
-    // todo: вызвать попап с подтверждением, отрисовав в него payload, и только
-    // потом, по нажатию на "готово" в попапе, дернуть диспатч регестрации
+  const getSkillCategoryLabel = (p: RegisterPayload) => {
+    const cat = categories.find((c: any) => c.id === p.skillCategoryId);
+    const sub = cat?.subcategories?.find((s: any) => s.id === p.skillSubcategoryId);
 
-    dispatch(registerUserThunk(payload));
+    const catName = (cat as any)?.title ?? (cat as any)?.name ?? '';
+    const subName = (sub as any)?.title ?? (sub as any)?.name ?? '';
+
+    return subName ? `${catName} / ${subName}` : catName;
+  };
+
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    if (step < 3) {
+      handleNext();
+      return;
+    }
+
+    if (!validateStep3()) return;
+
+    dispatch(commitStep({ step: 3 as any, data: localDraft } as any));
+
+    const payload = buildPayload();
+    setPendingPayload(payload);
+    setIsPreviewOpen(true);
+  };
+
+  const handleConfirmSubmit = async () => {
+    if (!pendingPayload) return;
+
+    didRequestSubmitRef.current = true;
+
+    try {
+      await dispatch(registerUserThunk(pendingPayload)).unwrap();
+      // дальше откроется success-модалка через useEffect(status)
+    } catch (e) {
+      didRequestSubmitRef.current = false;
+    }
+  };
+
+  const handleSuccessClose = () => {
+    setIsSuccessOpen(false);
+    dispatch(acceptRegisteredUser());
+  };
+
+  const onLearnCategoryChange = (categoryId: string) => {
+    setLocalDraft((prev: any) => {
+      const p = prev as Step2Profile;
+      return {
+        ...p,
+        learnCategoryId: categoryId,
+        learnSubcategoryId: '',
+      };
+    });
+    setLocalError(null);
+  };
+
+  const onSkillCategoryChange = (categoryId: string) => {
+    setLocalDraft((prev: any) => ({
+      ...prev,
+      skillCategoryId: categoryId,
+      skillSubcategoryId: '',
+    }));
+
+    setLocalError(null);
   };
 
   return (
-    <div>
-      <h1>Регистрация</h1>
-      <p>Шаг {step} из 3</p>
+    <div className={styles.wrapper}>
+      <StepperUI currentStep={step} totalSteps={3} />
+      <div className={styles.blocks}>
+        <form className={styles.form_container} onSubmit={handleFormSubmit}>
+          {step === 1 && (
+            <RegistrationAccountUI isLoading={isLoading} localDraft={localDraft as Step1Account} onField={onField} />
+          )}
+          {step === 2 && (
+            <RegistrationProfileUI
+              localDraft={localDraft as Step2Profile}
+              onAvatarFile={onAvatarFile}
+              onField={onField as any}
+              cities={cities}
+              citiesStatus={citiesStatus}
+              categories={categories}
+              categoriesStatus={categoriesStatus}
+              learnCategoryId={learnCategoryId}
+              learnSubcategories={learnSubcategories}
+              onLearnCategoryChange={onLearnCategoryChange}
+            />
+          )}
+          {step === 3 && (
+            <RegistrationSkillUI
+              localDraft={localDraft as Step3Skill}
+              onField={onField}
+              onSkillImages={onSkillImages}
+              categories={categories}
+              categoriesStatus={categoriesStatus}
+              skillCategoryId={skillCategoryId}
+              skillSubcategories={skillSubcategories}
+              onSkillCategoryChange={onSkillCategoryChange}
+            />
+          )}
+          {(localError || error) && <div>{localError || error}</div>}
+          <div className={styles.footer}>
+            {step > 1 && (
+              <ButtonUI variant="secondary" type="button" onClick={handleBack} disabled={isLoading} isWide>
+                Назад
+              </ButtonUI>
+            )}
 
-      {(localError || error) && <div>{localError || error}</div>}
+            {step < 3 && (
+              <ButtonUI type="button" onClick={handleNext} disabled={isLoading} isWide>
+                Продолжить
+              </ButtonUI>
+            )}
 
-      <form onSubmit={handleSubmit}>
-        {step === 1 && (
-          <div>
-            <h2>Создаём аккаунт</h2>
-
-            <button type="button" onClick={() => console.info('Google OAuth: заглушка')} disabled={isLoading}>
-              Продолжить с Google
-            </button>
-
-            <button type="button" onClick={() => console.info('Apple OAuth: заглушка')} disabled={isLoading}>
-              Продолжить с Apple
-            </button>
-
-            <div>
-              <label htmlFor="register-email">
-                Email
-                <input
-                  id="register-email"
-                  type="email"
-                  value={localDraft.email ?? ''}
-                  onChange={onField('email')}
-                  autoComplete="email"
-                />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-password">
-                Пароль
-                <input
-                  id="register-password"
-                  type="password"
-                  value={localDraft.password ?? ''}
-                  onChange={onField('password')}
-                  autoComplete="new-password"
-                />
-              </label>
-            </div>
+            {step === 3 && (
+              <ButtonUI type="submit" disabled={isLoading} isWide>
+                {isLoading ? 'Регистрируем…' : 'Продолжить'}
+              </ButtonUI>
+            )}
           </div>
-        )}
-
-        {step === 2 && (
-          <div>
-            <h2>О вас</h2>
-
-            <div>
-              <label htmlFor="register-avatar">
-                Аватар (файл)
-                <input id="register-avatar" type="file" accept="image/*" onChange={onAvatarFile} />
-              </label>
-              {(localDraft as any).avatar && (
-                <div>
-                  <img
-                    src={(localDraft as any).avatar}
-                    alt="avatar preview"
-                    style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: '50%' }}
-                  />
-                </div>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="register-name">
-                Имя
-                <input id="register-name" type="text" value={localDraft.name ?? ''} onChange={onField('name')} />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-birthdate">
-                Дата рождения
-                <input
-                  id="register-birthdate"
-                  type="date"
-                  value={localDraft.birthDate ?? ''}
-                  onChange={onField('birthDate')}
-                />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-gender">
-                Пол
-                <select id="register-gender" value={(localDraft as any).gender ?? 'any'} onChange={onField('gender')}>
-                  <option value="any">Любой</option>
-                  <option value="male">Мужской</option>
-                  <option value="female">Женский</option>
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-city">
-                Город
-                <select
-                  id="register-city"
-                  value={(localDraft as any).cityId ?? ''}
-                  onChange={onField('cityId')}
-                  disabled={citiesStatus !== 'succeeded'}
-                >
-                  <option value="">Не указан</option>
-                  {cities.map((c) => (
-                    <option key={c.id} value={String(c.id)}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-learn-category">
-                Категория навыка, которому хотите научиться
-                <select
-                  id="register-learn-category"
-                  value={(localDraft as any).learnCategoryId ?? ''}
-                  onChange={(e) => {
-                    const { value } = e.target;
-                    // при смене категории — сбрасываем подкатегорию
-                    setLocalDraft((prev: any) => ({
-                      ...prev,
-                      learnCategoryId: value,
-                      learnSubcategoryId: '',
-                    }));
-                    setLocalError(null);
-                  }}
-                  disabled={categoriesStatus !== 'succeeded'}
-                >
-                  <option value="">Выберите категорию</option>
-                  {categories.map((cat) => (
-                    <option key={cat.id} value={String(cat.id)}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-learn-subcategory">
-                Подкатегория навыка, которому хотите научиться
-                <select
-                  id="register-learn-subcategory"
-                  value={(localDraft as any).learnSubcategoryId ?? ''}
-                  onChange={onField('learnSubcategoryId')}
-                  disabled={!learnCategoryId || categoriesStatus !== 'succeeded'}
-                >
-                  <option value="">Выберите подкатегорию</option>
-                  {learnSubcategories.map((sub) => (
-                    <option key={sub.id} value={String(sub.id)}>
-                      {sub.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div>
-            <h2>Чему вы можете научить</h2>
-
-            <div>
-              <label htmlFor="register-skill-title">
-                Название навыка
-                <input
-                  id="register-skill-title"
-                  type="text"
-                  value={localDraft.skillTitle ?? ''}
-                  onChange={onField('skillTitle')}
-                />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-skill-category">
-                Категория навыка
-                <select
-                  id="register-skill-category"
-                  value={(localDraft as any).skillCategoryId ?? ''}
-                  onChange={(e) => {
-                    const { value } = e.target;
-                    setLocalDraft((prev: any) => ({
-                      ...prev,
-                      skillCategoryId: value,
-                      skillSubcategoryId: '',
-                    }));
-                    setLocalError(null);
-                  }}
-                  disabled={categoriesStatus !== 'succeeded'}
-                >
-                  <option value="">Выберите категорию навыка</option>
-                  {categories.map((cat) => (
-                    <option key={cat.id} value={String(cat.id)}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-skill-subcategory">
-                Подкатегория навыка
-                <select
-                  id="register-skill-subcategory"
-                  value={(localDraft as any).skillSubcategoryId ?? ''}
-                  onChange={onField('skillSubcategoryId')}
-                  disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
-                >
-                  <option value="">Выберите подкатегорию навыка</option>
-                  {skillSubcategories.map((sub) => (
-                    <option key={sub.id} value={String(sub.id)}>
-                      {sub.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-skill-description">
-                Описание
-                <textarea
-                  id="register-skill-description"
-                  value={localDraft.skillDescription ?? ''}
-                  onChange={onField('skillDescription')}
-                />
-              </label>
-            </div>
-
-            <div>
-              <label htmlFor="register-skill-images">
-                Картинки навыка
-                <input id="register-skill-images" type="file" multiple accept="image/*" onChange={onSkillImages} />
-              </label>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {(localDraft as any).skillImages?.map((img: string) => (
-                  <img key={img} src={img} alt="" style={{ width: 80, height: 80, objectFit: 'cover' }} />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div>
-          {step > 1 && (
-            <button type="button" onClick={handleBack} disabled={isLoading}>
-              Назад
-            </button>
+        </form>
+        <div className={styles.block}>
+          {step === 1 && (
+            <IllustrationBlockUI
+              illustration={<LightBulb />}
+              title="Добро пожаловать в SkillSwap!"
+              description="Присоединяйтесь к SkillSwap и обменивайтесь знаниями и навыками с другими людьми"
+            />
           )}
 
-          {step < 3 && (
-            <button type="button" onClick={handleNext} disabled={isLoading}>
-              Далее
-            </button>
+          {step === 2 && (
+            <IllustrationBlockUI
+              illustration={<UserInfoIllustration />}
+              title="Расскажите немного о себе"
+              description="Это поможет другим людям лучше вас узнать, чтобы выбрать для обмена"
+            />
           )}
 
           {step === 3 && (
-            <button type="submit" disabled={isLoading}>
-              {isLoading ? 'Регистрируем…' : 'Завершить регистрацию'}
-            </button>
+            <IllustrationBlockUI
+              illustration={<SchoolBoardIllustration />}
+              title="Укажите, чем вы готовы поделиться"
+              description="Так другие люди смогут увидеть ваши предложения и предложить вам обмен!"
+            />
           )}
         </div>
-      </form>
+      </div>
+
+      {isPreviewOpen && (
+        <ModalUI onClose={() => setIsPreviewOpen(false)}>
+          {pendingPayload && (
+            <div className={styles.modalFirst}>
+              <div className={styles.modalHeader}>
+                <span className={styles.modalHeaderTitle}>Ваше предложение</span>
+                <span className={styles.modalHeaderDesc}>Пожалуйста, проверьте и подтвердите правильность данных</span>
+              </div>
+
+              <SkillDetailsCardUI
+                title={pendingPayload.skillTitle}
+                category={getSkillCategoryLabel(pendingPayload)}
+                description={pendingPayload.skillDescription}
+                isCardActions={false}
+                images={pendingPayload.skillImages}
+                isSkillPage={false}
+                onChangeClick={() => setIsPreviewOpen(false)}
+                onSubmitClick={handleConfirmSubmit}
+              />
+            </div>
+          )}
+        </ModalUI>
+      )}
+
+      {isSuccessOpen && (
+        <ModalUI onClose={handleSuccessClose}>
+          <div style={{ padding: '80px 60px', width: '556px' }}>
+            <ActionResultUI
+              icon={<DoneIcon />}
+              title="Ваше предложение создано"
+              description="Теперь вы можете предложить обмен"
+              buttonText="Готово"
+              buttonOnClick={handleSuccessClose}
+            />
+          </div>
+        </ModalUI>
+      )}
     </div>
   );
 };

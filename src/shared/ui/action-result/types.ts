@@ -3,6 +3,6 @@ export type ActionResultUIProps = {
   description: string;
   icon: React.ReactNode;
   buttonText: string;
-  buttonLink: string;
+  buttonLink?: string;
   buttonOnClick: () => void;
 };

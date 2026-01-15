@@ -28,10 +28,12 @@ export const FiltersBlockUI: FC<FiltersBlockUIProps> = ({
       <div className={styles.header}>
         <h2 className={styles.title}>{headerTitle}</h2>
         {appliedCount > 0 && onReset && (
-          <ButtonUI onClick={onReset} variant="tertiary">
-            <span>Сбросить</span>
-            <CrossIcon className={styles.resetIcon} />
-          </ButtonUI>
+          <div className={styles.resetBtnWrap}>
+            <ButtonUI onClick={onReset} variant="tertiary">
+              <span>Сбросить</span>
+              <CrossIcon className={styles.resetIcon} />
+            </ButtonUI>
+          </div>
         )}
       </div>
 

@@ -6,8 +6,6 @@ type PopoverConfigProps = Pick<PopoverUIProps, 'placement' | 'offset' | 'matchWi
 
 type SelectFieldProps = Pick<SelectUIProps, 'label' | 'placeholder' | 'value'>;
 
-type CheckboxOnChange = TCheckboxItemUIProps['onChange'];
-
 export type MultiselectOption = {
   id: number;
   label: TCheckboxItemUIProps['label'];
@@ -20,5 +18,5 @@ export type MultiselectUIProps = PopoverConfigProps &
     handleToggle: SelectUIProps['handleToggle'];
     options: MultiselectOption[];
     selectedIds: number[];
-    onOptionChange: (id: number, e: Parameters<CheckboxOnChange>[0]) => void;
+    onOptionChange: (id: number, checked: boolean) => void;
   };

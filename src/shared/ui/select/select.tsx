@@ -15,6 +15,7 @@ export const SelectUI: FC<SelectUIProps> = ({
   query = '',
   handleQueryChange,
   handleClear,
+  disabled = false,
 }) => {
   const showClear = variant === 'search' && isOpen && query.length > 0;
 
@@ -35,9 +36,12 @@ export const SelectUI: FC<SelectUIProps> = ({
         <div className={styles.searchWrapper}>
           <input
             ref={inputRef}
-            className={`${styles.searchField} ${isOpen ? styles.open : ''}`}
+            className={[styles.searchField, isOpen && styles.open, disabled && styles.disabled]
+              .filter(Boolean)
+              .join(' ')}
             value={query}
             onChange={(e) => handleQueryChange?.(e.target.value)}
+            disabled={disabled}
           />
           {showClear && (
             <button
@@ -49,13 +53,20 @@ export const SelectUI: FC<SelectUIProps> = ({
                 handleClear?.();
               }}
               aria-label="Очистить поле ввода"
+              disabled={disabled}
             >
               <CrossIcon />
             </button>
           )}
         </div>
       ) : (
-        <button type="button" className={`${styles.field} ${isOpen ? styles.open : ''}`} onClick={handleToggle}>
+        <button
+          type="button"
+          className={[styles.field, isOpen && styles.open, disabled && styles.fieldDisabled].filter(Boolean).join(' ')}
+          onClick={disabled ? undefined : handleToggle}
+          disabled={disabled}
+          aria-disabled={disabled}
+        >
           {value ? (
             <span className={styles.value}>{value}</span>
           ) : (

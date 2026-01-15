@@ -18,7 +18,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
   const { variant } = props;
 
   if (variant === 'full') {
-    const { isUserAuth, userName, avatarUrl, searchValue, onSearchChange, onSearchClear } = props;
+    const { isUserAuth, searchValue, onSearchChange, onSearchClear } = props;
     return (
       <header className={style.header}>
         <LogoUI />

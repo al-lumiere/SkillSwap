@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import RequestIcon from '@icons/request-icon';
-import UserIcon from '@icons/user-icon';
+import UserIcon from '@icons/user-circle-icon';
 import { ProfileNavElementUI } from './profile-nav-element-ui';
 
 const meta: Meta<typeof ProfileNavElementUI> = {

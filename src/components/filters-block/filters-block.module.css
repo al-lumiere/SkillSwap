@@ -17,8 +17,8 @@
   align-items: center;
 }
 
-.header > :nth-child(2) {
-  margin-top: 4px;
+.resetBtnWrap button {
+  padding: 0px 5px;
 }
 
 .title {
@@ -31,6 +31,8 @@
   font-family: var(--header-font-family), sans-serif;
   font-size: 24px;
   letter-spacing: -0.011em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .filters {

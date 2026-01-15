@@ -39,7 +39,7 @@ export const MultiselectUI: FC<MultiselectUIProps> = ({
           key={opt.id}
           label={opt.label}
           checked={selectedIds.includes(opt.id)}
-          onChange={(e) => onOptionChange(opt.id, e)}
+          onChange={(e) => onOptionChange(opt.id, e.currentTarget.checked)}
         />
       ))}
     </fieldset>

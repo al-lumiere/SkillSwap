@@ -1,0 +1,74 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avatarWrapper {
+  align-self: center;
+}
+
+.doubleContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.datePickerWrapper {
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-color, #253017);
+}
+
+.datePicker {
+  height: 48px;
+  border: 1px solid var(--caption-color, #69735d);
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: 4px;
+}
+
+.avatarLabel {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.avatarInput {
+  display: none;
+}
+
+.avatarPicture {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatarPlus {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color, #abd27a);
+  color: #fff;
+  border-radius: 50%;
+}

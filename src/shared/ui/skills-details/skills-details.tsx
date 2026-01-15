@@ -1,5 +1,6 @@
 import React from 'react';
 import ClockIcon from '@icons/clock-icon';
+import PencilIcon from '@icons/pencil-icon';
 import styles from './skills-details.module.css';
 import { SkillDetailsCardUIProps } from './types';
 import { ButtonUI } from '../button/button';
@@ -10,11 +11,15 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
   title,
   category,
   description,
+  isCardActions,
   images,
   isFavorite,
   onFavoriteToggle,
   onOfferExchange,
   isOfferSent = false,
+  isSkillPage,
+  onChangeClick,
+  onSubmitClick,
 }) => {
   const normalizedImages = images.slice(0, 4).map((src) => ({ src, alt: title }));
 
@@ -26,14 +31,46 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
     return 'sliderWithThumbs' as const;
   })();
 
+  let actions: React.ReactNode = null;
+
+  if (!isSkillPage) {
+    actions = (
+      <div className={styles.buttonModal}>
+        <ButtonUI onClick={onChangeClick} type="button" variant="secondary" isWide iconRight={<PencilIcon />}>
+          Редактировать
+        </ButtonUI>
+
+        <ButtonUI onClick={onSubmitClick} type="submit" variant="primary" isWide>
+          Готово
+        </ButtonUI>
+      </div>
+    );
+  } else if (isOfferSent) {
+    actions = (
+      <ButtonUI onClick={onOfferExchange} type="button" variant="secondary" isWide iconLeft={<ClockIcon />}>
+        Обмен предложен
+      </ButtonUI>
+    );
+  } else {
+    actions = (
+      <ButtonUI onClick={onOfferExchange} type="button" variant="primary" isWide>
+        Предложить обмен
+      </ButtonUI>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      <CardActionsUI
-        onShareClick={() => console.log('Share clicked')}
-        onMoreClick={() => console.log('More clicked')}
-        isFavorite={isFavorite}
-        onFavoriteToggle={onFavoriteToggle}
-      />
+      {isCardActions && (
+        <div className={styles.actions}>
+          <CardActionsUI
+            onShareClick={() => console.log('Share clicked')}
+            onMoreClick={() => console.log('More clicked')}
+            isFavorite={isFavorite}
+            onFavoriteToggle={onFavoriteToggle}
+          />
+        </div>
+      )}
 
       <div className={styles.content}>
         <div className={styles.infoSide}>
@@ -45,15 +82,8 @@ export const SkillDetailsCardUI: React.FC<SkillDetailsCardUIProps> = ({
 
             <div className={styles.description}>{description}</div>
           </div>
-          {isOfferSent ? (
-            <ButtonUI onClick={onOfferExchange} type="button" variant="secondary" isWide iconLeft={<ClockIcon />}>
-              Обмен предложен
-            </ButtonUI>
-          ) : (
-            <ButtonUI onClick={onOfferExchange} type="button" variant="primary" isWide>
-              Предложить обмен
-            </ButtonUI>
-          )}
+
+          {actions}
         </div>
 
         <div className={styles.gallerySide}>
