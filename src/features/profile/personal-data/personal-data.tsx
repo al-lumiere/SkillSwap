@@ -7,6 +7,7 @@ import { compressImageToDataUrl } from '@api/compress';
 import { updateProfileThunk } from '@slices/auth/userSlice';
 import { Preloader } from '@ui/preloader';
 import { PersonalDataUI } from '@components/profile-ui/personal-data';
+import styles from './personal-data.module.css';
 
 export type FormState = {
   email: string;
@@ -143,7 +144,7 @@ export const PersonalData: FC = () => {
   if (!currentUser) return <div>Нужно войти</div>;
 
   return (
-    <section>
+    <section className={styles.personalDataContainer}>
       {isLoading && <Preloader variant="overlay" />}
       <PersonalDataUI
         values={form}

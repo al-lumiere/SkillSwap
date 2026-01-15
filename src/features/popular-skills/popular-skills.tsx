@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { SectionUI } from '@components/section';
 import { ButtonUI } from '@ui/button';
 import { useSelector } from 'react-redux';
-import { selectSkillsByList, toggleFavorite } from '@slices/skills/skillsSlice';
+import { selectSkillsByList, toggleFavoriteOptimistic } from '@slices/skills/skillsSlice';
 import { CatalogCardUI } from '@components/catalog-card';
 import { useNavigate } from 'react-router-dom';
 import ChevronRightIcon from '@icons/chevron-right-icon';
@@ -54,7 +54,7 @@ export const PopularSkills: FC = () => {
             onDetailsClick={() => {
               navigate(`/skills/${skill.id}`);
             }}
-            onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
+            onFavoriteToggle={() => dispatch(toggleFavoriteOptimistic(skill.id))}
           />
         );
       })}

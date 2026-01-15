@@ -12,31 +12,33 @@ import { useNavigate } from 'react-router-dom';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
 import { useDispatch } from '@store/store';
-import formatAge from '../../shared/helpers/format-age';
+import formatAge from '../../../shared/helpers/format-age';
 
-export const RecommendedSkills: FC = () => {
-  const recommendedSkills: Skill[] = useSelector(selectSkillsByList('home:recommended'));
-  const recomendedMeta = useSelector(selectSkillsList('home:recommended'));
+export const Favorites: FC = () => {
+  const favoritedSkills: Skill[] = useSelector(selectSkillsByList('favorites'));
+  const favoritedMeta = useSelector(selectSkillsList('favorites'));
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!recomendedMeta?.hasMore) return undefined;
+    if (!favoritedMeta?.hasMore) return undefined;
     if (!sentinelRef.current) return undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        if (recomendedMeta.loading) return;
+        if (favoritedMeta.loading) return;
 
         dispatch(
           fetchSkills({
-            listKey: 'home:recommended',
+            listKey: 'favorites',
             append: true,
             params: {
-              page: recomendedMeta.page,
-              page_size: recomendedMeta.pageSize,
+              page: favoritedMeta.page,
+              page_size: favoritedMeta.pageSize,
+              onlyFavorites: true,
+              ordering: '-createdAt',
             },
           }),
         );
@@ -47,11 +49,11 @@ export const RecommendedSkills: FC = () => {
     observer.observe(sentinelRef.current);
 
     return () => observer.disconnect();
-  }, [recomendedMeta, dispatch]);
+  }, [favoritedMeta, dispatch]);
 
   return (
-    <SectionUI title="Рекомендуем">
-      {recommendedSkills.map((skill) => {
+    <SectionUI title="Избранное">
+      {favoritedSkills.map((skill) => {
         const learnTags = skill.author.learnSubcategories.map((subcat) => ({
           id: subcat.id,
           label: subcat.name,
@@ -80,8 +82,10 @@ export const RecommendedSkills: FC = () => {
         );
       })}
 
-      {recomendedMeta?.hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-      {recomendedMeta?.loading && <p>Загрузка…</p>}
+      {favoritedMeta?.hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+      {favoritedMeta?.loading && <p>Загрузка…</p>}
     </SectionUI>
   );
 };
+
+export default Favorites;

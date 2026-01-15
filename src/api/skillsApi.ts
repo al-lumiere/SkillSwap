@@ -1,5 +1,6 @@
 // имитируем работу сервера, который осуществляет фильтрацию, поиск, сортировку и пагинацию
 import type { DRFPaginated, Skill, SkillsQueryParams } from './types';
+import { userApi } from './userApi';
 
 const FIXTURE_URL = import.meta.env.VITE_FIXTURE_URL as string;
 // const BASE_PATH = 'http://localhost:5173/'
@@ -36,6 +37,16 @@ async function fetchJson<T>(path: string): Promise<T> {
     throw new Error(`HTTP ${res.status} for ${path}`);
   }
   return res.json() as Promise<T>;
+}
+
+async function withFavorited(skills: Skill[]): Promise<Skill[]> {
+  const user = await userApi.getCurrentUser();
+  const liked = new Set(user?.likedSkillIds ?? []);
+  return skills.map((s) => ({
+    ...s,
+    isFavorited: liked.has(s.id),
+    favoritesCount: liked.has(s.id) ? (s.favoritesCount ?? 0) + 1 : (s.favoritesCount ?? 0),
+  }));
 }
 
 function applyFilters(skills: Skill[], params: SkillsQueryParams): Skill[] {
@@ -168,8 +179,15 @@ export const skillsApi = {
   async getSkills(params: SkillsQueryParams = {}): Promise<DRFPaginated<Skill>> {
     const all = await fetchJson<Skill[]>('skills.json');
 
+    // подмешаваем isFavorited взятые из локального хранилища, в данные из фикстур, до обработки
+    const allWithFav = await withFavorited(all);
+
     // фильтры/поиск
-    let filtered = applyFilters(all, params);
+    let filtered = applyFilters(allWithFav, params);
+
+    if (params.onlyFavorites) {
+      filtered = filtered.filter((s) => s.isFavorited);
+    }
 
     // ordering (если не задан — можно задать дефолт)
     // Например для “Новое”: ordering = '-createdAt'
@@ -182,6 +200,7 @@ export const skillsApi = {
 
   async getSkillById(id: number): Promise<Skill | null> {
     const all = await fetchJson<Skill[]>('skills.json');
-    return all.find((skill) => skill.id === id) ?? null;
+    const allWithFav = await withFavorited(all); // и тут тоже подмешиваем isFavorited
+    return allWithFav.find((skill) => skill.id === id) ?? null;
   },
 };

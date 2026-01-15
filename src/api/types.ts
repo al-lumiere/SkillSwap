@@ -82,13 +82,14 @@ export type SkillsQueryParams = {
   subcategoryId?: number[]; // repeated query param: ?subcategoryId=9&subcategoryId=10
   gender?: Gender; // 'любой' | 'мужской' | 'женский'
   cityIds?: number[];
-  favorites_only?: boolean; // страница избранного
+  onlyFavorites?: boolean; // страница избранного
   user_id?: number; // для избранного (возможно не понадобится, т.к. пользователь будет в запросе)
 };
 
 // авторизация и ко
 export type AuthUser = User & {
   email: string;
+  likedSkillIds: number[];
 };
 
 export type AuthResponse = {
