@@ -49,7 +49,7 @@ export const Default: Story = {
       },
       {
         id: '5',
-        element: <ProfileNavElementUI text="Личные данные" icon={<UserIcon />} to="/profile" end/>,
+        element: <ProfileNavElementUI text="Личные данные" icon={<UserIcon />} to="/profile" end />,
       },
     ],
   },
