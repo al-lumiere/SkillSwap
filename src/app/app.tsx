@@ -16,6 +16,7 @@ const NotFoundPage = lazy(() => import('@pages/not-found/not-found'));
 const ServerErrorPage = lazy(() => import('@pages/server-error/server-error'));
 const LoginPage = lazy(() => import('@pages/login/login'));
 const RegisterPage = lazy(() => import('@pages/register/register'));
+const PersonalData = lazy(() => import('@features/profile/personal-data/personal-data'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const App = () => {
             }
           >
             {/* todo: по мере готовности заменить на компоненты типа <PersonalData /> */}
-            <Route index element={<NotFoundPage />} />
+            <Route index element={<PersonalData />} />
             <Route path="requests" element={<NotFoundPage />} />
             <Route path="exchanges" element={<NotFoundPage />} />
             <Route path="favorites" element={<NotFoundPage />} />

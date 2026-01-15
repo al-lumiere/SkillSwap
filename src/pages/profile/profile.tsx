@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ProfileNav } from '@features/profile-nav';
+import { ProfileNav } from '@features/profile/profile-nav';
 
 import styles from './profile.module.css';
 

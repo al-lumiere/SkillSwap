@@ -123,3 +123,31 @@ export type LoginPayload = {
   email: string;
   password: string;
 };
+
+// изменение/обновления пользователя
+export type UpdateProfilePayload = Partial<{
+  email: string;
+  name: string;
+  birthDate: string;
+  gender: Gender;
+  cityId: number;
+  bio: string;
+  avatar: string; // у нас dataURL (или media path , если будут ссылки)
+  learnSubcategoryId: number;
+}>;
+
+export type UpdateSkillPayload = {
+  skillId: number; // текущий id'шник скила, т.к. даю только возможность изменить существующий
+  patch: Partial<{
+    title: string;
+    categoryId: number;
+    subcategoryId: number;
+    description: string;
+    images: string[];
+  }>;
+};
+
+export type ChangePasswordPayload = {
+  oldPassword: string;
+  newPassword: string;
+};
