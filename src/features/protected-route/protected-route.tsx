@@ -13,8 +13,7 @@ export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) =>
   const location = useLocation();
 
   if (!isAuthChecked) {
-    return <Preloader />;
-    // return <h1>Загрузка</h1>;
+    return <Preloader variant="overlay" />;
   }
 
   // Маршруты "только для авторизованных"

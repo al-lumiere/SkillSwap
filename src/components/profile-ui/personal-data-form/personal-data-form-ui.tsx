@@ -7,6 +7,8 @@ import { ButtonUI } from '@ui/button';
 import EditIcon from '@icons/pencil-icon';
 import { SingleselectUI } from '@components/registration-singleselect';
 import { SearchSelectUI } from '@components/registration-search';
+import { TextAreaUI } from '@ui/text-area';
+
 import styles from './personal-data-form-ui.module.css';
 
 type Props = {
@@ -149,23 +151,17 @@ export const PersonalDataFormUI: FC<Props> = ({ values, errors, cities, disabled
         {errors?.cityId && <p className={styles.error}>{errors.cityId}</p>}
       </div>
 
-      <div className={styles.field}>
-        <label htmlFor="bio" className={styles.label}>
-          О себе
-          <textarea
-            id="bio"
-            className={styles.textarea}
-            value={values.bio}
-            onChange={onField('bio')}
-            disabled={disabled}
-            rows={4}
-          />
-          <span className={styles.textareaIcon}>
-            <EditIcon />
-          </span>
-        </label>
-        {errors?.bio && <p className={styles.error}>{errors.bio}</p>}
-      </div>
+      <TextAreaUI
+        label="О себе"
+        name="bio"
+        value={values.bio}
+        onChange={onField('bio')}
+        disabled={disabled}
+        rows={4}
+        icon={<EditIcon />}
+        errorText={errors?.bio}
+        hasError={Boolean(errors?.bio)}
+      />
 
       <div className={styles.actions}>
         <ButtonUI type="submit" disabled={disabled} isWide>

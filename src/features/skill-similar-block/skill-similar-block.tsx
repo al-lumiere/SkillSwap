@@ -6,6 +6,7 @@ import { CatalogCardUI } from '@components/catalog-card';
 import type { Swiper as SwiperType } from 'swiper';
 import { SwiperNavigation } from '@ui/swiper-navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Preloader } from '@ui/preloader';
 
 import { useDispatch, useSelector } from '@store/store';
 
@@ -71,7 +72,7 @@ export const SimilarSkillsBlock: FC<SkillSimilarBlockProps> = ({ categoryId, exc
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const content = (() => {
-    if (categoriesStatus === 'loading' || meta.loading) return <div>Загрузка</div>;
+    if (categoriesStatus === 'loading' || meta.loading) return <Preloader />;
     if (categoriesStatus === 'failed') return <div>Не удалось загрузить категории…</div>;
     if (meta.error) return <div>Не удалось загрузить…</div>;
     if (visible.length === 0) return <div>Похожих предложений пока нет</div>;

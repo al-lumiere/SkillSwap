@@ -6,6 +6,7 @@ import { mediaUrl } from '@api/api';
 import { SkillAuthorBlock } from '@features/skill-author-block';
 import { SkillDetailsBlock } from '@features/skill-details-block';
 import { SimilarSkillsBlock } from '@features/skill-similar-block';
+import { Preloader } from '@ui/preloader';
 import styles from './skill.module.css';
 
 export const SkillPage: FC = () => {
@@ -37,7 +38,7 @@ export const SkillPage: FC = () => {
   }, [skill]);
 
   if (!skill) {
-    if (loading) return <p>Загружаем…</p>;
+    if (loading) return <Preloader variant="overlay" />;
     if (error) return <p>Ошибка: {error}</p>;
     return <p>Навык не найден</p>;
   }

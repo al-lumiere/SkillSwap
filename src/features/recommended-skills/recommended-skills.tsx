@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
 import { useDispatch } from '@store/store';
+import { Preloader } from '@ui/preloader';
 import formatAge from '../../shared/helpers/format-age';
 
 export const RecommendedSkills: FC = () => {
@@ -76,7 +77,7 @@ export const RecommendedSkills: FC = () => {
       })}
 
       {recomendedMeta?.hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
-      {recomendedMeta?.loading && <p>Загрузка…</p>}
+      {recomendedMeta?.loading && <Preloader />}
     </SectionUI>
   );
 };
