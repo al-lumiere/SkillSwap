@@ -17,6 +17,7 @@ const USERS_KEY = 'skillswap_users';
 const TOKEN_KEY = 'access_token';
 
 type StoredUser = AuthUser & { password: string };
+type ToggleFavoriteResult = { skillId: number; isFavorited: boolean; likedSkillIds: number[] };
 
 // утилиты
 
@@ -127,6 +128,7 @@ async function registerUser(payload: RegisterPayload): Promise<AuthResponse> {
     city,
     learnSubcategories: [learnSub],
     skills: [userSkill],
+    likedSkillIds: [],
   };
 
   const storedUser: StoredUser = { ...baseUser, password: payload.password };
@@ -136,6 +138,7 @@ async function registerUser(payload: RegisterPayload): Promise<AuthResponse> {
   const token = generateTokenForUser(newId);
   localStorage.setItem(TOKEN_KEY, token);
 
+  // return { token, user: baseUser };
   return { token, user: baseUser };
 }
 
@@ -155,7 +158,13 @@ async function loginUser(credentials: LoginPayload): Promise<AuthResponse> {
   localStorage.setItem(TOKEN_KEY, token);
 
   const { password: pw, ...authUser } = user;
-  return { token, user: authUser };
+  return {
+    token,
+    user: {
+      ...authUser,
+      likedSkillIds: authUser.likedSkillIds ?? [],
+    },
+  };
 }
 
 async function getCurrentUser(): Promise<AuthUser | null> {
@@ -172,7 +181,11 @@ async function getCurrentUser(): Promise<AuthUser | null> {
   if (!stored) return null;
 
   const { password: pw, ...authUser } = stored;
-  return authUser;
+  // return authUser;
+  return {
+    ...authUser,
+    likedSkillIds: authUser.likedSkillIds ?? [],
+  };
 }
 
 async function logoutUser(): Promise<void> {
@@ -299,6 +312,43 @@ async function changePassword(payload: ChangePasswordPayload): Promise<void> {
   writeUsers(nextUsers);
 }
 
+// лайкосы
+async function toggleFavorite(skillId: number): Promise<ToggleFavoriteResult> {
+  // await delay(50);
+
+  const userId = requireAuthedUserId();
+  const users = readUsers();
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx === -1) throw new Error('Пользователь не найден');
+
+  const prev = users[idx];
+  const prevLiked = prev.likedSkillIds ?? [];
+
+  const set = new Set(prevLiked);
+  let nextIsFavorited: boolean;
+
+  if (set.has(skillId)) {
+    set.delete(skillId);
+    nextIsFavorited = false;
+  } else {
+    set.add(skillId);
+    nextIsFavorited = true;
+  }
+
+  const nextLiked = Array.from(set);
+
+  const nextUser: StoredUser = {
+    ...prev,
+    likedSkillIds: nextLiked,
+  };
+
+  const nextUsers = users.slice();
+  nextUsers[idx] = nextUser;
+  writeUsers(nextUsers);
+
+  return { skillId, isFavorited: nextIsFavorited, likedSkillIds: nextLiked };
+}
+
 // имитируем апи для пользователя, все через localStorage
 export const userApi = {
   registerUser,
@@ -308,4 +358,5 @@ export const userApi = {
   updateProfile,
   updateSkill,
   changePassword,
+  toggleFavorite,
 };

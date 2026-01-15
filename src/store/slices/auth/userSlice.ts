@@ -100,6 +100,18 @@ export const changePasswordThunk = createAsyncThunk(
   },
 );
 
+export const toggleFavoriteThunk = createAsyncThunk(
+  'user/toggleFavorite',
+  async (skillId: number, { rejectWithValue }) => {
+    try {
+      return await userApi.toggleFavorite(skillId);
+    } catch (err) {
+      if (err instanceof Error) return rejectWithValue(err.message);
+      return rejectWithValue('Не удалось поставить/снять лайк');
+    }
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -203,6 +215,12 @@ const userSlice = createSlice({
       .addCase(changePasswordThunk.rejected, (state, action) => {
         state.status = 'failed';
         state.error = (action.payload as string) || 'Ошибка смены пароля';
+      })
+
+      // likes
+      .addCase(toggleFavoriteThunk.fulfilled, (state, action) => {
+        if (!state.currentUser) return;
+        state.currentUser.likedSkillIds = action.payload.likedSkillIds;
       });
   },
 });

@@ -15,7 +15,7 @@ import {
   resetList,
   selectSkillsByList,
   selectSkillsList,
-  toggleFavorite,
+  toggleFavoriteOptimistic,
 } from '@slices/skills/skillsSlice';
 
 import { fetchCategories } from '@slices/categories/categoriesSlice';
@@ -107,7 +107,7 @@ export const SimilarSkillsBlock: FC<SkillSimilarBlockProps> = ({ categoryId, exc
                   likesCount={skill.favoritesCount}
                   isFavorited={skill.isFavorited}
                   onDetailsClick={() => navigate(`/skills/${skill.id}`)}
-                  onFavoriteToggle={(nextValue) => dispatch(toggleFavorite({ skillId: skill.id, nextValue }))}
+                  onFavoriteToggle={() => dispatch(toggleFavoriteOptimistic(skill.id))}
                 />
               </SwiperSlide>
             );

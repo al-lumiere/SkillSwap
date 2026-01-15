@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LogoUI } from '@ui/logo';
 import { NavElementUI } from '@ui/nav-element';
 import { SearchUI } from '@ui/search';
@@ -16,6 +17,7 @@ import { HeaderUIProps } from './type';
 
 export const HeaderUI: FC<HeaderUIProps> = (props) => {
   const { variant } = props;
+  const navigate = useNavigate();
 
   if (variant === 'full') {
     const { isUserAuth, searchValue, onSearchChange, onSearchClear } = props;
@@ -45,7 +47,7 @@ export const HeaderUI: FC<HeaderUIProps> = (props) => {
                   <IconButtonUI onClick={() => {}}>
                     <NotificationIcon />
                   </IconButtonUI>
-                  <IconButtonUI onClick={() => {}}>
+                  <IconButtonUI onClick={() => navigate('/profile/favorites')}>
                     <LikeIcon />
                   </IconButtonUI>
                 </>

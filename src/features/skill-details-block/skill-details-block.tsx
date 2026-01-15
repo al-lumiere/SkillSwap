@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
+import { useDispatch } from '@store/store';
+import { toggleFavoriteOptimistic } from '@slices/skills/skillsSlice';
 import NotificationIcon from '@icons/notification-icon';
 import { SkillDetailsCardUI } from '@ui/skills-details';
 import { ActionResultUI } from '@ui/action-result';
@@ -11,6 +13,7 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOfferSent, setIsOfferSent] = useState(false);
   const [isExchangeModalOpen, setIsExchangeModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const serverSkillId = skill.id;
   const serverIsFavorited = skill.isFavorited;
@@ -28,9 +31,7 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
     [skill.category?.name, skill.subcategory?.name],
   );
 
-  const handleFavoriteToggle = useCallback((nextValue?: boolean) => {
-    setIsFavorite((prev) => (typeof nextValue === 'boolean' ? nextValue : !prev));
-  }, []);
+  const handleFavoriteToggle = () => dispatch(toggleFavoriteOptimistic(skill.id));
 
   const handleOfferExchange = useCallback(() => {
     setIsOfferSent(true);

@@ -6,7 +6,13 @@ import { ButtonUI } from '@ui/button';
 import { CatalogCardUI } from '@components/catalog-card';
 
 import { useDispatch, useSelector } from '@store/store';
-import { fetchSkills, resetList, selectSkillsByList, selectSkillsList } from '@slices/skills/skillsSlice';
+import {
+  fetchSkills,
+  resetList,
+  selectSkillsByList,
+  selectSkillsList,
+  toggleFavoriteOptimistic,
+} from '@slices/skills/skillsSlice';
 
 import SortIcon from '@icons/sort-icon';
 import { Preloader } from '@ui/preloader';
@@ -138,7 +144,7 @@ export const FilteredSkills: FC = () => {
             likesCount={skill.favoritesCount}
             isFavorited={skill.isFavorited}
             onDetailsClick={() => navigate(`/skills/${skill.id}`)}
-            onFavoriteToggle={() => {}}
+            onFavoriteToggle={() => dispatch(toggleFavoriteOptimistic(skill.id))}
           />
         );
       })}
