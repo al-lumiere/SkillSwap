@@ -80,9 +80,9 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
             ) : (
               <UserCircleIcon aria-hidden />
             )}
-            <span className={styles.avatarPlus} aria-hidden>
-              <AddIcon />
-            </span>
+          </span>
+          <span className={styles.avatarPlus} aria-hidden>
+            <AddIcon />
           </span>
         </label>
       </div>
