@@ -4,7 +4,7 @@ import RequestIcon from '@icons/request-icon';
 import MessageTextIcon from '@icons/message-text-icon';
 import LikeIcon from '@icons/like-icon';
 import IdeaIcon from '@icons/idea-icon';
-import UserIcon from '@icons/user-icon';
+import UserIcon from '@icons/user-circle-icon';
 import { ProfileNavUI } from './profile-nav-ui';
 import { ProfileNavElementUI } from '../profile-nav-element-ui';
 

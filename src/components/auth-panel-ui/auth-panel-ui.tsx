@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, FormEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonUI } from '@ui/button';
 import GoogleIcon from '@icons/google-icon';
@@ -9,6 +9,7 @@ import type { AuthPanelUIProps } from './type';
 export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   actionText,
   onSubmit,
+  onAction,
   isActionDisabled = false,
   children,
   errorText,
@@ -17,49 +18,59 @@ export const AuthPanelUI: FC<AuthPanelUIProps> = ({
   className,
   showRegisterLink = true,
   registerLinkTo = '/register',
-}) => (
-  <form className={[styles.panel, className].filter(Boolean).join(' ')} onSubmit={onSubmit} noValidate>
-    <div className={styles.groupUserData}>
-      <div className={styles.socialButtons}>
-        <ButtonUI variant="secondary" onClick={onGoogleClick} isWide iconLeft={<GoogleIcon />} type="button">
-          Продолжить с Google
-        </ButtonUI>
+}) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    onSubmit?.(e);
+    if (!onSubmit) {
+      e.preventDefault();
+      onAction?.();
+    }
+  };
 
-        <ButtonUI variant="secondary" onClick={onAppleClick} isWide iconLeft={<AppleIcon />} type="button">
-          Продолжить с Apple
-        </ButtonUI>
+  return (
+    <form className={[styles.panel, className].filter(Boolean).join(' ')} onSubmit={handleSubmit} noValidate>
+      <div className={styles.groupUserData}>
+        <div className={styles.socialButtons}>
+          <ButtonUI variant="secondary" onClick={onGoogleClick} isWide iconLeft={<GoogleIcon />} type="button">
+            Продолжить с Google
+          </ButtonUI>
+
+          <ButtonUI variant="secondary" onClick={onAppleClick} isWide iconLeft={<AppleIcon />} type="button">
+            Продолжить с Apple
+          </ButtonUI>
+        </div>
+
+        <div className={styles.divider}>
+          <span className={styles.dividerLine} aria-hidden="true" />
+          <span>или</span>
+          <span className={styles.dividerLine} aria-hidden="true" />
+        </div>
+
+        <div className={styles.fields}>{children}</div>
+
+        {errorText && (
+          <p className={styles.formError} role="alert">
+            {errorText}
+          </p>
+        )}
       </div>
+      {(actionText || showRegisterLink) && (
+        <div className={styles.groupButtons}>
+          {actionText && (
+            <div className={styles.action}>
+              <ButtonUI variant="primary" disabled={isActionDisabled} isWide type="submit">
+                {actionText}
+              </ButtonUI>
+            </div>
+          )}
 
-      <div className={styles.divider}>
-        <span className={styles.dividerLine} aria-hidden="true" />
-        <span>или</span>
-        <span className={styles.dividerLine} aria-hidden="true" />
-      </div>
-
-      <div className={styles.fields}>{children}</div>
-
-      {errorText && (
-        <p className={styles.formError} role="alert">
-          {errorText}
-        </p>
+          {showRegisterLink && (
+            <Link className={styles.registerLink} to={registerLinkTo}>
+              Зарегистрироваться
+            </Link>
+          )}
+        </div>
       )}
-    </div>
-    {(actionText || showRegisterLink) && (
-      <div className={styles.groupButtons}>
-        {actionText && onAction && (
-          <div className={styles.action}>
-            <ButtonUI variant="primary" onClick={onAction} isWide>
-              {actionText}
-            </ButtonUI>
-          </div>
-        )}
-
-        {showRegisterLink && (
-          <Link className={styles.registerLink} to={registerLinkTo}>
-            Зарегистрироваться
-          </Link>
-        )}
-      </div>
-    )}
-  </div>
-);
+    </form>
+  );
+};

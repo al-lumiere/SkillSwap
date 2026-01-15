@@ -3,7 +3,7 @@ import { InputUI } from '@ui/input';
 import { SingleselectUI } from '@components/registration-singleselect';
 import { SearchSelectUI } from '@components/registration-search';
 import { SingleselectOption } from '@components/registration-singleselect/type';
-import UserIcon from '@icons/user-icon';
+import UserCircleIcon from '@icons/user-circle-icon';
 import AddIcon from '@icons/add-icon';
 import { RegistrationProfileUIProps } from './type';
 import styles from './registration-profile.module.css';
@@ -78,7 +78,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
             {localDraft.avatar ? (
               <img className={styles.avatarImg} src={localDraft.avatar} alt="" />
             ) : (
-              <UserIcon aria-hidden />
+              <UserCircleIcon aria-hidden />
             )}
             <span className={styles.avatarPlus} aria-hidden>
               <AddIcon />
