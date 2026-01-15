@@ -159,7 +159,7 @@ async function loginUser(credentials: LoginPayload): Promise<AuthResponse> {
 }
 
 async function getCurrentUser(): Promise<AuthUser | null> {
-  await delay(200);
+  await delay();
 
   const token = localStorage.getItem(TOKEN_KEY);
   if (!token) return null;
@@ -176,12 +176,12 @@ async function getCurrentUser(): Promise<AuthUser | null> {
 }
 
 async function logoutUser(): Promise<void> {
-  await delay(100);
+  await delay(200);
   localStorage.removeItem(TOKEN_KEY);
 }
 
 async function updateProfile(patch: UpdateProfilePayload): Promise<AuthUser> {
-  await delay(500);
+  await delay();
 
   const userId = requireAuthedUserId();
   const users = readUsers();
@@ -230,7 +230,7 @@ async function updateProfile(patch: UpdateProfilePayload): Promise<AuthUser> {
 
 // обновлние навыка мы пока не используем, сделал заготовку-скелет по аналогии, требует доработки/проверки
 async function updateSkill(payload: UpdateSkillPayload): Promise<AuthUser> {
-  await delay(200);
+  await delay();
 
   const userId = requireAuthedUserId();
   const users = readUsers();
@@ -276,7 +276,7 @@ async function updateSkill(payload: UpdateSkillPayload): Promise<AuthUser> {
 
 // в макете не показано как должен меняться пароль, но есть заглушка, добавил метод на всякий/на будущее
 async function changePassword(payload: ChangePasswordPayload): Promise<void> {
-  await delay(200);
+  await delay();
 
   const userId = requireAuthedUserId();
   const users = readUsers();

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from '@store/store';
 import { fetchSkills, resetList, selectSkillsByList, selectSkillsList } from '@slices/skills/skillsSlice';
 
 import SortIcon from '@icons/sort-icon';
+import { Preloader } from '@ui/preloader';
 import { Skill } from '@api/types';
 import { mediaUrl } from '@api/api';
 import formatAge from '../../shared/helpers/format-age';
@@ -112,7 +113,7 @@ export const FilteredSkills: FC = () => {
         </ButtonUI>
       }
     >
-      {filteredMeta?.loading && <p>Загрузка…</p>}
+      {filteredMeta?.loading && <Preloader />}
       {filteredMeta?.error && <p>Ошибка: {filteredMeta.error}</p>}
 
       {filteredSkills.map((skill) => {
