@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '@store/store';
+import { Preloader } from '@ui/preloader';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
@@ -8,14 +9,12 @@ type ProtectedRouteProps = {
 };
 
 export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
-  const { currentUser, status } = useSelector((store) => store.user);
+  const { currentUser, isAuthChecked } = useSelector((store) => store.user);
   const location = useLocation();
 
-  const isAuthChecking = status === 'idle' || status === 'loading';
-
-  if (isAuthChecking) {
-    // return <Preloader />;
-    return <h1>Загрузка</h1>;
+  if (!isAuthChecked) {
+    return <Preloader />;
+    // return <h1>Загрузка</h1>;
   }
 
   // Маршруты "только для авторизованных"
