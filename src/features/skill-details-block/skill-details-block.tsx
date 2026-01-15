@@ -47,6 +47,8 @@ export const SkillDetailsBlock: FC<SkillDetailsBlockProps> = ({ skill }) => {
         title={skill.title}
         category={preparedCategory}
         description={skill.description}
+        isCardActions
+        isSkillPage
         images={skill.images}
         isFavorite={isFavorite}
         onFavoriteToggle={handleFavoriteToggle}

@@ -17,6 +17,7 @@ type UserState = {
   status: Status;
   error: string | null;
   isAuthChecked: boolean;
+  pendingUser: AuthUser | null;
 };
 
 const initialState: UserState = {
@@ -24,6 +25,7 @@ const initialState: UserState = {
   status: 'idle',
   error: null,
   isAuthChecked: false,
+  pendingUser: null,
 };
 
 export const fetchCurrentUserThunk = createAsyncThunk('user/fetchCurrentUser', async (_, { rejectWithValue }) => {
@@ -101,7 +103,15 @@ export const changePasswordThunk = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    acceptRegisteredUser(state) {
+      state.currentUser = state.pendingUser;
+      state.pendingUser = null;
+    },
+    clearPendingUser(state) {
+      state.pendingUser = null;
+    },
+  },
   extraReducers(builder) {
     builder
       // fetchCurrentUser
@@ -128,7 +138,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUserThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.currentUser = action.payload.user;
+        state.pendingUser = action.payload.user;
       })
       .addCase(registerUserThunk.rejected, (state, action) => {
         state.status = 'failed';
@@ -197,4 +207,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { acceptRegisteredUser, clearPendingUser } = userSlice.actions;
 export default userSlice.reducer;

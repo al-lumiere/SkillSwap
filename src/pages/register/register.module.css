@@ -7,16 +7,6 @@
   margin: 0 auto auto;
 }
 
-/* .title {
-  font-family: var(--header-font-family);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: -0.011em;
-  color: var(--text-color);
-} */
-
 .blocks {
   display: flex;
   flex-direction: row;
@@ -49,4 +39,40 @@
   margin-top: 32px;
   gap: 20px;
   justify-content: space-between;
+}
+
+.modalFirst {
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 44px 0px 32px;
+}
+
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.modalHeaderTitle {
+  font-family: var(--header-font-family);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.011em;
+  color: var(--text-color);
+}
+
+.modalHeaderDesc {
+  font-family: var(--body-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
 }

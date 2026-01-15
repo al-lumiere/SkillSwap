@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable arrow-body-style */
 import { Gender, RegisterPayload } from '@api/types';
-import { registerUserThunk } from '@slices/auth/userSlice';
+import { registerUserThunk, acceptRegisteredUser } from '@slices/auth/userSlice';
 import { useDispatch, useSelector } from '@store/store';
-import { ChangeEvent, useEffect, useMemo, useRef, useState, type FC, type FormEvent } from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef, useState, type FC } from 'react';
 import {
   setStep,
   saveDraft,
@@ -26,6 +26,10 @@ import { RegistrationAccountUI } from '@features/registration-account';
 import { RegistrationProfileUI } from '@features/registration-profile';
 import { RegistrationSkillUI } from '@features/registration-skill';
 import { ButtonUI } from '@ui/button';
+import { ModalUI } from '@ui/modal-ui';
+import { ActionResultUI } from '@ui/action-result';
+import { SkillDetailsCardUI } from '@ui/skills-details';
+import DoneIcon from '@icons/done-icon';
 import styles from './register.module.css';
 
 type StepData = Step1Account | Step2Profile | Step3Skill;
@@ -40,12 +44,18 @@ export const RegisterPage: FC = () => {
   const categories = useSelector((s) => s.categories.data);
   const categoriesStatus = useSelector((s) => s.categories.status);
 
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [pendingPayload, setPendingPayload] = useState<RegisterPayload | null>(null);
+
+  const didRequestSubmitRef = useRef(false);
+
   useEffect(() => {
     if (citiesStatus === 'idle') dispatch(fetchCities());
     if (categoriesStatus === 'idle') dispatch(fetchCategories());
   }, [dispatch, citiesStatus, categoriesStatus]);
-
-  const [localError, setLocalError] = useState<string | null>(null);
 
   function stepKey(st: Step): 'step1' | 'step2' | 'step3' {
     switch (st) {
@@ -92,6 +102,21 @@ export const RegisterPage: FC = () => {
     setLocalDraft(stepInitialValues);
     setLocalError(null);
   }, [stepInitialValues, step]);
+
+  useEffect(() => {
+    if (!didRequestSubmitRef.current) return;
+
+    if (status === 'succeeded') {
+      didRequestSubmitRef.current = false;
+      setIsPreviewOpen(false);
+      setIsSuccessOpen(true);
+      setPendingPayload(null);
+    }
+
+    if (status === 'failed') {
+      didRequestSubmitRef.current = false;
+    }
+  }, [status]);
 
   const isLoading = status === 'loading';
 
@@ -199,18 +224,12 @@ export const RegisterPage: FC = () => {
     dispatch(setStep((step - 1) as Step));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!validateStep3()) return;
-
-    // фиксируем шаг 3 (финальный)
-    dispatch(commitStep({ step: 3 as any, data: localDraft } as any));
-
+  const buildPayload = (): RegisterPayload => {
     const s1 = formData.step1;
     const s2 = formData.step2;
     const s3 = { ...formData.step3, ...localDraft }; // step3 точно актуальный
 
-    const payload: RegisterPayload = {
+    return {
       email: s1.email.trim(),
       password: s1.password,
 
@@ -228,11 +247,51 @@ export const RegisterPage: FC = () => {
       skillDescription: s3.skillDescription.trim(),
       skillImages: s3.skillImages ?? [],
     };
+  };
 
-    // todo: вызвать попап с подтверждением, отрисовав в него payload, и только
-    // потом, по нажатию на "готово" в попапе, дернуть диспатч регестрации
+  const getSkillCategoryLabel = (p: RegisterPayload) => {
+    const cat = categories.find((c: any) => c.id === p.skillCategoryId);
+    const sub = cat?.subcategories?.find((s: any) => s.id === p.skillSubcategoryId);
 
-    dispatch(registerUserThunk(payload));
+    const catName = (cat as any)?.title ?? (cat as any)?.name ?? '';
+    const subName = (sub as any)?.title ?? (sub as any)?.name ?? '';
+
+    return subName ? `${catName} / ${subName}` : catName;
+  };
+
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    if (step < 3) {
+      handleNext();
+      return;
+    }
+
+    if (!validateStep3()) return;
+
+    dispatch(commitStep({ step: 3 as any, data: localDraft } as any));
+
+    const payload = buildPayload();
+    setPendingPayload(payload);
+    setIsPreviewOpen(true);
+  };
+
+  const handleConfirmSubmit = async () => {
+    if (!pendingPayload) return;
+
+    didRequestSubmitRef.current = true;
+
+    try {
+      await dispatch(registerUserThunk(pendingPayload)).unwrap();
+      // дальше откроется success-модалка через useEffect(status)
+    } catch (e) {
+      didRequestSubmitRef.current = false;
+    }
+  };
+
+  const handleSuccessClose = () => {
+    setIsSuccessOpen(false);
+    dispatch(acceptRegisteredUser());
   };
 
   const onLearnCategoryChange = (categoryId: string) => {
@@ -261,7 +320,7 @@ export const RegisterPage: FC = () => {
     <div className={styles.wrapper}>
       <StepperUI currentStep={step} totalSteps={3} />
       <div className={styles.blocks}>
-        <form className={styles.form_container} onSubmit={handleSubmit}>
+        <form className={styles.form_container} onSubmit={handleFormSubmit}>
           {step === 1 && (
             <RegistrationAccountUI isLoading={isLoading} localDraft={localDraft as Step1Account} onField={onField} />
           )}
@@ -306,7 +365,7 @@ export const RegisterPage: FC = () => {
             )}
 
             {step === 3 && (
-              <ButtonUI type="submit" disabled={isLoading} isWide onClick={handleSubmit}>
+              <ButtonUI type="submit" disabled={isLoading} isWide>
                 {isLoading ? 'Регистрируем…' : 'Продолжить'}
               </ButtonUI>
             )}
@@ -338,6 +397,44 @@ export const RegisterPage: FC = () => {
           )}
         </div>
       </div>
+
+      {isPreviewOpen && (
+        <ModalUI onClose={() => setIsPreviewOpen(false)}>
+          {pendingPayload && (
+            <div className={styles.modalFirst}>
+              <div className={styles.modalHeader}>
+                <span className={styles.modalHeaderTitle}>Ваше предложение</span>
+                <span className={styles.modalHeaderDesc}>Пожалуйста, проверьте и подтвердите правильность данных</span>
+              </div>
+
+              <SkillDetailsCardUI
+                title={pendingPayload.skillTitle}
+                category={getSkillCategoryLabel(pendingPayload)}
+                description={pendingPayload.skillDescription}
+                isCardActions={false}
+                images={pendingPayload.skillImages}
+                isSkillPage={false}
+                onChangeClick={() => setIsPreviewOpen(false)}
+                onSubmitClick={handleConfirmSubmit}
+              />
+            </div>
+          )}
+        </ModalUI>
+      )}
+
+      {isSuccessOpen && (
+        <ModalUI onClose={handleSuccessClose}>
+          <div style={{ padding: '80px 60px', width: '556px' }}>
+            <ActionResultUI
+              icon={<DoneIcon />}
+              title="Ваше предложение создано"
+              description="Теперь вы можете предложить обмен"
+              buttonText="Готово"
+              buttonOnClick={handleSuccessClose}
+            />
+          </div>
+        </ModalUI>
+      )}
     </div>
   );
 };
