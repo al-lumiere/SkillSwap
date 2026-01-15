@@ -142,7 +142,7 @@ export const RegisterPage: FC = () => {
   };
 
   const onSkillImages = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files ?? []).slice(0, 3); // например не больше 3
+    const files = Array.from(e.target.files ?? []).slice(0, 4); // например не больше 3
     const urls = await Promise.all(
       files.map((file) =>
         compressImageToDataUrl({
