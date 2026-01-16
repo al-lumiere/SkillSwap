@@ -157,8 +157,8 @@ export const PersonalData: FC = () => {
       />
       {(localError || savedMsg) && (
         <div>
-          {localError && <p style={{ color: 'crimson' }}>{localError}</p>}
-          {savedMsg && <p style={{ color: 'green' }}>{savedMsg}</p>}
+          {localError && <div className={styles.errorText}>{localError}</div>}
+          {savedMsg  && <div className={`${styles.errorText} ${styles.succesText}`}>{savedMsg}</div>}
         </div>
       )}
     </section>

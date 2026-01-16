@@ -3,3 +3,17 @@
   padding: 60px;
   background-color: var(--card-input-color);
 }
+
+.errorText {
+  margin-top: 4px;
+  font-family: var(--body-font-family), sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--error-color);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.succesText {
+  color: var(--button-pressed-color)
+}

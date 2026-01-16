@@ -110,46 +110,41 @@ export const PersonalDataFormUI: FC<Props> = ({ values, errors, cities, disabled
           hasError={Boolean(errors?.birthDate)}
         />
 
-        <div>
-          <SingleselectUI
-            label="Пол"
-            placeholder="Выберите пол"
-            value={genderValue}
-            options={genderOptions}
-            selectedId={values.gender}
-            isOpen={isGenderOpen}
-            handleToggle={() => setIsGenderOpen((v) => !v)}
-            onClose={() => setIsGenderOpen(false)}
-            onSelect={onGenderSelect}
-            placement="bottom-end"
-            offset={-1}
-          />
-          {errors?.gender && <p className={styles.error}>{errors.gender}</p>}
-        </div>
-      </div>
-
-      <div>
-        <SearchSelectUI
-          label="Город"
-          placeholder="Начните вводить..."
-          value={cityValue}
-          options={cities}
-          isOpen={isCityOpen}
-          handleToggle={() => setIsCityOpen((v) => !v)}
-          onClose={() => {
-            setIsCityOpen(false);
-            setCityQuery('');
-          }}
-          query={cityQuery}
-          handleQueryChange={(q: string) => setCityQuery(q)}
-          handleClear={() => setCityQuery('')}
-          onSelect={onCitySelect}
-          placement="bottom-start"
+        <SingleselectUI
+          label="Пол"
+          placeholder="Выберите пол"
+          value={genderValue}
+          options={genderOptions}
+          selectedId={values.gender}
+          isOpen={isGenderOpen}
+          handleToggle={() => setIsGenderOpen((v) => !v)}
+          onClose={() => setIsGenderOpen(false)}
+          onSelect={onGenderSelect}
+          placement="bottom-end"
           offset={-1}
+          errorMessage={errors?.gender}
         />
-
-        {errors?.cityId && <p className={styles.error}>{errors.cityId}</p>}
       </div>
+
+      <SearchSelectUI
+        label="Город"
+        placeholder="Начните вводить..."
+        value={cityValue}
+        options={cities}
+        isOpen={isCityOpen}
+        handleToggle={() => setIsCityOpen((v) => !v)}
+        onClose={() => {
+          setIsCityOpen(false);
+          setCityQuery('');
+        }}
+        query={cityQuery}
+        handleQueryChange={(q: string) => setCityQuery(q)}
+        handleClear={() => setCityQuery('')}
+        onSelect={onCitySelect}
+        placement="bottom-start"
+        offset={-1}
+        errorMessage={errors?.cityId}
+      />
 
       <TextAreaUI
         label="О себе"

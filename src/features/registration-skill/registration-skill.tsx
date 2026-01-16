@@ -73,6 +73,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
           setCategoryOpen(false);
         }}
         disabled={categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.skillCategoryId}
       />
 
       <SingleselectUI
@@ -94,6 +95,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         }}
         options={subcategoryOptions}
         disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.skillSubcategoryId}
       />
 
       <TextAreaUI
