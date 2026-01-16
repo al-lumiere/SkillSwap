@@ -1,9 +1,11 @@
 import type { Step3Skill } from '@slices/registration/registrationSlice';
 import { ChangeEvent } from 'react';
 import { Category } from '@api/types';
+import { Step3Errors } from '@pages/register/register';
 
 export type RegistrationSkillUIProps = {
   localDraft: Step3Skill;
+  errors: Step3Errors;
   onField: (
     field: keyof Step3Skill,
   ) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;

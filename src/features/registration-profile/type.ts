@@ -1,6 +1,7 @@
 import type { Step2Profile } from '@slices/registration/registrationSlice';
 import { ChangeEvent } from 'react';
 import { City, Category } from '@api/types';
+import { Step2Errors } from '@pages/register/register';
 
 export type RegistrationProfileUIProps = {
   localDraft: Step2Profile;
@@ -15,4 +16,5 @@ export type RegistrationProfileUIProps = {
   learnCategoryId: string;
   learnSubcategories: { id: number; name: string }[];
   onLearnCategoryChange: (categoryId: string) => void;
+  errors: Step2Errors;
 };

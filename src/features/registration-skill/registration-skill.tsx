@@ -1,6 +1,7 @@
 import { FC, useState, useMemo } from 'react';
 import { InputUI } from '@ui/input';
 import { SingleselectUI } from '@components/registration-singleselect';
+import { TextAreaUI } from '@ui/text-area';
 import { RegistrationSkillUIProps } from './type';
 import styles from './registration-skill.module.css';
 
@@ -13,6 +14,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
   skillCategoryId,
   skillSubcategories,
   onSkillCategoryChange,
+  errors,
 }) => {
   const [isCategoryOpen, setCategoryOpen] = useState(false);
   const [isSubcatOpen, setSubcatOpen] = useState(false);
@@ -46,7 +48,10 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         name="register-skill-title"
         value={localDraft.skillTitle ?? ''}
         onChange={onField('skillTitle')}
+        errorText={errors?.skillTitle}
+        hasError={Boolean(errors?.skillTitle)}
       />
+
       <SingleselectUI<number>
         isOpen={isCategoryOpen}
         onClose={() => setCategoryOpen(false)}
@@ -69,6 +74,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         }}
         disabled={categoriesStatus !== 'succeeded'}
       />
+
       <SingleselectUI
         isOpen={isSubcatOpen}
         onClose={() => setSubcatOpen(false)}
@@ -90,29 +96,29 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
       />
 
+      <TextAreaUI
+        label="Описание"
+        name="bio"
+        value={localDraft.skillDescription}
+        onChange={onField('skillDescription')}
+        rows={4}
+        errorText={errors?.skillDescription}
+        hasError={Boolean(errors?.skillDescription)}
+      />
+      
       <div>
-        <label className={`${styles.label} ${styles.text}`} htmlFor="register-skill-description">
-          Описание
-          <textarea
-            className={`${styles.textareaField} ${styles.text}`}
-            placeholder="Коротко опишите, чему можете научить"
-            id="register-skill-description"
-            value={localDraft.skillDescription ?? ''}
-            onChange={onField('skillDescription')}
-          />
-        </label>
-      </div>
-
-      <div className={styles.dragndropWrapper}>
-        <label className={`${styles.dragndropField} ${styles.text}`} htmlFor="register-skill-images">
-          Перетащите или выберите изображения навыка
-          <input id="register-skill-images" type="file" multiple accept="image/*" onChange={onSkillImages} />
-        </label>
-        <div style={{ display: 'flex', gap: 8 }}>
-          {localDraft.skillImages?.map((img: string) => (
-            <img key={img} src={img} alt="" style={{ width: 80, height: 80, objectFit: 'cover' }} />
-          ))}
+        <div className={styles.dragndropWrapper}>
+          <label className={`${styles.dragndropField} ${styles.text}`} htmlFor="register-skill-images">
+            Перетащите или выберите изображения навыка
+            <input id="register-skill-images" type="file" multiple accept="image/*" onChange={onSkillImages} />
+          </label>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {localDraft.skillImages?.map((img: string) => (
+              <img key={img} src={img} alt="" style={{ width: 80, height: 80, objectFit: 'cover' }} />
+            ))}
+          </div>
         </div>
+        {errors?.skillImages && <p className={styles.errorText}>{errors.skillImages}</p>}
       </div>
     </div>
   );

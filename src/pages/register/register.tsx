@@ -34,6 +34,12 @@ import styles from './register.module.css';
 
 type StepData = Step1Account | Step2Profile | Step3Skill;
 
+export type Step1Errors = Partial<Record<keyof Step1Account, string>>;
+export type Step2Errors = Partial<Record<keyof Step2Profile, string>>;
+export type Step3Errors = Partial<Record<keyof Step3Skill, string>>;
+
+type StepErrors = Step1Errors | Step2Errors | Step3Errors;
+
 export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
 
@@ -44,6 +50,7 @@ export const RegisterPage: FC = () => {
   const categories = useSelector((s) => s.categories.data);
   const categoriesStatus = useSelector((s) => s.categories.status);
 
+  const [stepErrors, setStepErrors] = useState<StepErrors>({});
   const [localError, setLocalError] = useState<string | null>(null);
 
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -101,6 +108,7 @@ export const RegisterPage: FC = () => {
   useEffect(() => {
     setLocalDraft(stepInitialValues);
     setLocalError(null);
+    setStepErrors({});
   }, [stepInitialValues, step]);
 
   useEffect(() => {
@@ -124,6 +132,12 @@ export const RegisterPage: FC = () => {
     const { value } = e.target;
     setLocalDraft((prev: any) => ({ ...prev, [field]: value }));
     setLocalError(null);
+    setStepErrors((prev) => {
+      if (!(field in prev)) return prev;
+      const next = { ...(prev as any) };
+      delete (next as any)[field];
+      return next;
+    });
   };
 
   const onAvatarFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -170,9 +184,21 @@ export const RegisterPage: FC = () => {
   // Валидация берёт из localDraft (то, что вводят прямо сейчас)
   const validateStep1 = (): boolean => {
     const { email, password } = localDraft as { email: string; password: string };
-    if (!email?.trim()) return (setLocalError('Введите email'), false);
-    if (!password?.trim()) return (setLocalError('Введите пароль'), false);
-    if (!/\S+@\S+\.\S+/.test(email)) return (setLocalError('Неверный формат email'), false);
+
+    const next: Step1Errors = {};
+
+    if (!email?.trim()) next.email = 'Введите email';
+    else if (!/\S+@\S+\.\S+/.test(email)) next.email = 'Неверный формат email';
+    if (!password?.trim()) next.password = 'Введите пароль';
+    else if (password?.trim().length < 8) next.password = 'Пароль должен содержать не менее 8 символов';
+
+    setStepErrors(next);
+
+    if (Object.keys(next).length) {
+      setLocalError('Проверьте поля формы');
+      return false;
+    }
+
     return true;
   };
 
@@ -185,27 +211,49 @@ export const RegisterPage: FC = () => {
       learnCategoryId: string;
       learnSubcategoryId: string;
     };
-    if (!v.name?.trim()) return (setLocalError('Введите имя'), false);
-    if (!v.birthDate?.trim()) return (setLocalError('Укажите дату рождения'), false);
-    if (v.gender === 'any') return (setLocalError('Укажите пол'), false);
-    if (!v.cityId?.trim()) return (setLocalError('Выберите город'), false);
-    // if (!v.learnSubcategoryId?.trim()) return (setLocalError('Выберите направление, которому хотите учиться'), false);
-    if (!v.learnCategoryId?.trim()) return (setLocalError('Выберите категорию обучения'), false);
-    if (!v.learnSubcategoryId?.trim()) return (setLocalError('Выберите подкатегорию обучения'), false);
+
+    const next: Step2Errors = {};
+
+    if (!v.name?.trim()) next.name = 'Введите имя';
+    if (!v.birthDate?.trim()) next.birthDate = 'Укажите дату рождения';
+    if (v.gender === 'any') next.gender = 'Укажите пол';
+    if (!String(v.cityId ?? '').trim()) next.cityId = 'Выберите город';
+    if (!String(v.learnCategoryId ?? '').trim()) next.learnCategoryId = 'Выберите категорию обучения';
+    if (!String(v.learnSubcategoryId ?? '').trim()) next.learnSubcategoryId = 'Выберите подкатегорию обучения';
+
+    setStepErrors(next);
+
+    if (Object.keys(next).length) {
+      setLocalError('Проверьте поля формы');
+      return false;
+    }
+
     return true;
   };
 
   const validateStep3 = (): boolean => {
+    console.log('validateStep3 fired', localDraft);
     const v = localDraft as {
       skillTitle: string;
       skillCategoryId: string;
       skillSubcategoryId: string;
       skillDescription: string;
+      skillImages: string[];
     };
-    if (!v.skillTitle?.trim()) return (setLocalError('Введите название навыка'), false);
-    if (!v.skillCategoryId?.trim() || !v.skillSubcategoryId?.trim())
-      return (setLocalError('Выберите категорию и подкатегорию навыка'), false);
-    if (!v.skillDescription?.trim()) return (setLocalError('Добавьте описание навыка'), false);
+    const next: Step3Errors = {};
+
+    if (!v.skillTitle?.trim()) next.skillTitle = 'Введите название навыка';
+    if (!String(v.skillCategoryId ?? '').trim()) next.skillCategoryId = 'Выберите категорию';
+    if (!String(v.skillSubcategoryId ?? '').trim()) next.skillSubcategoryId = 'Выберите подкатегорию';
+    if (!v.skillDescription?.trim()) next.skillDescription = 'Добавьте описание навыка';
+    if (v.skillImages?.length < 1) next.skillImages = 'Добавьте по меньшей мере одну картинку';
+
+    setStepErrors(next);
+
+    if (Object.keys(next).length) {
+      setLocalError('Проверьте поля формы');
+      return false;
+    }
     return true;
   };
 
@@ -261,6 +309,7 @@ export const RegisterPage: FC = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    console.log('handleFormSubmit', { step });
 
     if (step < 3) {
       handleNext();
@@ -322,7 +371,12 @@ export const RegisterPage: FC = () => {
       <div className={styles.blocks}>
         <form className={styles.form_container} onSubmit={handleFormSubmit}>
           {step === 1 && (
-            <RegistrationAccountUI isLoading={isLoading} localDraft={localDraft as Step1Account} onField={onField} />
+            <RegistrationAccountUI
+              isLoading={isLoading}
+              localDraft={localDraft as Step1Account}
+              onField={onField}
+              errors={stepErrors as Step1Errors}
+            />
           )}
           {step === 2 && (
             <RegistrationProfileUI
@@ -336,6 +390,7 @@ export const RegisterPage: FC = () => {
               learnCategoryId={learnCategoryId}
               learnSubcategories={learnSubcategories}
               onLearnCategoryChange={onLearnCategoryChange}
+              errors={stepErrors as Step2Errors}
             />
           )}
           {step === 3 && (
@@ -348,9 +403,9 @@ export const RegisterPage: FC = () => {
               skillCategoryId={skillCategoryId}
               skillSubcategories={skillSubcategories}
               onSkillCategoryChange={onSkillCategoryChange}
+              errors={stepErrors as Step3Errors}
             />
           )}
-          {(localError || error) && <div>{localError || error}</div>}
           <div className={styles.footer}>
             {step > 1 && (
               <ButtonUI variant="secondary" type="button" onClick={handleBack} disabled={isLoading} isWide>
@@ -370,6 +425,7 @@ export const RegisterPage: FC = () => {
               </ButtonUI>
             )}
           </div>
+          {(localError || error) && <div className={styles.errorText}>{localError || error}</div>}
         </form>
         <div className={styles.block}>
           {step === 1 && (

@@ -19,6 +19,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
   learnCategoryId,
   learnSubcategories,
   onLearnCategoryChange,
+  errors,
 }) => {
   const [isGenderOpen, setGenderOpen] = useState(false);
   const [isCityOpen, setCityOpen] = useState(false);
@@ -92,20 +93,19 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
         value={localDraft.name ?? ''}
         onChange={onField('name')}
         placeholder="Введите ваше имя"
+        errorText={errors?.name}
+        hasError={Boolean(errors?.name)}
       />
       <div className={styles.doubleContainer}>
-        <div className={styles.datePickerWrapper}>
-          <label htmlFor="register-birthdate" className={styles.label}>
-            Дата рождения
-            <input
-              className={styles.datePicker}
-              id="register-birthdate"
-              type="date"
-              value={localDraft.birthDate ?? ''}
-              onChange={onField('birthDate')}
-            />
-          </label>
-        </div>
+        <InputUI
+          label="Дата рождения"
+          name="birthDate"
+          type="date"
+          value={localDraft.birthDate}
+          onChange={onField('birthDate')}
+          errorText={errors?.birthDate}
+          hasError={Boolean(errors?.birthDate)}
+        />
         <SingleselectUI
           isOpen={isGenderOpen}
           onClose={() => setGenderOpen(false)}
