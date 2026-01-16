@@ -14,6 +14,7 @@ export const PopoverUI: FC<PopoverUIProps> = ({
   offset = 8,
   matchWidth = false,
   popoverClassName,
+  hasError = false,
 }) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,7 +43,7 @@ export const PopoverUI: FC<PopoverUIProps> = ({
 
       {isOpen && (
         <div
-          className={[styles.popover, popoverClassName].filter(Boolean).join(' ')}
+          className={[styles.popover, popoverClassName, hasError && styles.error].filter(Boolean).join(' ')}
           data-placement={placement}
           style={style}
           role="dialog"

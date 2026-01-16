@@ -107,7 +107,6 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         errorText={errors?.skillDescription}
         hasError={Boolean(errors?.skillDescription)}
       />
-      
       <div>
         <div className={styles.dragndropWrapper}>
           <label className={`${styles.dragndropField} ${styles.text}`} htmlFor="register-skill-images">
