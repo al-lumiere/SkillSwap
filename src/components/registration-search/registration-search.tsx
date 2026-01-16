@@ -21,6 +21,7 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
   handleQueryChange,
   handleClear,
   onSelect,
+  errorMessage = '',
 }) => {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -29,43 +30,47 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
   }, [options, query]);
 
   return (
-    <PopoverUI
-      isOpen={isOpen}
-      onClose={onClose}
-      placement={placement}
-      offset={offset}
-      matchWidth={matchWidth}
-      maxWidth={maxWidth}
-      popoverClassName={popoverStyles.popoverJoined}
-      anchor={
-        <SelectUI
-          isOpen={isOpen}
-          label={label}
-          placeholder={placeholder}
-          value={value}
-          handleToggle={handleToggle}
-          variant="search"
-          query={query}
-          handleQueryChange={handleQueryChange}
-          handleClear={handleClear}
-        />
-      }
-    >
-      {query.length === 0 && <span className={styles.hint}>Начните вводить текст</span>}
-      {query.length > 0 &&
-        (filtered.length > 0 ? (
-          <ul className={styles.list}>
-            {filtered.map((city) => (
-              <li key={city.id}>
-                <button type="button" className={styles.list_item} onClick={() => onSelect(city)}>
-                  {city.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <span className={styles.hint}>Мы не нашли такого города 😭</span>
-        ))}
-    </PopoverUI>
+    <>
+      <PopoverUI
+        isOpen={isOpen}
+        onClose={onClose}
+        placement={placement}
+        offset={offset}
+        matchWidth={matchWidth}
+        maxWidth={maxWidth}
+        popoverClassName={popoverStyles.popoverJoined}
+        anchor={
+          <SelectUI
+            isOpen={isOpen}
+            label={label}
+            placeholder={placeholder}
+            value={value}
+            handleToggle={handleToggle}
+            variant="search"
+            query={query}
+            handleQueryChange={handleQueryChange}
+            handleClear={handleClear}
+            hasError={!!errorMessage}
+          />
+        }
+      >
+        {query.length === 0 && <span className={styles.hint}>Начните вводить текст</span>}
+        {query.length > 0 &&
+          (filtered.length > 0 ? (
+            <ul className={styles.list}>
+              {filtered.map((city) => (
+                <li key={city.id}>
+                  <button type="button" className={styles.list_item} onClick={() => onSelect(city)}>
+                    {city.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <span className={styles.hint}>Мы не нашли такого города 😭</span>
+          ))}
+      </PopoverUI>
+      {errorMessage && <span className={styles.error}>{errorMessage}</span>}
+    </>
   );
 };

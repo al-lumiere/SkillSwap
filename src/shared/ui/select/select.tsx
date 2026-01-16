@@ -16,6 +16,7 @@ export const SelectUI: FC<SelectUIProps> = ({
   handleQueryChange,
   handleClear,
   disabled = false,
+  hasError = false,
 }) => {
   const showClear = variant === 'search' && isOpen && query.length > 0;
 
@@ -62,7 +63,9 @@ export const SelectUI: FC<SelectUIProps> = ({
       ) : (
         <button
           type="button"
-          className={[styles.field, isOpen && styles.open, disabled && styles.fieldDisabled].filter(Boolean).join(' ')}
+          className={[styles.field, isOpen && styles.open, disabled && styles.fieldDisabled, hasError && styles.error]
+            .filter(Boolean)
+            .join(' ')}
           onClick={disabled ? undefined : handleToggle}
           disabled={disabled}
           aria-disabled={disabled}

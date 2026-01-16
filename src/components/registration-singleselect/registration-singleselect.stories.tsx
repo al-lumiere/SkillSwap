@@ -49,6 +49,7 @@ export const Interactive: Story = {
         <SingleselectUI
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...args}
+          errorMessage="Пример ошибки"
           isOpen={isOpen}
           onClose={() => setOpen(false)}
           handleToggle={() => setOpen((v) => !v)}
@@ -70,5 +71,6 @@ export const Interactive: Story = {
     offset: -1,
     matchWidth: true,
     maxWidth: null,
-  } satisfies Partial<SingleselectUIProps>,
+    errorMessage: 'Пример ошибки',
+  } satisfies Partial<SingleselectUIProps<number>>,
 };

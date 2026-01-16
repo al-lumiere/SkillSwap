@@ -26,6 +26,7 @@ const meta: Meta<typeof SearchSelectUI> = {
     label: 'Город',
     placeholder: 'Не указан',
     options: CITIES,
+    // errorMessage: 'Пример ошибки',
   },
 };
 
