@@ -37,7 +37,12 @@ export const SelectUI: FC<SelectUIProps> = ({
         <div className={styles.searchWrapper}>
           <input
             ref={inputRef}
-            className={[styles.searchField, isOpen && styles.open, disabled && styles.disabled]
+            className={[
+              styles.searchField,
+              isOpen && styles.open,
+              disabled && styles.disabled,
+              hasError && styles.error,
+            ]
               .filter(Boolean)
               .join(' ')}
             value={query}

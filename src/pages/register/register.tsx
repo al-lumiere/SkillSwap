@@ -170,6 +170,14 @@ export const RegisterPage: FC = () => {
     );
 
     setLocalDraft((prev: any) => ({ ...prev, skillImages: urls }));
+    setLocalError(null);
+
+    setStepErrors((prev) => {
+      if (!('skillImages' in prev)) return prev;
+      const next = { ...(prev as any) };
+      delete next.skillImages;
+      return next;
+    });
   };
 
   // для выпадашек категория/подкатегория
@@ -353,6 +361,13 @@ export const RegisterPage: FC = () => {
       };
     });
     setLocalError(null);
+    setStepErrors((prev) => {
+      if (!('learnCategoryId' in prev) && !('learnSubcategoryId' in prev)) return prev;
+      const next = { ...(prev as any) };
+      delete next.learnCategoryId;
+      delete next.learnSubcategoryId; // логично сбросить и её, т.к. ты обнуляешь подкатегорию
+      return next;
+    });
   };
 
   const onSkillCategoryChange = (categoryId: string) => {
@@ -363,6 +378,15 @@ export const RegisterPage: FC = () => {
     }));
 
     setLocalError(null);
+
+    setStepErrors((prev) => {
+      if (!('skillCategoryId' in prev) && !('skillSubcategoryId' in prev)) return prev;
+
+      const next = { ...(prev as any) };
+      delete next.skillCategoryId;
+      delete next.skillSubcategoryId;
+      return next;
+    });
   };
 
   return (

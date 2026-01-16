@@ -37,3 +37,8 @@
   top: calc(100% + var(--popover-offset));
   right: 0;
 }
+
+.error {
+  border-color: var(--error-color, #bf3920);
+  border-top: none;
+}

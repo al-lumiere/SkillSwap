@@ -30,7 +30,7 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
   }, [options, query]);
 
   return (
-    <>
+    <div>
       <PopoverUI
         isOpen={isOpen}
         onClose={onClose}
@@ -39,6 +39,7 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
         matchWidth={matchWidth}
         maxWidth={maxWidth}
         popoverClassName={popoverStyles.popoverJoined}
+        hasError={!!errorMessage}
         anchor={
           <SelectUI
             isOpen={isOpen}
@@ -71,6 +72,6 @@ export const SearchSelectUI: FC<SearchSelectUIProps> = ({
           ))}
       </PopoverUI>
       {errorMessage && <span className={styles.error}>{errorMessage}</span>}
-    </>
+    </div>
   );
 };

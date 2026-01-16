@@ -10,4 +10,5 @@ export type PopoverUIProps = {
   offset: number;
   matchWidth?: boolean;
   popoverClassName?: string;
+  hasError?: boolean;
 };

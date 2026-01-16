@@ -124,6 +124,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
             setGenderOpen(false);
           }}
           options={genderOptions}
+          errorMessage={errors?.gender}
         />
       </div>
       <SearchSelectUI
@@ -154,6 +155,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
           setCityOpen(false);
           setCityQuery('');
         }}
+        errorMessage={errors?.cityId}
       />
       <SingleselectUI<number>
         isOpen={isLearnCategoryOpen}
@@ -176,6 +178,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
           setIsLearnCategoryOpen(false);
         }}
         disabled={categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.learnCategoryId}
       />
       <SingleselectUI
         isOpen={isSubcatOpen}
@@ -196,6 +199,7 @@ export const RegistrationProfileUI: FC<RegistrationProfileUIProps> = ({
         }}
         options={subcategoryOptions}
         disabled={!learnCategoryId || categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.learnSubcategoryId}
       />
     </div>
   );

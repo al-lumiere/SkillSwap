@@ -73,6 +73,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
           setCategoryOpen(false);
         }}
         disabled={categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.skillCategoryId}
       />
 
       <SingleselectUI
@@ -94,6 +95,7 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         }}
         options={subcategoryOptions}
         disabled={!skillCategoryId || categoriesStatus !== 'succeeded'}
+        errorMessage={errors?.skillSubcategoryId}
       />
 
       <TextAreaUI
@@ -105,7 +107,6 @@ export const RegistrationSkillUI: FC<RegistrationSkillUIProps> = ({
         errorText={errors?.skillDescription}
         hasError={Boolean(errors?.skillDescription)}
       />
-      
       <div>
         <div className={styles.dragndropWrapper}>
           <label className={`${styles.dragndropField} ${styles.text}`} htmlFor="register-skill-images">

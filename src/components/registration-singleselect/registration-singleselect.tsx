@@ -21,7 +21,7 @@ export const SingleselectUI = <TId extends string | number>({
   disabled = false,
   errorMessage = '',
 }: SingleselectUIProps<TId>) => (
-  <>
+  <div>
     <PopoverUI
       isOpen={disabled ? false : isOpen}
       onClose={onClose}
@@ -30,6 +30,7 @@ export const SingleselectUI = <TId extends string | number>({
       matchWidth={matchWidth}
       maxWidth={maxWidth}
       popoverClassName={popoverStyles.popoverJoined}
+      hasError={!!errorMessage}
       anchor={
         <SelectUI
           isOpen={disabled ? false : isOpen}
@@ -62,6 +63,6 @@ export const SingleselectUI = <TId extends string | number>({
         ))}
       </ul>
     </PopoverUI>
-    {errorMessage && <span className={styles.error}>{errorMessage}</span>}
-  </>
+    {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+  </div>
 );
