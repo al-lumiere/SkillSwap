@@ -240,7 +240,6 @@ export const RegisterPage: FC = () => {
   };
 
   const validateStep3 = (): boolean => {
-    console.log('validateStep3 fired', localDraft);
     const v = localDraft as {
       skillTitle: string;
       skillCategoryId: string;
@@ -317,7 +316,6 @@ export const RegisterPage: FC = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log('handleFormSubmit', { step });
 
     if (step < 3) {
       handleNext();

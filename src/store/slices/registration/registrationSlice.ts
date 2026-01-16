@@ -88,7 +88,6 @@ export const registrationSlice = createSlice({
 
     // записываем черновик шага при уходе/размонтаже
     saveDraft(state, action: PayloadAction<SaveDraftPayload>) {
-      console.log('[saveDraft]', action.payload.step, action.payload.data);
       const { step, data } = action.payload;
       const key = stepKey(step);
       state.draft[key] = data as never;
@@ -96,7 +95,6 @@ export const registrationSlice = createSlice({
 
     // фиксируем данные шага при клике по "далее" (тут же отчищаем черновик шага)
     commitStep(state, action: PayloadAction<CommitStepPayload>) {
-      console.log('[commitStep]', action.payload.step, action.payload.data);
       const { step, data } = action.payload;
       const key = stepKey(step);
       state.formData[key] = data as never;
