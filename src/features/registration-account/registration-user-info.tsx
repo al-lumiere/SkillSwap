@@ -3,7 +3,7 @@ import { AuthPanelUI } from '@components/auth-panel-ui';
 import { InputUI } from '@ui/input';
 import { RegistrationAccountUIProps } from './type';
 
-export const RegistrationAccountUI: FC<RegistrationAccountUIProps> = ({ isLoading, localDraft, onField }) => (
+export const RegistrationAccountUI: FC<RegistrationAccountUIProps> = ({ isLoading, localDraft, onField, errors }) => (
   <AuthPanelUI
     onGoogleClick={() => console.info('Google OAuth: заглушка')}
     onAppleClick={() => console.info('Apple OAuth: заглушка')}
@@ -17,6 +17,8 @@ export const RegistrationAccountUI: FC<RegistrationAccountUIProps> = ({ isLoadin
       value={localDraft.email ?? ''}
       onChange={onField('email')}
       disabled={isLoading}
+      errorText={errors?.email}
+      hasError={Boolean(errors?.email)}
     />
 
     <InputUI
@@ -28,6 +30,8 @@ export const RegistrationAccountUI: FC<RegistrationAccountUIProps> = ({ isLoadin
       value={localDraft.password ?? ''}
       onChange={onField('password')}
       disabled={isLoading}
+      errorText={errors?.password}
+      hasError={Boolean(errors?.password)}
     />
   </AuthPanelUI>
 );

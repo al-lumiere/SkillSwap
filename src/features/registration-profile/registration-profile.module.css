@@ -9,12 +9,9 @@
 }
 
 .doubleContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
-}
-
-.datePickerWrapper {
-  width: 100%;
 }
 
 .label {
@@ -26,14 +23,6 @@
   line-height: 24px;
   letter-spacing: 0.02em;
   color: var(--text-color, #253017);
-}
-
-.datePicker {
-  height: 48px;
-  border: 1px solid var(--caption-color, #69735d);
-  border-radius: 12px;
-  padding: 12px 20px;
-  margin-top: 4px;
 }
 
 .avatarLabel {
@@ -71,4 +60,8 @@
   background: var(--accent-color, #abd27a);
   color: #fff;
   border-radius: 50%;
+}
+
+input[type="date"] {
+  height: 22.2px;
 }
