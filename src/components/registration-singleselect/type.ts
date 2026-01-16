@@ -18,4 +18,5 @@ export type SingleselectUIProps<TId extends string | number> = PopoverConfigProp
     selectedId: TId | null;
     onSelect: (id: TId) => void;
     disabled?: boolean;
+    errorMessage?: string;
   };

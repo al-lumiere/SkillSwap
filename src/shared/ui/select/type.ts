@@ -11,4 +11,5 @@ export type SelectUIProps = {
   handleQueryChange?: (value: string) => void;
   handleClear?: () => void;
   disabled?: boolean;
+  hasError?: boolean;
 };

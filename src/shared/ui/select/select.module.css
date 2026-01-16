@@ -28,6 +28,10 @@
   border-radius: 12px;
 }
 
+.error {
+  border-color: var(--error-color, #bf3920);
+}
+
 .placeholder {
   color: var(--caption-color, #69735d);
 }

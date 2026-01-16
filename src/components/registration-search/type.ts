@@ -16,4 +16,5 @@ export type SearchSelectUIProps = PopoverConfigProps &
   SelectConfigProps & {
     options: City[];
     onSelect: (city: City) => void;
+    errorMessage?: string;
   };

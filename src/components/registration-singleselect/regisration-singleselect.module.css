@@ -25,3 +25,12 @@
 .selected {
   color: var(--button-pressed-color, #508826);
 }
+
+.error {
+  padding-top: 4px;
+  font-family: 'Roboto';
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: var(--error-color, #bf3920);
+}

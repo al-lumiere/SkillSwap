@@ -19,44 +19,49 @@ export const SingleselectUI = <TId extends string | number>({
   selectedId,
   onSelect,
   disabled = false,
+  errorMessage = '',
 }: SingleselectUIProps<TId>) => (
-  <PopoverUI
-    isOpen={disabled ? false : isOpen}
-    onClose={onClose}
-    placement={placement}
-    offset={offset}
-    matchWidth={matchWidth}
-    maxWidth={maxWidth}
-    popoverClassName={popoverStyles.popoverJoined}
-    anchor={
-      <SelectUI
-        isOpen={disabled ? false : isOpen}
-        label={label}
-        placeholder={placeholder}
-        value={value}
-        handleToggle={handleToggle}
-        disabled={disabled}
-      />
-    }
-  >
-    <ul className={styles.list}>
-      {options.map(({ id, label: optionLabel }) => (
-        <li key={String(id)}>
-          <button
-            type="button"
-            className={[styles.list_item, selectedId === id && styles.selected, disabled && styles.list_itemDisabled]
-              .filter(Boolean)
-              .join(' ')}
-            onClick={() => {
-              if (disabled) return;
-              onSelect(id);
-            }}
-            disabled={disabled}
-          >
-            {optionLabel}
-          </button>
-        </li>
-      ))}
-    </ul>
-  </PopoverUI>
+  <>
+    <PopoverUI
+      isOpen={disabled ? false : isOpen}
+      onClose={onClose}
+      placement={placement}
+      offset={offset}
+      matchWidth={matchWidth}
+      maxWidth={maxWidth}
+      popoverClassName={popoverStyles.popoverJoined}
+      anchor={
+        <SelectUI
+          isOpen={disabled ? false : isOpen}
+          label={label}
+          placeholder={placeholder}
+          value={value}
+          handleToggle={handleToggle}
+          disabled={disabled}
+          hasError={!!errorMessage}
+        />
+      }
+    >
+      <ul className={styles.list}>
+        {options.map(({ id, label: optionLabel }) => (
+          <li key={String(id)}>
+            <button
+              type="button"
+              className={[styles.list_item, selectedId === id && styles.selected, disabled && styles.list_itemDisabled]
+                .filter(Boolean)
+                .join(' ')}
+              onClick={() => {
+                if (disabled) return;
+                onSelect(id);
+              }}
+              disabled={disabled}
+            >
+              {optionLabel}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </PopoverUI>
+    {errorMessage && <span className={styles.error}>{errorMessage}</span>}
+  </>
 );
