@@ -84,6 +84,10 @@ This repository is kept as a portfolio project to demonstrate:
 ```bash
 git clone https://github.com/al-lumiere/SkillSwap.git
 cd SkillSwap
+
+npm install 
+npm run dev 
+npm run storybook
 ```
 ## Screenshots
 
